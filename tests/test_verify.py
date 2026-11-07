@@ -1,3 +1,7 @@
+import json
+
+import pytest
+
 import verify as gv
 
 
@@ -41,3 +45,41 @@ def test_partial_verdicts_skip_the_completeness_check():
     verdicts = [{"key": "k1", "verdict": "reject", "reason": "r"}]
     assert gv.validate_verdicts(verdicts, keys) == ["no verdict for k2"]
     assert gv.validate_verdicts(verdicts, keys, partial=True) == []
+
+
+def seed(run, records):
+    d = run / "data" / "agent" / "validated"
+    d.mkdir(parents=True)
+    (d / "B01.json").write_text(json.dumps({"records": records}))
+    (run / "data" / "batches").mkdir()
+    (run / "data" / "batches" / "manifest.json").write_text(json.dumps({"B01": {"title": "t", "files": ["a.md"], "hits": []}}))
+
+
+REC = {"key": "a.md@1", "file": "a.md", "line": 1, "start": 1, "end": 2, "type": "Misuse", "confidence": "High",
+       "terms": ["T-RT"], "decision": None, "recommended": None, "issue": "i", "find": "x", "replace": "y",
+       "change_class": "Prose", "field": "paragraph", "kind": "page", "context": "c"}
+
+
+def test_packets_number_after_the_highest_existing_verdict_file(run, capsys):
+    seed(run, [REC])
+    v = run / "data" / "verify"; v.mkdir(parents=True)
+    (v / "V04.json").write_text("[]")              # a consistency-pass file with no keys file
+    gv.main(["--run", str(run), "--packets", "--n", "1"])
+    assert (v / "V05.keys.json").exists() and (v / "V04.json").read_text() == "[]"
+
+
+def test_check_without_keys_file_requires_partial(run):
+    seed(run, [REC])
+    v = run / "data" / "verify"; v.mkdir(parents=True)
+    (v / "V09.json").write_text(json.dumps([{"key": "a.md@1", "verdict": "reject", "reason": "r"}]))
+    with pytest.raises(SystemExit, match="V09.keys.json"):
+        gv.main(["--run", str(run), "--check", "V09"])
+    with pytest.raises(SystemExit) as e:
+        gv.main(["--run", str(run), "--check", "V09", "--partial"])
+    assert e.value.code == 0
+
+
+def test_mistyped_files_value_is_an_error(run):
+    seed(run, [REC])
+    with pytest.raises(SystemExit, match="B3"):
+        gv.main(["--run", str(run), "--packets", "--files", "B3"])

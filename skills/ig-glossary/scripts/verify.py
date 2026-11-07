@@ -82,8 +82,10 @@ def main(argv=None):
     if args.files:
         manifest = json.loads((data / "batches" / "manifest.json").read_text(encoding="utf-8"))
         files = set(manifest[args.files]["files"]) if args.files in manifest else set(args.files.split(","))
+        if args.files not in manifest and not load_records(data, files):
+            raise SystemExit(f"--files {args.files}: no validated records in those files (batch ids look like B03)")
     if args.packets:
-        start = len(list(vdir.glob("V[0-9][0-9].keys.json")))
+        start = max((int(p.name[1:3]) for p in vdir.glob("V[0-9][0-9].*")), default=0)
         for n, recs in enumerate(build_packets(load_records(data, files), args.n), start + 1):
             vid = f"V{n:02d}"
             (vdir / f"{vid}.md").write_text(packet_md(vid, recs), encoding="utf-8")
@@ -95,9 +97,10 @@ def main(argv=None):
     if keys_path.exists():
         keys = set(json.loads(keys_path.read_text()))
         by_key = {r["key"]: r for r in records if r["key"] in keys}
-    else:
+    elif args.partial:
         by_key = {r["key"]: r for r in records}
-        args.partial = True
+    else:
+        raise SystemExit(f"no {args.check}.keys.json; pass --partial for a consistency-pass or QA verdict file")
     errors = validate_verdicts(json.loads((vdir / f"{args.check}.json").read_text(encoding="utf-8")), by_key, args.partial)
     print(f"{args.check}: OK" if not errors else "\n".join(errors))
     raise SystemExit(1 if errors else 0)
