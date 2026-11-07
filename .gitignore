@@ -1,0 +1,9 @@
+__pycache__/
+.pytest_cache/
+.DS_Store
+_build/
+experiments/model-dependency/runs/reference/
+experiments/model-dependency/runs/*/data/*
+!experiments/model-dependency/runs/*/data/agent/
+!experiments/model-dependency/runs/*/data/verify/
+!experiments/model-dependency/runs/*/data/scores/
