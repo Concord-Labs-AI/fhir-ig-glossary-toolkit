@@ -4,21 +4,23 @@ from collections import defaultdict
 
 from findings import make_record, positions
 
-ACRONYMS = {"CBO": ("community-based organization", "T-CBO"),
-            "CP": ("coordination platform", "T-CP"),
-            "EHR": ("electronic health record", "T-EHR"),
-            "SCN": ("social care network", "T-SCN"),
-            "SDOH": ("social determinants of health", "T-SDOH")}
 BODY_FIELDS = {"paragraph", "list-item", "table-row"}
 # An acronym inside a name ("SDOH Clinical Care", the "SDOH Category" value set, the term "SDOH domain"), a hyphenated compound
 # ("SDOH-related"), a quoted code value or a possessive isn't spelled out; the first standalone use is.
-NOT_STANDALONE = r"(?![-\u2010\u2011”\"']|’|\s+(?:Clinical Care|Category|[Dd]omains?)\b)"
 NOT_QUOTED = r"(?<![“\"'‘])"
 AN_BEFORE = re.compile(r"\b([Aa]n) $")
 SENTENCE_START = re.compile(r"(?:^|[.!?]\s+|^\s*(?:[-*+]|\d+\.)\s+)$")
 
 
-def acronym_findings(segments, corpus):
+def acronym_regex(acr, not_standalone):
+    """The acronym as a standalone word: not hyphenated, quoted or possessive, and not the start of a listed name."""
+    suffixes = [p[len(acr):].strip() for p in not_standalone if p.upper().startswith(acr.upper() + " ")]
+    names = "|".join(re.escape(s) for s in suffixes)
+    tail = rf"|\s+(?i:{names})s?\b" if names else ""
+    return re.compile(rf"{NOT_QUOTED}\b{acr}s?\b(?![-‐‑”\"']|’{tail})")
+
+
+def acronym_findings(segments, corpus, acronyms):
     pages = defaultdict(list)
     for s in segments:
         if s["kind"] == "page" and s["change_class"] == "Prose":
@@ -27,8 +29,9 @@ def acronym_findings(segments, corpus):
     for file in sorted(pages):
         segs = sorted(pages[file], key=lambda s: s["start"])
         raw = corpus.text(file)
-        for acr, (long, term) in ACRONYMS.items():
-            acr_rx = re.compile(rf"{NOT_QUOTED}\b{acr}s?\b{NOT_STANDALONE}")
+        for acr, entry in acronyms["table"].items():
+            long, term = entry["long"], entry["term"]
+            acr_rx = acronym_regex(acr, acronyms["not_standalone"])
             long_rx = re.compile(r"[\s-]+".join(map(re.escape, re.split(r"[\s-]", long))), re.I)
             for s in segs:
                 a, spelled = acr_rx.search(s["visible"]), long_rx.search(s["visible"])

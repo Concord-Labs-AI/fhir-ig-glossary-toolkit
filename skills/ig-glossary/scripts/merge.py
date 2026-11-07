@@ -156,7 +156,7 @@ def main(argv=None):
     records = []
     for p in sorted((data / "agent" / "validated").glob("[BQ][0-9][0-9].json")):
         records += json.loads(p.read_text(encoding="utf-8"))["records"]
-    records += acronym_findings(segments, corpus)
+    records += acronym_findings(segments, corpus, cfg["acronyms"])
     rules = {r["id"]: r for t in book["terms"] for r in t.get("rules", [])}
     if book.get("identifier_decision"):
         records += identifier_rows(read_jsonl(data / "hits.jsonl"), segments, rules, corpus, book["identifier_decision"])
