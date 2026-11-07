@@ -39,7 +39,7 @@ def file_sizes(segments, snapshot):
 
 
 def plan_batches(sizes, target_chars, overrides):
-    """{bid: {title, files}}. Overrides first (first match wins), then a greedy pack per directory group."""
+    """{bid: {title, files}}. Overrides first (first match wins), then a next-fit pack per directory group."""
     if not sizes:
         raise ValueError("no editable files to batch")
     plan, left = {}, dict(sizes)

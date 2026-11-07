@@ -33,6 +33,14 @@ def test_overrides_win_and_keep_their_ids():
     assert plan["B01"]["files"] == ["input/pagecontent/a.md", "input/pagecontent/b.md"]
 
 
+def test_auto_ids_skip_an_override_that_took_a_low_id():
+    s = {"input/pagecontent/a.md": 10, "input/fsh/profiles/p.fsh": 10, "input/fsh/instances/i.fsh": 10}
+    plan = gb.plan_batches(s, 1000, overrides=[{"id": "B01", "title": "Pages", "globs": ["input/pagecontent/*"]}])
+    assert list(plan) == ["B01", "B02", "B03"]
+    assert plan["B01"]["files"] == ["input/pagecontent/a.md"]
+    assert plan["B02"]["files"] == ["input/fsh/profiles/p.fsh"] and plan["B03"]["files"] == ["input/fsh/instances/i.fsh"]
+
+
 def test_override_matching_nothing_and_empty_corpus_are_errors():
     with pytest.raises(ValueError, match="B09"):
         gb.plan_batches({"a.md": 1}, 1000, overrides=[{"id": "B09", "title": "x", "globs": ["nope/*"]}])
