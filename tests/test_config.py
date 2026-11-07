@@ -41,3 +41,27 @@ def test_missing_snapshot_is_a_named_error(run):
     (run / "config.yaml").write_text(yaml.safe_dump(raw))
     with pytest.raises(config.ConfigError, match="snapshot"):
         config.load(run)
+
+
+def test_each_load_gets_its_own_default_lists(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    del raw["batches"]; del raw["acronyms"]; del raw["summary"]
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    first = config.load(run)
+    first["batches"]["overrides"].append({"id": "B99"})
+    first["ig"]["historical_pages"].append("x.md")
+    second = config.load(run)
+    assert second["batches"]["overrides"] == [] and second["ig"]["historical_pages"] == ["changehistory.md"]
+
+
+def test_empty_artifact_prefixes_is_valid(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    raw["ig"]["artifact_prefixes"] = []
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    assert config.load(run)["ig"]["artifact_prefixes"] == []
+
+
+def test_missing_themes_file_is_a_named_error(run):
+    (run / "themes.yaml").unlink()
+    with pytest.raises(config.ConfigError, match="themes.yaml"):
+        config.themes(config.load(run))

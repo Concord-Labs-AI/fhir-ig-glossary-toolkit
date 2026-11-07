@@ -1,4 +1,5 @@
 """Load the run directory's config.yaml: the whole IG-specific surface of a run."""
+import copy
 from pathlib import Path
 
 import yaml
@@ -25,10 +26,10 @@ def load(run_dir=None):
     raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     cfg = {}
     for section, defaults in DEFAULTS.items():
-        cfg[section] = {**defaults, **(raw.get(section) or {})}
-    missing = [k for k in REQUIRED_IG if not cfg["ig"].get(k)]
+        cfg[section] = {**copy.deepcopy(defaults), **(raw.get(section) or {})}
+    missing = [k for k in REQUIRED_IG if cfg["ig"].get(k) in (None, "")]
     if missing:
-        raise ConfigError("config.yaml is missing " + ", ".join(f"ig.{k}" for k in missing))
+        raise ConfigError(f"{path} is missing " + ", ".join(f"ig.{k}" for k in missing))
     snapshot = (run_dir / cfg["ig"]["snapshot"]).resolve()
     if not (snapshot / "sushi-config.yaml").exists():
         raise ConfigError(f"ig.snapshot {snapshot} has no sushi-config.yaml")
@@ -39,12 +40,19 @@ def load(run_dir=None):
     return cfg
 
 
+def _yaml(cfg, name):
+    path = cfg["run_dir"] / name
+    if not path.exists():
+        raise ConfigError(f"{path} not found")
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
+
+
 def rulebook(cfg):
-    return yaml.safe_load((cfg["run_dir"] / "rulebook.yaml").read_text(encoding="utf-8"))
+    return _yaml(cfg, "rulebook.yaml")
 
 
 def themes(cfg):
-    return yaml.safe_load((cfg["run_dir"] / "themes.yaml").read_text(encoding="utf-8"))["themes"]
+    return _yaml(cfg, "themes.yaml")["themes"]
 
 
 def _stem(cfg):
