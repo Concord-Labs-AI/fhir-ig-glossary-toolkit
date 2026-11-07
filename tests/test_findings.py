@@ -19,7 +19,7 @@ def corpus(tmp_path):
     (tmp_path / "input/fsh").mkdir(parents=True)
     (tmp_path / P).write_text(PAGE)
     (tmp_path / F).write_text(FSH)
-    return gf.Corpus(tmp_path, gx.extract_page(P, PAGE) + gx.extract_fsh(F, FSH, {})[0])
+    return gf.Corpus(tmp_path, gx.extract_page(P, PAGE) + gx.extract_fsh(F, FSH, {}, "https://example.org/", ["SDOHCC"])[0])
 
 
 def finding(**kw):

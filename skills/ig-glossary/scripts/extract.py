@@ -14,11 +14,9 @@ from pathlib import Path
 
 import yaml
 
-from common import (ARTIFACT, DATA, DIAGRAM, EXTERNAL, HERE, HISTORICAL,
-                       IDENTIFIER, PROSE, PUBLISHED_BASE, write_jsonl)
+import config
+from common import (ARTIFACT, DIAGRAM, EXTERNAL, HISTORICAL, IDENTIFIER, PROSE, write_jsonl)
 
-GLOSSARY_PAGE = "glossary.md"
-HISTORICAL_PAGES = {"changehistory.md"}
 HEADING = re.compile(r"^(#{1,6})")
 
 
@@ -106,12 +104,12 @@ def md_field(raw_line):
     return "paragraph"
 
 
-def page_url(name):
+def page_url(name, base):
     stem = name[:-3]
     for suffix in ("-intro", "-notes"):
         if stem.endswith(suffix):
             stem = stem[: -len(suffix)]
-    return PUBLISHED_BASE + stem + ".html"
+    return base + stem + ".html"
 
 
 def extract_page(rel, raw, change_class=PROSE, kind="page", url=None):
@@ -206,7 +204,7 @@ def last_segment(path):
     return re.sub(r"\[[^\]]*\]", "", path).split(".")[-1]
 
 
-def classify_fsh(entity, prefix, value):
+def classify_fsh(entity, prefix, value, markers):
     """(change_class, field) for a string literal, or None when it isn't reader prose."""
     kind = entity["kind"] if entity else None
     m = KEYWORD_TEXT.match(prefix)
@@ -221,7 +219,7 @@ def classify_fsh(entity, prefix, value):
     if m:
         if kind == "CodeSystem":
             return ARTIFACT, "concept display"
-        local = "SDOHCC" in m.group(1) or "sdoh-clinicalcare" in m.group(1)
+        local = any(mk in m.group(1) for mk in markers)
         return (ARTIFACT, "code display (local)") if local else (EXTERNAL, "code display")
     m = ASSIGN.match(prefix)
     if m:
@@ -244,19 +242,24 @@ def decamel(name):
     return collapse(s)
 
 
-def fsh_url(entity, id_types):
+def local_markers(ig):
+    """Substrings that mark a code system as this IG's own: its canonical URL and its FSH id prefixes."""
+    return [ig["canonical"]] + list(ig["artifact_prefixes"])
+
+
+def fsh_url(entity, id_types, base):
     if not entity or entity["kind"] not in NAMED_KINDS:
         return None
     ident = entity["id"] or entity["name"]
     if entity["kind"] in ("Profile", "Extension", "Logical", "Resource"):
-        return f"{PUBLISHED_BASE}StructureDefinition-{ident}.html"
+        return f"{base}StructureDefinition-{ident}.html"
     if entity["kind"] in ("ValueSet", "CodeSystem"):
-        return f"{PUBLISHED_BASE}{entity['kind']}-{ident}.html"
+        return f"{base}{entity['kind']}-{ident}.html"
     rtype = id_types.get(ident)
-    return f"{PUBLISHED_BASE}{rtype}-{ident}.html" if rtype else None
+    return f"{base}{rtype}-{ident}.html" if rtype else None
 
 
-def extract_fsh(rel, raw, id_types):
+def extract_fsh(rel, raw, id_types, base, markers):
     """Return (segments, skipped_string_count)."""
     strings, comments = fsh_scan(raw)
     code = list(raw)
@@ -272,7 +275,7 @@ def extract_fsh(rel, raw, id_types):
         prefix = code[line_start:s - q]
         i = bisect_right(offsets, s) - 1
         entity = ents[i][1] if i >= 0 else None
-        cls = classify_fsh(entity, prefix, raw[s:e])
+        cls = classify_fsh(entity, prefix, raw[s:e], markers)
         if cls is None:
             skipped += 1
             continue
@@ -292,14 +295,14 @@ def extract_fsh(rel, raw, id_types):
         for field, span in (("entity name", ent["name_span"]), ("Id", ent["id_span"])):
             if span:
                 segs.append(segment(rel, "fsh", IDENTIFIER, field, ent["kind"], ent["name"],
-                                    fsh_url(ent, id_types), raw, raw, span[0], span[1], idx,
+                                    fsh_url(ent, id_types, base), raw, raw, span[0], span[1], idx,
                                     text=decamel(raw[span[0]:span[1]])))
     for s, e, (change_class, field), section, entity in keep:
         text = collapse(visible[s:e].replace("\\n", " ").replace("\\r", " ").replace('\\"', '"'))
         if change_class == IDENTIFIER:
             text = decamel(raw[s:e])
         segs.append(segment(rel, "fsh", change_class, field, section,
-                            entity["name"] if entity else None, fsh_url(entity, id_types),
+                            entity["name"] if entity else None, fsh_url(entity, id_types, base),
                             raw, visible, s, e, idx, text=text))
     segs.sort(key=lambda g: g["start"])
     return segs, skipped
@@ -377,9 +380,9 @@ def extract_ig_yml(rel, raw):
     return kept_segments(rel, raw, spans, "config", PROSE, "ig.yml")
 
 
-def extract_structuremap(rel, raw):
+def extract_structuremap(rel, raw, base):
     m_id = re.search(r'<id value="([^"]+)"', raw)
-    url = f"{PUBLISHED_BASE}StructureMap-{m_id.group(1)}.html" if m_id else None
+    url = f"{base}StructureMap-{m_id.group(1)}.html" if m_id else None
     spans = [(m.start(2), m.end(2), m.group(1), m.group(1))
              for m in re.finditer(r'<(description|title|documentation) value="([^"]*)"', raw)
              if m.group(2).strip()]
@@ -416,11 +419,11 @@ def image_refs(pages):
     return refs
 
 
-def first_page_url(pages):
-    return page_url(sorted(pages)[0]) if pages else None
+def first_page_url(pages, base):
+    return page_url(sorted(pages)[0], base) if pages else None
 
 
-def classify_file(rel, published, refs, stems, includes, transcripts):
+def classify_file(rel, published, refs, stems, includes, transcripts, glossary_name, historical):
     """Return (extractor, None) or (None, exclusion reason)."""
     parts = Path(rel).parts
     name = parts[-1]
@@ -432,9 +435,9 @@ def classify_file(rel, published, refs, stems, includes, transcripts):
     if rel == "input/ignoreWarnings.txt":
         return None, "publisher QA configuration (not reader-visible)"
     if top == "pagecontent" and name.endswith(".md"):
-        if name == GLOSSARY_PAGE:
+        if name == glossary_name:
             return "glossary", None
-        if name in HISTORICAL_PAGES:
+        if name in historical:
             return "historical", None
         if is_published(name, published):
             return "page", None
@@ -478,8 +481,10 @@ def id_types_from(gen_dir):
     return out
 
 
-def extract(snapshot, id_types=None, transcripts=None):
+def extract(snapshot, ig, id_types=None, transcripts=None):
     snapshot = Path(snapshot)
+    base, markers = ig["published_base"], local_markers(ig)
+    glossary_name, historical = Path(ig["glossary_page"]).name, set(ig.get("historical_pages") or [])
     id_types = id_types or {}
     transcripts = {t["image"]: t for t in (transcripts or [])}
     published = published_pages(yaml.safe_load((snapshot / "sushi-config.yaml").read_text(encoding="utf-8")))
@@ -494,7 +499,7 @@ def extract(snapshot, id_types=None, transcripts=None):
 
     segments, coverage, figures = [], {}, []
     for rel in files:
-        how, reason = classify_file(rel, published, refs, stems, includes, transcripts)
+        how, reason = classify_file(rel, published, refs, stems, includes, transcripts, glossary_name, historical)
         name = Path(rel).name
         if how is None:
             coverage[rel] = {"status": "excluded", "reason": reason}
@@ -504,7 +509,7 @@ def extract(snapshot, id_types=None, transcripts=None):
         skipped = 0
         if how == "transcript":
             t = transcripts[rel]
-            url = first_page_url(refs.get(name))
+            url = first_page_url(refs.get(name), base)
             segs = [{"seg_id": f"{rel}#{n}", "file": rel, "kind": "figure",
                      "change_class": t.get("change_class", DIAGRAM), "field": "transcribed text",
                      "section": name, "artifact": name, "url": url, "line": None, "col": None,
@@ -514,40 +519,41 @@ def extract(snapshot, id_types=None, transcripts=None):
             raw = (snapshot / rel).read_text(encoding="utf-8")
             if how in ("page", "glossary", "historical"):
                 segs = extract_page(rel, raw, HISTORICAL if how == "historical" else PROSE,
-                                    "glossary" if how == "glossary" else "page", page_url(name))
+                                    "glossary" if how == "glossary" else "page", page_url(name, base))
             elif how == "include":
-                segs = extract_page(rel, raw, url=page_url(includes[name]))
+                segs = extract_page(rel, raw, url=page_url(includes[name], base))
             elif how == "fsh":
-                segs, skipped = extract_fsh(rel, raw, id_types)
+                segs, skipped = extract_fsh(rel, raw, id_types, base, markers)
             elif how == "plantuml":
                 stem = Path(rel).stem
-                segs = extract_plantuml(rel, raw, first_page_url(refs.get(stem + ".svg", set()) | refs.get(stem + ".png", set())))
+                segs = extract_plantuml(rel, raw, first_page_url(refs.get(stem + ".svg", set()) | refs.get(stem + ".png", set()), base))
             elif how == "svg":
-                segs = extract_svg(rel, raw, first_page_url(refs.get(name)))
+                segs = extract_svg(rel, raw, first_page_url(refs.get(name), base))
             elif how == "sushi-config":
                 segs = extract_sushi_config(rel, raw)
             elif how == "ig-yml":
                 segs = extract_ig_yml(rel, raw)
             else:
-                segs = extract_structuremap(rel, raw)
+                segs = extract_structuremap(rel, raw, base)
         segments += segs
         coverage[rel] = {"status": "extracted", "segments": len(segs), "skipped_strings": skipped}
     return {"segments": segments, "coverage": coverage, "figures": figures}
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--snapshot", type=Path, required=True)
-    ap.add_argument("--fsh-generated", type=Path, help="SUSHI fsh-generated/resources dir, for instance URLs")
-    ap.add_argument("--transcripts", type=Path, default=HERE / "figure_transcripts.yaml")
-    ap.add_argument("--out", type=Path, default=DATA)
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
+    ap.add_argument("--fsh-generated", type=Path, help="SUSHI fsh-generated/resources dir (default: inside the snapshot if present)")
     args = ap.parse_args(argv)
-    id_types = id_types_from(args.fsh_generated) if args.fsh_generated else {}
-    transcripts = yaml.safe_load(args.transcripts.read_text()) if args.transcripts.exists() else []
-    result = extract(args.snapshot, id_types=id_types, transcripts=transcripts)
-    write_jsonl(args.out / "segments.jsonl", result["segments"])
-    (args.out / "coverage.json").write_text(json.dumps(result["coverage"], indent=1, sort_keys=True) + "\n")
-    (args.out / "figures.json").write_text(json.dumps(result["figures"], indent=1) + "\n")
+    cfg = config.load(args.run)
+    gen = args.fsh_generated or cfg["snapshot"] / "fsh-generated" / "resources"
+    id_types = id_types_from(gen) if gen.exists() else {}
+    tpath = cfg["run_dir"] / "figure_transcripts.yaml"
+    transcripts = yaml.safe_load(tpath.read_text(encoding="utf-8")) if tpath.exists() else []
+    result = extract(cfg["snapshot"], cfg["ig"], id_types=id_types, transcripts=transcripts or [])
+    out = cfg["data"]
+    write_jsonl(out / "segments.jsonl", result["segments"])
+    (out / "coverage.json").write_text(json.dumps(result["coverage"], indent=1, sort_keys=True) + "\n")
+    (out / "figures.json").write_text(json.dumps(result["figures"], indent=1) + "\n")
     excluded = sum(c["status"] == "excluded" for c in result["coverage"].values())
     print(f"{len(result['segments'])} segments from {len(result['coverage']) - excluded} files "
           f"({excluded} excluded); by class {dict(Counter(s['change_class'] for s in result['segments']))}; "

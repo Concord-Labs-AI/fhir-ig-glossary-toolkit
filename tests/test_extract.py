@@ -5,6 +5,14 @@ import pytest
 import extract as gx
 from common import ARTIFACT, DIAGRAM, EXTERNAL, HISTORICAL, IDENTIFIER, PROSE
 
+IG = {"published_base": "https://hl7.org/fhir/us/sdoh-clinicalcare/en/",
+      "canonical": "http://hl7.org/fhir/us/sdoh-clinicalcare",
+      "artifact_prefixes": ["SDOHCC"],
+      "glossary_page": "input/pagecontent/glossary.md",
+      "historical_pages": ["changehistory.md"]}
+BASE = IG["published_base"]
+MARKERS = [IG["canonical"]] + IG["artifact_prefixes"]
+
 
 def test_mask_keeps_length_and_newlines():
     raw = "a <!-- hidden\nstill hidden --> b"
@@ -56,8 +64,8 @@ def test_segment_offsets_point_into_raw():
 
 
 def test_page_url_maps_intro_pages_to_artifact_page():
-    assert gx.page_url("StructureDefinition-SDOHCC-Goal-intro.md").endswith("/en/StructureDefinition-SDOHCC-Goal.html")
-    assert gx.page_url("referral_workflow.md").endswith("/en/referral_workflow.html")
+    assert gx.page_url("StructureDefinition-SDOHCC-Goal-intro.md", BASE).endswith("/en/StructureDefinition-SDOHCC-Goal.html")
+    assert gx.page_url("referral_workflow.md", BASE).endswith("/en/referral_workflow.html")
 
 
 FSH = textwrap.dedent('''\
@@ -103,7 +111,7 @@ FSH = textwrap.dedent('''\
 
 @pytest.fixture(scope="module")
 def fsh_result():
-    return gx.extract_fsh("input/fsh/x.fsh", FSH, {"ExampleOrg": "Organization"})
+    return gx.extract_fsh("input/fsh/x.fsh", FSH, {"ExampleOrg": "Organization"}, BASE, MARKERS)
 
 
 def _by_raw(segs):
@@ -205,7 +213,7 @@ def test_ig_yml_and_structuremap_text():
     yml = "groups:\n    Profiles:\n        name: Profiles\n        description: For referral targets\n        resources:\n          - X\n"
     assert [s["text"] for s in gx.extract_ig_yml("input/data/ig.yml", yml)] == ["Profiles", "For referral targets"]
     xml = '<StructureMap><id value="SDOHCC-SM"/><description value="Transforms answers"/><url value="http://x"/></StructureMap>'
-    segs = gx.extract_structuremap("input/resources/sm.xml", xml)
+    segs = gx.extract_structuremap("input/resources/sm.xml", xml, BASE)
     assert [s["text"] for s in segs] == ["Transforms answers"]
     assert segs[0]["url"].endswith("/en/StructureMap-SDOHCC-SM.html")
 
@@ -243,7 +251,7 @@ def snapshot(tmp_path):
 
 
 def test_extract_accounts_for_every_file(snapshot):
-    cov = gx.extract(snapshot)["coverage"]
+    cov = gx.extract(snapshot, IG)["coverage"]
     all_files = {p.relative_to(snapshot).as_posix() for p in snapshot.rglob("*") if p.is_file()}
     assert set(cov) == all_files
     assert "not published" in cov["input/pagecontent/savestuff.md"]["reason"]
@@ -257,7 +265,7 @@ def test_extract_accounts_for_every_file(snapshot):
 
 def test_extract_change_classes_kinds_and_urls(snapshot):
     by_file = {}
-    for s in gx.extract(snapshot)["segments"]:
+    for s in gx.extract(snapshot, IG)["segments"]:
         by_file.setdefault(s["file"], []).append(s)
     assert by_file["input/pagecontent/changehistory.md"][0]["change_class"] == HISTORICAL
     assert by_file["input/pagecontent/glossary.md"][0]["kind"] == "glossary"
@@ -267,13 +275,13 @@ def test_extract_change_classes_kinds_and_urls(snapshot):
 
 
 def test_raster_figures_queue_for_visual_read_until_transcribed(snapshot):
-    result = gx.extract(snapshot)
+    result = gx.extract(snapshot, IG)
     assert [f["image"] for f in result["figures"]] == ["input/images/Model.png"]
     assert "needs visual read" in result["coverage"]["input/images/Model.png"]["reason"]
 
     transcripts = [{"image": "input/images/Model.png", "change_class": "Diagram",
                     "text": ["Referral Source", "Coordination Platform"]}]
-    result = gx.extract(snapshot, transcripts=transcripts)
+    result = gx.extract(snapshot, IG, transcripts=transcripts)
     assert result["figures"] == []
     assert result["coverage"]["input/images/Model.png"]["status"] == "extracted"
     segs = [s for s in result["segments"] if s["file"] == "input/images/Model.png"]
@@ -285,3 +293,20 @@ def test_link_text_wrapping_across_lines_is_still_unwrapped():
     vis = gx.mask_markdown("see [the referral\nServiceRequest](#servicerequest-topic). Next")
     assert "](#" not in vis and "servicerequest-topic" not in vis
     assert "the referral" in vis and "ServiceRequest" in vis
+
+
+def test_local_code_systems_come_from_config_not_a_hard_coded_name():
+    ig = {**IG, "artifact_prefixes": ["ACME"], "canonical": "http://acme.org/fhir/x"}
+    markers = gx.local_markers(ig)
+    assert gx.classify_fsh(None, "* code = ACME-Temp#x ", "x", markers) == (gx.ARTIFACT, "code display (local)")
+    assert gx.classify_fsh(None, "* code = http://acme.org/fhir/x/CodeSystem/y#x ", "x", markers) == (gx.ARTIFACT, "code display (local)")
+    assert gx.classify_fsh(None, "* code = SDOHCC-Temp#x ", "x", markers) == (gx.EXTERNAL, "code display")
+
+
+def test_glossary_and_historical_pages_come_from_config(snapshot):
+    ig = {**IG, "glossary_page": "input/pagecontent/index.md", "historical_pages": ["glossary.md"]}
+    by_file = {}
+    for s in gx.extract(snapshot, ig)["segments"]:
+        by_file.setdefault(s["file"], []).append(s)
+    assert by_file["input/pagecontent/index.md"][0]["kind"] == "glossary"
+    assert by_file["input/pagecontent/glossary.md"][0]["change_class"] == HISTORICAL

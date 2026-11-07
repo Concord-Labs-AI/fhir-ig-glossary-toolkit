@@ -47,7 +47,7 @@ def test_finalize_assigns_ids_themes_and_status():
 def test_identifier_rows_one_per_artifact_and_rule(tmp_path):
     fsh = "Instance: SDOHCC-ReferralRecipientLight\nInstanceOf: CapabilityStatement\n"
     (tmp_path / "x.fsh").write_text(fsh)
-    segs, _ = gx.extract_fsh("x.fsh", fsh, {})
+    segs, _ = gx.extract_fsh("x.fsh", fsh, {}, "https://example.org/", ["SDOHCC"])
     hit = {"change_class": "Identifier", "type": "missed-use", "seg_id": segs[0]["seg_id"], "rule_id": "R-RT-RECIP",
            "term_id": "T-RT", "match": "Referral Recipient"}
     rows = gm.identifier_rows([hit, dict(hit), {**hit, "type": "canonical"}], segs,
