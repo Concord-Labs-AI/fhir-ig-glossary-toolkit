@@ -1,0 +1,46 @@
+version: fixture
+identifier_decision: D-2
+domain_notes: Treat "recipient" as the retired name for the referral target.
+decisions:
+- id: D-1
+  title: CBO wording
+  question: Keep CBO?
+  options: ['A: Replace with social service organization', 'B: Keep CBO']
+  recommendation: A — the inclusive term.
+- id: D-2
+  title: Identifier-level misalignments
+  question: Rename artifacts whose ids carry retired wording?
+  options: ['A: Do not rename', 'B: Rename']
+  recommendation: A — non-breaking.
+terms:
+- id: T-RT
+  glossary_term: Referral target
+  definition: An actor.
+  rules:
+  - id: R-RT-CANON
+    type: canonical
+    pattern: \breferral\s+targets?\b
+  - id: R-RT-RECIP
+    type: missed-use
+    pattern: \breferral\s+recipients?\b
+    suggest: referral target
+    note: Retired term.
+- id: T-SSO
+  glossary_term: Social service organization
+  definition: An organization.
+  decision: D-1
+  rules:
+  - id: R-SSO-CANON
+    type: canonical
+    pattern: \bsocial\s+service\s+organizations?\b
+  - id: R-SSO-CBO
+    type: missed-use
+    pattern: \bCBOs?\b
+    suggest: social service organization
+- id: T-SDOH
+  glossary_term: Social determinants of health
+  definition: Conditions.
+  rules:
+  - id: R-SDOH-CANON
+    type: canonical
+    pattern: \bsocial\s+determinants\s+of\s+health\b|\bSDOH\b

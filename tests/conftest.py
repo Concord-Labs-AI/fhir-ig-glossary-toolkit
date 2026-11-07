@@ -1,9 +1,25 @@
+import shutil
 import sys
 from pathlib import Path
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "skills" / "ig-glossary" / "scripts"))
+
+FIXTURE_RUN = Path(__file__).resolve().parent / "fixtures" / "run"
+
+
+@pytest.fixture
+def run(tmp_path):
+    dest = tmp_path / "run"
+    shutil.copytree(FIXTURE_RUN, dest)
+    return dest
+
+
+@pytest.fixture
+def cfg(run):
+    import config
+    return config.load(run)
 
 
 def _row(n, **kw):

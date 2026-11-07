@@ -1,0 +1,17 @@
+themes:
+- id: TH-ACTORS
+  title: Referral actors
+  terms: [T-RT]
+  glossary_says: Referral target is the receiving actor.
+  alignment_work: Retire 'referral recipient'.
+  work_package: WP-1 Actors
+  size: S
+  depends_on: []
+- id: TH-ORGS
+  title: Organization types
+  terms: [T-SSO]
+  glossary_says: Social service organization is the inclusive term.
+  alignment_work: Replace CBO where generic.
+  work_package: WP-2 Organizations
+  size: S
+  depends_on: [D-1]

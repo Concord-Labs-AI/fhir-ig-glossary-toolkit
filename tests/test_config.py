@@ -1,0 +1,43 @@
+import pytest
+import yaml
+
+import config
+
+
+def test_load_resolves_paths_and_fills_defaults(run):
+    cfg = config.load(run)
+    assert cfg["run_dir"] == run and cfg["data"] == run / "data" and cfg["build"] == run / "_build"
+    assert cfg["snapshot"] == run / "snapshot" and (cfg["snapshot"] / "sushi-config.yaml").exists()
+    assert cfg["ig"]["published_base"].endswith("/")
+    assert cfg["ig"]["historical_pages"] == ["changehistory.md"]
+    assert cfg["batches"]["target_chars"] == 1000 and cfg["batches"]["overrides"] == []
+    assert cfg["summary"]["outside_workbook"] == [] and cfg["summary"]["legend_examples"]
+    assert config.workbook_path(cfg).name == "example-1.0.0-glossary-alignment-findings.xlsx"
+    assert config.summary_path(cfg).name == "example-1.0.0-glossary-alignment-summary.html"
+
+
+def test_rulebook_and_themes_load_from_the_run_dir(run):
+    cfg = config.load(run)
+    assert config.rulebook(cfg)["identifier_decision"] == "D-2"
+    assert [t["id"] for t in config.themes(cfg)] == ["TH-ACTORS", "TH-ORGS"]
+
+
+def test_missing_required_key_is_a_named_error(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    del raw["ig"]["canonical"]
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match="ig.canonical"):
+        config.load(run)
+
+
+def test_missing_config_file_is_a_named_error(tmp_path):
+    with pytest.raises(config.ConfigError, match="config.yaml"):
+        config.load(tmp_path)
+
+
+def test_missing_snapshot_is_a_named_error(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    raw["ig"]["snapshot"] = "nowhere"
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match="snapshot"):
+        config.load(run)

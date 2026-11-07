@@ -1,0 +1,13 @@
+id: org.example.fhir.example
+canonical: http://example.org/fhir/example
+title: Example IG
+version: 1.0.0
+pages:
+  index.md:
+    title: Home
+  glossary.md:
+    title: Glossary
+  changehistory.md:
+    title: History
+menu:
+  Home: index.html

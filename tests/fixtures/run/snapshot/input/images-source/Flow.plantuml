@@ -1,0 +1,4 @@
+@startuml
+title Flow
+A -> B: referral recipient
+@enduml

@@ -1,0 +1,19 @@
+ig:
+  name: Example IG
+  short: example
+  snapshot: snapshot
+  tag: "1.0.0"
+  canonical: http://example.org/fhir/example
+  artifact_prefixes: [XYZ]
+  published_base: https://example.org/fhir/example/en/
+  glossary_page: input/pagecontent/glossary.md
+acronyms:
+  table:
+    CBO: {long: community-based organization, term: T-SSO}
+    SDOH: {long: social determinants of health, term: T-SDOH}
+  not_standalone: [SDOH domain]
+batches:
+  target_chars: 1000
+  overrides: []
+summary:
+  legend_examples: ["Social determinants of health (SDOH)"]
