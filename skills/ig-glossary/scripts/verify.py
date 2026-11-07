@@ -3,7 +3,7 @@ import argparse
 import json
 from pathlib import Path
 
-from common import DATA
+import config
 from findings import replace_problems
 
 VERDICTS = {"confirm", "reject", "revise"}
@@ -37,7 +37,7 @@ def packet_md(vid, recs):
     return "\n".join(lines)
 
 
-def validate_verdicts(verdicts, keys):
+def validate_verdicts(verdicts, keys, partial=False):
     errors, seen = [], set()
     for v in verdicts:
         k = v.get("key")
@@ -53,37 +53,52 @@ def validate_verdicts(verdicts, keys):
             errors.append(f"{k}: reason is required")
         if v.get("verdict") == "revise":
             errors += [f"{k}: {p}" for p in replace_problems(keys[k], keys[k]["find"], v.get("replace"))]
-    errors += [f"no verdict for {k}" for k in sorted(set(keys) - seen)]
+    if not partial:
+        errors += [f"no verdict for {k}" for k in sorted(set(keys) - seen)]
     return errors
 
 
-def load_records(data):
+def load_records(data, files=None):
     recs = []
     for p in sorted((data / "agent" / "validated").glob("B[0-9][0-9].json")):
         recs += json.loads(p.read_text(encoding="utf-8"))["records"]
-    return recs
+    return [r for r in recs if files is None or r["file"] in files]
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
     mode = ap.add_mutually_exclusive_group(required=True)
     mode.add_argument("--packets", action="store_true")
     mode.add_argument("--check", metavar="VID")
     ap.add_argument("--n", type=int, default=3, help="number of packets (one skeptic agent each)")
-    ap.add_argument("--data", type=Path, default=DATA)
+    ap.add_argument("--files", help="only records in these files (a batch id like B03, or a comma-separated list)")
+    ap.add_argument("--partial", action="store_true", help="a verdict file that rules on a subset of keys (consistency pass)")
     args = ap.parse_args(argv)
-    vdir = args.data / "verify"
+    cfg = config.load(args.run)
+    data = cfg["data"]
+    vdir = data / "verify"
     vdir.mkdir(parents=True, exist_ok=True)
+    files = None
+    if args.files:
+        manifest = json.loads((data / "batches" / "manifest.json").read_text(encoding="utf-8"))
+        files = set(manifest[args.files]["files"]) if args.files in manifest else set(args.files.split(","))
     if args.packets:
-        for n, recs in enumerate(build_packets(load_records(args.data), args.n), 1):
+        start = len(list(vdir.glob("V[0-9][0-9].keys.json")))
+        for n, recs in enumerate(build_packets(load_records(data, files), args.n), start + 1):
             vid = f"V{n:02d}"
             (vdir / f"{vid}.md").write_text(packet_md(vid, recs), encoding="utf-8")
             (vdir / f"{vid}.keys.json").write_text(json.dumps([r["key"] for r in recs]) + "\n")
             print(f"{vid}: {len(recs)} findings")
         return
-    keys = set(json.loads((vdir / f"{args.check}.keys.json").read_text()))
-    by_key = {r["key"]: r for r in load_records(args.data) if r["key"] in keys}
-    errors = validate_verdicts(json.loads((vdir / f"{args.check}.json").read_text(encoding="utf-8")), by_key)
+    keys_path = vdir / f"{args.check}.keys.json"
+    records = load_records(data)
+    if keys_path.exists():
+        keys = set(json.loads(keys_path.read_text()))
+        by_key = {r["key"]: r for r in records if r["key"] in keys}
+    else:
+        by_key = {r["key"]: r for r in records}
+        args.partial = True
+    errors = validate_verdicts(json.loads((vdir / f"{args.check}.json").read_text(encoding="utf-8")), by_key, args.partial)
     print(f"{args.check}: OK" if not errors else "\n".join(errors))
     raise SystemExit(1 if errors else 0)
 

@@ -4,8 +4,9 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
+import config
 from batches import hit_id
-from common import DATA, read_jsonl
+from common import read_jsonl
 from findings import AUTO_METHODS, positions
 
 
@@ -70,17 +71,18 @@ def explained_hits(rows, data):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
     ap.add_argument("--root", type=Path, help="IG tree to edit (dry run: a scratch worktree)")
     ap.add_argument("--residuals", action="store_true", help="compare data/hits.jsonl with data/dryrun/hits.jsonl")
-    ap.add_argument("--data", type=Path, default=DATA)
     args = ap.parse_args(argv)
-    doc = json.loads((args.data / "findings.json").read_text(encoding="utf-8"))
-    out = args.data / "dryrun"
+    cfg = config.load(args.run)
+    data = cfg["data"]
+    doc = json.loads((data / "findings.json").read_text(encoding="utf-8"))
+    out = data / "dryrun"
     out.mkdir(parents=True, exist_ok=True)
     if args.residuals:
-        res = residuals(read_jsonl(args.data / "hits.jsonl"), read_jsonl(out / "hits.jsonl"),
-                        explained_hits(doc["rows"], args.data))
+        res = residuals(read_jsonl(data / "hits.jsonl"), read_jsonl(out / "hits.jsonl"),
+                        explained_hits(doc["rows"], data))
         (out / "residuals.json").write_text(json.dumps(res, indent=1, sort_keys=True) + "\n")
         for rule, v in sorted(res.items()):
             if v["unexplained"] > 0:

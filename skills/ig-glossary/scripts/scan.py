@@ -5,9 +5,8 @@ import re
 from collections import Counter
 from pathlib import Path
 
-import yaml
-
-from common import DATA, HERE, IDENTIFIER, LOCKED_CLASSES, read_jsonl, write_jsonl
+import config
+from common import IDENTIFIER, LOCKED_CLASSES, read_jsonl, write_jsonl
 
 RULE_TYPES = {"canonical", "missed-use", "misuse-signal", "form"}
 
@@ -75,9 +74,9 @@ def summarize(hits, rules):
     return out
 
 
-def write_review(book, counts, hits, path, samples=3):
+def write_review(book, counts, hits, path, tag, samples=3):
     lines = ["# Rulebook review (Checkpoint 1)", "",
-             "Counts are pattern hits over the STU 3.0 corpus; *editable* excludes locked classes",
+             f"Counts are pattern hits over the {tag} corpus; *editable* excludes locked classes",
              "(Identifier, External, Historical). Agents judge each hit in context in Part 2.", "",
              "## Decisions register", ""]
     for d in book.get("decisions", []):
@@ -110,19 +109,18 @@ def write_review(book, counts, hits, path, samples=3):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--rulebook", type=Path, default=HERE / "rulebook.yaml")
-    ap.add_argument("--data", type=Path, default=DATA)
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
     args = ap.parse_args(argv)
-    book = yaml.safe_load(args.rulebook.read_text(encoding="utf-8"))
+    cfg = config.load(args.run)
+    book = config.rulebook(cfg)
     rules = load_rules(book)
-    hits = scan(read_jsonl(args.data / "segments.jsonl"), rules)
+    hits = scan(read_jsonl(cfg["data"] / "segments.jsonl"), rules)
     counts = summarize(hits, rules)
-    write_jsonl(args.data / "hits.jsonl", hits)
-    (args.data / "counts.json").write_text(json.dumps(counts, indent=1) + "\n")
-    write_review(book, counts, hits, args.data / "rulebook-review.md")
+    write_jsonl(cfg["data"] / "hits.jsonl", hits)
+    (cfg["data"] / "counts.json").write_text(json.dumps(counts, indent=1) + "\n")
+    write_review(book, counts, hits, cfg["data"] / "rulebook-review.md", cfg["ig"]["tag"])
     print(f"{len(hits)} hits from {len(rules)} rules; "
-          f"{sum(not h['locked'] for h in hits)} editable; review → {args.data / 'rulebook-review.md'}")
+          f"{sum(not h['locked'] for h in hits)} editable; review → {cfg['data'] / 'rulebook-review.md'}")
 
 
 if __name__ == "__main__":

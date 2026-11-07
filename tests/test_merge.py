@@ -51,8 +51,22 @@ def test_identifier_rows_one_per_artifact_and_rule(tmp_path):
     hit = {"change_class": "Identifier", "type": "missed-use", "seg_id": segs[0]["seg_id"], "rule_id": "R-RT-RECIP",
            "term_id": "T-RT", "match": "Referral Recipient"}
     rows = gm.identifier_rows([hit, dict(hit), {**hit, "type": "canonical"}], segs,
-                              {"R-RT-RECIP": {"note": "n"}}, gf.Corpus(tmp_path, segs))
+                              {"R-RT-RECIP": {"note": "n"}}, gf.Corpus(tmp_path, segs), "D-10")
     assert len(rows) == 1 and rows[0]["apply_method"] == "Manual" and rows[0]["decision"] == "D-10"
+
+
+def test_identifier_rows_carry_the_rulebook_decision():
+    seg = {"seg_id": "f.fsh:1:10", "file": "f.fsh", "kind": "fsh", "change_class": "Identifier", "field": "Id",
+           "section": "Profile", "artifact": "XRecipient", "url": None, "line": 1, "start": 9, "end": 19,
+           "raw": "XRecipient", "visible": "XRecipient", "text": "X Recipient"}
+    hit = {"change_class": "Identifier", "type": "missed-use", "seg_id": seg["seg_id"], "rule_id": "R-1",
+           "term_id": "T-RT", "match": "Recipient"}
+
+    class C:
+        def text(self, f):
+            return "Profile: XRecipient\n"
+    rows = gm.identifier_rows([hit], [seg], {"R-1": {"note": "n"}}, C(), "D-7")
+    assert rows[0]["decision"] == "D-7" and rows[0]["recommended"] == "keep"
 
 
 def test_trim_context_and_digest():

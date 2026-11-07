@@ -7,7 +7,8 @@ from pathlib import Path
 
 import yaml
 
-from common import DATA, HERE, LOCKED_CLASSES, SNAPSHOT, read_jsonl
+import config
+from common import LOCKED_CLASSES, read_jsonl
 from extract import LineIndex
 
 TYPES = {"Misuse", "Missed use", "Form"}
@@ -208,25 +209,25 @@ def batch_entry(manifest, bid, out):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
     ap.add_argument("--batch", help="e.g. B01 (default: every batch with agent output)")
-    ap.add_argument("--snapshot", type=Path, default=SNAPSHOT)
-    ap.add_argument("--data", type=Path, default=DATA)
     args = ap.parse_args(argv)
-    book = yaml.safe_load((HERE / "rulebook.yaml").read_text(encoding="utf-8"))
-    manifest = json.loads((args.data / "batches" / "manifest.json").read_text(encoding="utf-8"))
-    corpus = Corpus(args.snapshot, read_jsonl(args.data / "segments.jsonl"))
-    bids = [args.batch] if args.batch else sorted(p.stem for p in (args.data / "agent").glob("[BQ][0-9][0-9].json"))
+    cfg = config.load(args.run)
+    data = cfg["data"]
+    book = config.rulebook(cfg)
+    manifest = json.loads((data / "batches" / "manifest.json").read_text(encoding="utf-8"))
+    corpus = Corpus(cfg["snapshot"], read_jsonl(data / "segments.jsonl"))
+    bids = [args.batch] if args.batch else sorted(p.stem for p in (data / "agent").glob("[BQ][0-9][0-9].json"))
     failed = False
     for bid in bids:
-        out = json.loads((args.data / "agent" / f"{bid}.json").read_text(encoding="utf-8"))
+        out = json.loads((data / "agent" / f"{bid}.json").read_text(encoding="utf-8"))
         records, errors = validate_batch(out, batch_entry(manifest, bid, out), corpus, book)
         if errors:
             failed = True
             print(f"{bid}: {len(errors)} problem(s)")
             print("\n".join(f"  - {e}" for e in errors))
             continue
-        dest = args.data / "agent" / "validated" / f"{bid}.json"
+        dest = data / "agent" / "validated" / f"{bid}.json"
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(json.dumps({"records": records, "dismissed": out.get("dismissed", []),
                                     "glossary_feedback": out.get("glossary_feedback", [])},

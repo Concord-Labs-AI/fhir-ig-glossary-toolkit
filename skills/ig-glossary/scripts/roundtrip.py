@@ -6,7 +6,7 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
-from common import DATA
+import config
 from sheet import FINDING_COLUMNS, REVIEW_CHOICES, locked_value
 
 
@@ -54,11 +54,11 @@ def check(doc, meta, sheet_rows):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
     ap.add_argument("workbook", type=Path)
-    ap.add_argument("--findings", type=Path, default=DATA / "findings.json")
     args = ap.parse_args(argv)
-    doc = json.loads(args.findings.read_text(encoding="utf-8"))
+    cfg = config.load(args.run)
+    doc = json.loads((cfg["data"] / "findings.json").read_text(encoding="utf-8"))
     meta, rows = read_workbook(args.workbook)
     problems = check(doc, meta, rows)
     print(f"{len(rows)} rows; review: {dict(Counter(norm(r.get('Review')) or '(blank)' for r in rows))}")

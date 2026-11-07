@@ -6,10 +6,9 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-import yaml
-
 from acronyms import acronym_findings
-from common import DATA, HERE, IDENTIFIER, SNAPSHOT, SNAPSHOT_TAG, read_jsonl
+import config
+from common import IDENTIFIER, read_jsonl
 from findings import Corpus, make_record, positions
 
 THEME_FORM, THEME_OTHER = "TH-FORM", "TH-OTHER"
@@ -86,7 +85,7 @@ def resolve_overlaps(records):
     return out, errors
 
 
-def identifier_rows(hits, segments, rules, corpus):
+def identifier_rows(hits, segments, rules, corpus, decision):
     seg_by_id = {s["seg_id"]: s for s in segments}
     rows, seen = [], set()
     for h in hits:
@@ -103,7 +102,7 @@ def identifier_rows(hits, segments, rules, corpus):
         rows.append(make_record(seg, seg["line"], seg["start"], seg["end"], seg["raw"], "", occurrence, len(pos),
                                 terms=[h["term_id"]], type=TYPE_OF[h["type"]], rule=h["rule_id"],
                                 issue=f"Artifact name/id contains '{h['match']}'. {note} Renaming is a breaking change.",
-                                confidence="High", decision="D-10", recommended="keep", hits=[], source="identifier"))
+                                confidence="High", decision=decision, recommended="keep", hits=[], source="identifier"))
     return rows
 
 
@@ -146,22 +145,23 @@ def finalize(records, themes, book):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--data", type=Path, default=DATA)
-    ap.add_argument("--snapshot", type=Path, default=SNAPSHOT)
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
     args = ap.parse_args(argv)
-    book = yaml.safe_load((HERE / "rulebook.yaml").read_text(encoding="utf-8"))
-    themes = yaml.safe_load((HERE / "themes.yaml").read_text(encoding="utf-8"))["themes"]
-    segments = read_jsonl(args.data / "segments.jsonl")
-    corpus = Corpus(args.snapshot, segments)
+    cfg = config.load(args.run)
+    data = cfg["data"]
+    book = config.rulebook(cfg)
+    themes = config.themes(cfg)
+    segments = read_jsonl(data / "segments.jsonl")
+    corpus = Corpus(cfg["snapshot"], segments)
     records = []
-    for p in sorted((args.data / "agent" / "validated").glob("[BQ][0-9][0-9].json")):
+    for p in sorted((data / "agent" / "validated").glob("[BQ][0-9][0-9].json")):
         records += json.loads(p.read_text(encoding="utf-8"))["records"]
     records += acronym_findings(segments, corpus)
     rules = {r["id"]: r for t in book["terms"] for r in t.get("rules", [])}
-    records += identifier_rows(read_jsonl(args.data / "hits.jsonl"), segments, rules, corpus)
+    if book.get("identifier_decision"):
+        records += identifier_rows(read_jsonl(data / "hits.jsonl"), segments, rules, corpus, book["identifier_decision"])
     verdicts = []
-    for p in sorted((args.data / "verify").glob("V[0-9][0-9].json")):
+    for p in sorted((data / "verify").glob("V[0-9][0-9].json")):
         verdicts += json.loads(p.read_text(encoding="utf-8"))
     records, rejected = apply_verdicts(records, verdicts, corpus)  # after every source, so QA can rule on script rows too
     records, errors = resolve_overlaps(records)
@@ -169,11 +169,11 @@ def main(argv=None):
         print("\n".join(errors))
         raise SystemExit(1)
     rows = finalize(records, themes, book)
-    doc = {"meta": {"snapshot": SNAPSHOT_TAG, "rulebook": book["version"],
+    doc = {"meta": {"snapshot": cfg["ig"]["tag"], "ig": cfg["ig"]["name"], "rulebook": book["version"],
                     "generated": datetime.date.today().isoformat(), "rows": len(rows), "sha256": digest(rows)},
            "rows": rows}
-    (args.data / "findings.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-    (args.data / "rejected.json").write_text(json.dumps(rejected, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    (data / "findings.json").write_text(json.dumps(doc, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    (data / "rejected.json").write_text(json.dumps(rejected, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"{len(rows)} rows ({len(rejected)} rejected by the skeptic pass)")
     for label, key in (("status", "status"), ("type", "type"), ("apply method", "apply_method"), ("theme", "theme")):
         print(f"  by {label}: {dict(Counter(r[key] for r in rows))}")
