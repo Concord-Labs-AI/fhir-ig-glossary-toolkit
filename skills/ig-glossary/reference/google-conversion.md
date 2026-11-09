@@ -24,8 +24,8 @@ function protectLockedColumns() {
 ```
 
 ## Verify the round trip
-File → Download → Microsoft Excel (.xlsx), then from the run directory:
+File → Download → Microsoft Excel (.xlsx), then ask Claude to run the round-trip check on the downloaded workbook, or run it yourself from the toolkit (the `scripts` directory of the `ig-glossary` skill):
 ```bash
-python3 $SCRIPTS/roundtrip.py <downloaded>.xlsx
+python3 $SCRIPTS/roundtrip.py --run <run directory> <downloaded>.xlsx
 ```
 Expected: `OK: every locked column matches findings.json`. Run the same command on the workbook the reviewers hand back; it also validates their Review values and flags Modify rows without replacement text.

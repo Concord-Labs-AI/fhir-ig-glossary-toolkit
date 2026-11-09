@@ -1,14 +1,18 @@
 # Optional stage: build the dry-run copy and compare QA
 
+Run this after the final QA loop (Step 11) on a fresh dry-run copy (Step 8's instructions), so `build_note` describes the edits that ship. Each code block is self-contained: shell variables do not carry between separate calls, so every block starts by defining them.
+
 Proves that applying every suggested edit still builds, and that the publisher's QA counts do not get worse. Needs the HL7 IG Publisher toolchain (Java, Node + SUSHI, Jekyll/Ruby) already working for this IG, plus `jq`. Budget 20–40 minutes per build.
 
 ## 1. Baseline build (pristine snapshot copy)
 
 ```bash
-IG=<path to the IG checkout>            # the snapshot in config.yaml
-TAG=<tag>                               # ig.tag in config.yaml
-RUN=<run directory>
+set -eu
+IG=<absolute path to the IG checkout>   # the snapshot in config.yaml
+TAG=HEAD                                # the commit under review (the configured tag may not be a git ref)
+RUN=<absolute run directory>
 git -C $IG worktree add --detach $IG-baseline $TAG
+mkdir -p $IG-baseline/input-cache
 cp $IG/input-cache/publisher.jar $IG-baseline/input-cache/ 2>/dev/null || true   # or _updatePublisher.sh
 cd $IG-baseline && bash ./_genonce.sh > build.log 2>&1
 mkdir -p $RUN/data/qa && cp output/qa.json $RUN/data/qa/qa-baseline.json
@@ -21,6 +25,12 @@ jq '{errs, warnings, hints}' $RUN/data/qa/qa-baseline.json
 Step 8 of the skill already created `$IG-dryrun` and applied the rows (`drifted 0`). Then:
 
 ```bash
+set -eu
+IG=<absolute path to the IG checkout>   # the snapshot in config.yaml
+TAG=HEAD                                # the commit under review (the configured tag may not be a git ref)
+RUN=<absolute run directory>
+mkdir -p $IG-dryrun/input-cache
+cp $IG/input-cache/publisher.jar $IG-dryrun/input-cache/ 2>/dev/null || true
 cd $IG-dryrun && bash ./_genonce.sh > build.log 2>&1
 grep -m1 -E '[0-9]+ Errors' build.log
 for k in errs warnings hints; do
@@ -36,6 +46,11 @@ echo "broken_links baseline $(grep -oE '[0-9]+' $RUN/data/qa/qa-baseline.txt) dr
 Shows which rule hits remain after every edit, and which of those are explained (dismissed, Manual, rejected):
 
 ```bash
+set -eu
+IG=<absolute path to the IG checkout>   # the snapshot in config.yaml
+TAG=HEAD                                # the commit under review (the configured tag may not be a git ref)
+RUN=<absolute run directory>
+SCRIPTS=<skill directory>/scripts
 mkdir -p $RUN/dryrun-scan && cd $RUN/dryrun-scan
 sed "s#^  snapshot: .*#  snapshot: $IG-dryrun#" $RUN/config.yaml > config.yaml
 cp $RUN/rulebook.yaml .
@@ -46,4 +61,4 @@ cd $RUN && python3 $SCRIPTS/apply.py --residuals
 ```
 Any `UNEXPLAINED` line is a hit nobody dispositioned; look at it before sharing the workbook.
 
-Clean up: `git -C $IG worktree remove $IG-baseline && git -C $IG worktree remove $IG-dryrun && rm -rf $RUN/dryrun-scan`.
+Clean up: `git -C $IG worktree remove --force $IG-baseline && git -C $IG worktree remove --force $IG-dryrun && rm -rf $RUN/dryrun-scan`.

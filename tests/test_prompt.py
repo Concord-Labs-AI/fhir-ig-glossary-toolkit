@@ -90,4 +90,4 @@ def test_skill_and_reference_docs_only_call_scripts_and_flags_that_exist():
     skill = gp.PROMPTS.parent
     docs = [skill / "SKILL.md", *sorted((skill / "reference").glob("*.md"))]
     assert len(docs) == 4
-    _check_script_calls(docs, re.compile(r"\$SCRIPTS/(\w+\.py)(.*)"))
+    _check_script_calls(docs, re.compile(r"\$SCRIPTS/(\w+\.py)([^`\n]*)"))
