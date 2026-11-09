@@ -3,20 +3,19 @@ import argparse
 import json
 from collections import Counter, defaultdict
 
-import yaml
 from openpyxl import Workbook
 from openpyxl.formatting.rule import FormulaRule
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
-from common import BUILD, DATA, HERE
+import config
+from common import ATTRIBUTION
 
-WORKBOOK = BUILD / "Gravity-STU3.1-Glossary-Alignment-Detailed.xlsx"
 FINDING_COLUMNS = [  # (header, row key, width) — all locked
     ("ID", "id", 10), ("Theme", "theme", 20), ("Terms", "terms", 20), ("Type", "type", 11),
     ("Rule", "rule", 15), ("Page / artifact", "page", 24), ("Section", "section", 24),
-    ("Source file", "file", 28), ("Line @3.0.0", "line", 7), ("Occurrence #", "occurrence", 7),
+    ("Source file", "file", 28), ("Line (snapshot)", "line", 7), ("Occurrence #", "occurrence", 7),
     ("Published link", "url", 26), ("Context (as read)", "context", 60), ("Issue", "issue", 40),
     ("Source find (exact)", "find", 30), ("Suggested replace", "replace", 30),
     ("Change class", "change_class", 12), ("Apply method", "apply_method", 15),
@@ -27,10 +26,10 @@ REVIEW_COLUMNS = [("Review", 12), ("Reviewer's replace", 34), ("Reviewer notes",
 REVIEW_CHOICES = ["Accept", "Modify", "Reject", "Defer"]
 RECOMMENDED_LABELS = {None: "", "": "", "change": "still changes", "keep": "left as written"}
 COLUMN_HELP = {
-    "Context (as read)": "The sentence as readers see it on hl7.org (markup removed).",
+    "Context (as read)": "The sentence as readers see it in the published guide (markup removed).",
     "Source find (exact)": "The exact source text that will be replaced. Don't edit.",
     "Suggested replace": "What Accept will put in place of 'Source find'.",
-    "Line @3.0.0": "Line in the published 3.0.0 source (edits locate by text, not line).",
+    "Line (snapshot)": "Line in the snapshot source (edits locate by text, not line).",
     "Occurrence #": "Which occurrence of 'Source find' in the file this row means.",
     "Change class": "Prose / Artifact text / Diagram are editable; Identifier / External / Historical are locked.",
     "Apply method": "Text replace / Diagram source + re-render / Glossary entry edit are applied automatically; Manual is reported only.",
@@ -73,13 +72,13 @@ def header(ws, names, fills):
     ws.freeze_panes = "A2"
 
 
-def readme_sheet(wb, rows, meta):
+def readme_sheet(wb, rows, meta, cfg):
     ws = wb.active
     ws.title = "README"
     last = len(rows) + 1
     lines = [
-        ("Gravity SDOH Clinical Care IG — glossary alignment, detailed findings", ""),
-        ("Snapshot", f"IG tag {meta['snapshot']} — the published STU 3 guide"),
+        (f"{cfg['ig']['name']} — glossary alignment, detailed findings", ""),
+        ("Snapshot", f"IG tag {meta['snapshot']}"),
         ("Findings", len(rows)),
         ("Unreviewed rows", f"=COUNTBLANK(Findings!{REVIEW_COL}2:{REVIEW_COL}{last})"),
         ("Modify rows missing a replacement",
@@ -95,11 +94,12 @@ def readme_sheet(wb, rows, meta):
               "'Depends on' column to see one decision's rows. Their suggestions follow the glossary strictly; "
               "'Under recommended option' says whether the edit survives the recommended option. The Decision x "
               "theme tab shows which themes each decision touches."),
-        ("5", "Use Published link to see the text in context on hl7.org."),
+        ("5", "Use Published link to see the text in context in the published guide."),
         ("6", "Spotted something the analysis missed? Add it on the Reviewer additions tab."),
         ("", ""),
         ("Columns", ""),
     ] + [(name, COLUMN_HELP.get(name, "")) for name, _, _ in FINDING_COLUMNS + [(n, None, None) for n, _ in REVIEW_COLUMNS]]
+    lines += [("", ""), ("About", ATTRIBUTION)]
     for r, (a, b) in enumerate(lines, 1):
         ws.cell(row=r, column=1, value=a).font = BOLD
         ws.cell(row=r, column=2, value=b).alignment = WRAP
@@ -231,10 +231,10 @@ def meta_sheet(wb, meta):
     ws.sheet_state = "hidden"
 
 
-def build(doc, book, counts):
+def build(doc, book, counts, cfg):
     wb = Workbook()
     rows = doc["rows"]
-    readme_sheet(wb, rows, doc["meta"])
+    readme_sheet(wb, rows, doc["meta"], cfg)
     findings_sheet(wb, rows)
     decisions_sheet(wb, rows, book)
     decision_theme_sheet(wb, rows, book)
@@ -246,14 +246,16 @@ def build(doc, book, counts):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.parse_args(argv)
-    doc = json.loads((DATA / "findings.json").read_text(encoding="utf-8"))
-    book = yaml.safe_load((HERE / "rulebook.yaml").read_text(encoding="utf-8"))
-    counts = json.loads((DATA / "counts.json").read_text(encoding="utf-8"))
-    BUILD.mkdir(exist_ok=True)
-    build(doc, book, counts).save(WORKBOOK)
-    print(f"{WORKBOOK} — {len(doc['rows'])} findings")
+    ap = config.add_run_arg(argparse.ArgumentParser(description=__doc__))
+    args = ap.parse_args(argv)
+    cfg = config.load(args.run)
+    doc = json.loads((cfg["data"] / "findings.json").read_text(encoding="utf-8"))
+    book = config.rulebook(cfg)
+    counts = json.loads((cfg["data"] / "counts.json").read_text(encoding="utf-8"))
+    cfg["build"].mkdir(exist_ok=True)
+    path = config.workbook_path(cfg)
+    build(doc, book, counts, cfg).save(path)
+    print(f"{path} — {len(doc['rows'])} findings")
 
 
 if __name__ == "__main__":
