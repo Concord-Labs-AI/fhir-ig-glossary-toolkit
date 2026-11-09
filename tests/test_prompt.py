@@ -67,17 +67,27 @@ def test_cli_without_packet_refuses_a_packet_brief(run):
         gp.main(["consistency", "--run", str(run)])
 
 
-def test_briefs_only_call_scripts_and_flags_that_exist():
-    call = re.compile(r"\{\{scripts\}\}/(\w+\.py)(.*)")
+def _check_script_calls(sources, call):
     scripts = gp.PROMPTS.parent / "scripts"
     helps = {}
-    for template in gp.PROMPTS.glob("*.md"):
-        for name, rest in call.findall(template.read_text(encoding="utf-8")):
-            assert (scripts / name).exists(), f"{template.name}: {name} does not exist"
+    for source in sources:
+        for name, rest in call.findall(source.read_text(encoding="utf-8")):
+            assert (scripts / name).exists(), f"{source.name}: {name} does not exist"
             if name not in helps:
                 helps[name] = subprocess.run([sys.executable, str(scripts / name), "--help"],
                                              capture_output=True, text=True)
             help_run = helps[name]
-            assert help_run.returncode == 0, f"{template.name}: {name} --help failed"
+            assert help_run.returncode == 0, f"{source.name}: {name} --help failed"
             for flag in re.findall(r"--[\w-]+", rest):
-                assert flag in help_run.stdout, f"{template.name}: {name} has no {flag}"
+                assert flag in help_run.stdout, f"{source.name}: {name} has no {flag}"
+
+
+def test_briefs_only_call_scripts_and_flags_that_exist():
+    _check_script_calls(gp.PROMPTS.glob("*.md"), re.compile(r"\{\{scripts\}\}/(\w+\.py)(.*)"))
+
+
+def test_skill_and_reference_docs_only_call_scripts_and_flags_that_exist():
+    skill = gp.PROMPTS.parent
+    docs = [skill / "SKILL.md", *sorted((skill / "reference").glob("*.md"))]
+    assert len(docs) == 4
+    _check_script_calls(docs, re.compile(r"\$SCRIPTS/(\w+\.py)(.*)"))
