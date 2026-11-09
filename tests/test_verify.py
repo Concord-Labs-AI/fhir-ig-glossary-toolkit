@@ -122,19 +122,25 @@ def test_partial_check_can_rule_on_script_generated_rows(run):
     assert e.value.code == 1
 
 
-def test_partial_check_accepts_a_revise_on_a_script_row_without_kind(run):
+def test_partial_check_takes_kind_and_field_from_the_rows_segment(run):
+    import extract
+    extract.main(["--run", str(run)])
     seed(run, [REC])
-    (run / "data" / "findings.json").write_text(json.dumps({"rows": [
-        {"key": "acr@9", "file": "input/pagecontent/x.md", "find": "x", "field": "paragraph"}]}))
+    # a merged row carries neither kind nor field; this one sits inside a glossary table-row segment
+    row = {"key": "input/pagecontent/glossary.md@40", "file": "input/pagecontent/glossary.md",
+           "start": 40, "find": "An actor."}
+    (run / "data" / "findings.json").write_text(json.dumps({"rows": [row]}))
     v = run / "data" / "verify"; v.mkdir(parents=True)
-    (v / "V09.json").write_text(json.dumps([{"key": "acr@9", "verdict": "revise", "replace": "y", "reason": "QA: r"}]))
-    with pytest.raises(SystemExit) as e:
-        gv.main(["--run", str(run), "--check", "V09", "--partial"])
-    assert e.value.code == 0
-    (v / "V09.json").write_text(json.dumps([{"key": "acr@9", "verdict": "revise", "replace": "x", "reason": "QA: r"}]))
-    with pytest.raises(SystemExit) as e:
-        gv.main(["--run", str(run), "--check", "V09", "--partial"])
-    assert e.value.code == 1
+
+    def check(replace):
+        (v / "V09.json").write_text(json.dumps([{"key": row["key"], "verdict": "revise",
+                                                 "replace": replace, "reason": "QA: r"}]))
+        with pytest.raises(SystemExit) as e:
+            gv.main(["--run", str(run), "--check", "V09", "--partial"])
+        return e.value.code
+    assert check("A person.") == 0
+    assert check("A person | extra.") == 1          # table row must keep its | count
+    assert check("An actor.") == 1                  # replace equal to find
 
 
 def test_main_rejects_a_retag_to_an_unknown_decision(run):

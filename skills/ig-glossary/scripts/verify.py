@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import config
+from common import read_jsonl
 from findings import replace_problems
 
 VERDICTS = {"confirm", "reject", "revise", "retag"}
@@ -66,6 +67,15 @@ def validate_verdicts(verdicts, keys, partial=False, open_decisions=None):
     return errors
 
 
+def segment_shape(segs, row):
+    """kind and field of the segment holding a merged row (merged rows carry neither)."""
+    if row.get("start") is not None:
+        for g in segs:
+            if g["file"] == row["file"] and g["start"] is not None and g["start"] <= row["start"] < g["end"]:
+                return {"kind": g["kind"], "field": g["field"]}
+    return {"kind": "page", "field": "paragraph"}
+
+
 def load_records(data, files=None):
     recs = []
     for p in sorted((data / "agent" / "validated").glob("B[0-9][0-9].json")):
@@ -109,8 +119,11 @@ def main(argv=None):
         by_key = {r["key"]: r for r in records}
         merged = data / "findings.json"  # QA verdicts may rule on script-generated rows too
         if merged.exists():
+            segs_path = data / "segments.jsonl"
+            segs = read_jsonl(segs_path) if segs_path.exists() else []
             for r in json.loads(merged.read_text(encoding="utf-8"))["rows"]:
-                by_key.setdefault(r["key"], {**r, "kind": r.get("kind") or ("fsh" if r["file"].endswith(".fsh") else "page")})
+                if r["key"] not in by_key:
+                    by_key[r["key"]] = {**r, **segment_shape(segs, r)}
     else:
         raise SystemExit(f"no {args.check}.keys.json; pass --partial for a consistency-pass or QA verdict file")
     open_decisions = {d["id"] for d in config.rulebook(cfg).get("decisions", []) if not d.get("team_decision")}
