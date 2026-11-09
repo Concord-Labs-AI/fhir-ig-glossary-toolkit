@@ -70,11 +70,14 @@ def test_cli_without_packet_refuses_a_packet_brief(run):
 def test_briefs_only_call_scripts_and_flags_that_exist():
     call = re.compile(r"\{\{scripts\}\}/(\w+\.py)(.*)")
     scripts = gp.PROMPTS.parent / "scripts"
+    helps = {}
     for template in gp.PROMPTS.glob("*.md"):
         for name, rest in call.findall(template.read_text(encoding="utf-8")):
             assert (scripts / name).exists(), f"{template.name}: {name} does not exist"
-            help_run = subprocess.run([sys.executable, str(scripts / name), "--help"],
-                                      capture_output=True, text=True)
+            if name not in helps:
+                helps[name] = subprocess.run([sys.executable, str(scripts / name), "--help"],
+                                             capture_output=True, text=True)
+            help_run = helps[name]
             assert help_run.returncode == 0, f"{template.name}: {name} --help failed"
             for flag in re.findall(r"--[\w-]+", rest):
                 assert flag in help_run.stdout, f"{template.name}: {name} has no {flag}"

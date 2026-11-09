@@ -1,5 +1,6 @@
 """Check rulebook.yaml: shape, regexes, decision references, and coverage of the glossary's terms."""
 import argparse
+import re
 
 import config
 import scan
@@ -8,23 +9,38 @@ from common import read_jsonl
 REQUIRED_DECISION = ("id", "title", "question", "options", "recommendation")
 
 
+def headword(text):
+    """First table cell as a reader sees it: markup, link syntax and tags removed."""
+    cell = text.strip().strip("|").split("|")[0]
+    cell = re.sub(r"\[([^\]]*)\]\([^)]*\)|<[^>]*>|[*_`]", lambda m: m.group(1) or "", cell)
+    return " ".join(cell.split())
+
+
 def glossary_terms(segments):
-    """Headwords from the glossary page's table rows (first cell), skipping the header row."""
-    out = []
+    """Headwords from the glossary page's table rows (first cell). The first row is the header; so is any repeat of it."""
+    out, header = [], None
     for s in segments:
         if s["kind"] == "glossary" and s["field"] == "table-row":
-            cell = s["text"].strip("| ").split(" | ")[0].strip()
-            if cell and cell != "Term":
+            cell = headword(s["text"])
+            if header is None:
+                header = cell
+            elif cell and cell != header:
                 out.append(cell)
     return out
 
 
 def problems(book, glossary_terms=None):
     probs = []
-    try:
-        scan.load_rules(book)
-    except (ValueError, KeyError) as err:
-        probs.append(str(err))
+    for t in book.get("terms", []):
+        if not t.get("id"):
+            probs.append(f"term without id: {t.get('glossary_term', '?')}")
+        for r in t.get("rules", []):
+            probs += [f"{t.get('id', '?')}: rule {r.get('id', '?')} needs {k}" for k in ("id", "type", "pattern") if not r.get(k)]
+    if not probs:
+        try:
+            scan.load_rules(book)
+        except ValueError as err:
+            probs.append(str(err))
     for t in book.get("terms", []):
         tid = t.get("id", "?")
         if not t.get("glossary_term"):
@@ -40,9 +56,12 @@ def problems(book, glossary_terms=None):
         for k in REQUIRED_DECISION:
             if not d.get(k):
                 probs.append(f"{did}: {k} required")
-        letter = str(d.get("recommendation", "")).partition(" — ")[0].strip()
+        rec = str(d.get("recommendation", ""))
+        letter = rec.partition(" — ")[0].strip()
         letters = {str(o).split(":", 1)[0].strip() for o in d.get("options", [])}
-        if letter and letter not in letters:
+        if rec and " — " not in rec:
+            probs.append(f'{did}: recommendation must start with an option letter and " — " (e.g. "A — reason")')
+        elif letter and letter not in letters:
             probs.append(f"{did}: recommendation {letter!r} names none of its options {sorted(letters)}")
     idd = book.get("identifier_decision")
     if idd and idd not in ids:
@@ -63,7 +82,13 @@ def main(argv=None):
     if probs:
         print("\n".join(f"- {p}" for p in probs))
         raise SystemExit(1)
-    print("rulebook: OK" + ("" if terms else " (glossary coverage not checked: run extract.py first)"))
+    note = ""
+    if terms is None:
+        note = " (glossary coverage not checked: run extract.py first)"
+    elif not terms:
+        note = (" (glossary coverage not checked: the glossary page has no table rows; "
+                "confirm by hand that every glossary term has an entry)")
+    print("rulebook: OK" + note)
 
 
 if __name__ == "__main__":

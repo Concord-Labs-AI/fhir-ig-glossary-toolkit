@@ -8,7 +8,8 @@ REQUIRED = ("id", "title", "terms", "glossary_says", "alignment_work", "work_pac
 
 def problems(themes, book):
     probs, seen = [], set()
-    term_ids = {t["id"] for t in book.get("terms", [])}
+    term_ids = {t.get("id") for t in book.get("terms", [])}
+    owner = {}
     for th in themes:
         tid = th.get("id", "?")
         if tid in seen:
@@ -18,10 +19,14 @@ def problems(themes, book):
             if not th.get(k):
                 probs.append(f"{tid}: {k} required")
         probs += [f"{tid}: unknown term {t}" for t in th.get("terms", []) if t not in term_ids]
+        for t in th.get("terms", []):
+            if t in owner and owner[t] != tid:
+                probs.append(f"{t} listed in {owner[t]} and {tid}")
+            owner.setdefault(t, tid)
         if th.get("size") not in ("S", "M", "L", "", None):
             probs.append(f"{tid}: size must be S, M or L")
     covered = {t for th in themes for t in th.get("terms", [])}
-    flagging = {t["id"] for t in book.get("terms", []) if any(r.get("type") != "canonical" for r in t.get("rules", []))}
+    flagging = {t.get("id") for t in book.get("terms", []) if any(r.get("type") not in ("canonical", "form") for r in t.get("rules", []))}
     probs += [f"{t}: term has flagging rules but no theme" for t in sorted(flagging - covered)]
     return probs
 

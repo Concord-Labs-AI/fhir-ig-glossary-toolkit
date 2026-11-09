@@ -68,7 +68,10 @@ def rulebook(cfg):
 
 
 def themes(cfg):
-    return _yaml(cfg, "themes.yaml")["themes"]
+    data = _yaml(cfg, "themes.yaml")
+    if not isinstance(data, dict) or not isinstance(data.get("themes"), list):
+        raise ConfigError(f"{cfg['run_dir'] / 'themes.yaml'}: needs a top-level themes: list")
+    return data["themes"]
 
 
 def _stem(cfg):
