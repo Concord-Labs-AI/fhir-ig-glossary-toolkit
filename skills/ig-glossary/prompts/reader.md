@@ -38,7 +38,7 @@ Some hits show a Decision (D-n) in the packet. Read that D-n entry in the rulebo
 If a D-n entry has a `team_decision`, apply that option directly and leave `decision` unset.
 
 ## Writing the edit
-- **`line`:** the source line number as the Read tool shows it. Transcribed figures (`input/images/*.png|jpg`) have no lines: use `"line": null` and copy `find` from the label text shown in the packet.
+- **`line`:** the source line number as the Read tool shows it. Transcribed figures (`input/images/*.png|jpg`) have no lines: use `"line": null` and copy `find` from the label text shown in the packet. The exact label text is in `{{run_dir}}/figure_transcripts.yaml`, and `find` must match it exactly.
 - **`find`:** copy **exactly** from the raw source line: same characters, case, punctuation, and markdown (`**`, backticks).
   - As short as possible while still a correct drop-in. Include a neighboring word when the replacement changes it ("a vendor" → "an implementer").
   - It must start and end on visible text. Never start or end inside a link URL `](...)`, a tag `<...>`, or a Liquid tag `{% %}`.

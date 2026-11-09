@@ -1,6 +1,6 @@
 # Glossary alignment — write the themes
 
-The findings for **{{ig_name}}** ({{tag}}) are merged in `{{run_dir}}/data/findings.json` (rows with `theme_id`, `terms`, `type`, `status`, `decision`, `find`, `replace`, `issue`). Write `{{run_dir}}/themes.yaml`, which groups findings for the summary report. Use the example in this toolkit's `examples/` directory as the model for shape and tone.
+The findings for **{{ig_name}}** ({{tag}}) are merged in `{{run_dir}}/data/findings.json` (rows with `theme_id`, `terms` (glossary headwords joined by "; ", not ids), `type`, `status`, `decision`, `find`, `replace`, `issue`). Write `{{run_dir}}/themes.yaml`, which groups findings for the summary report. Use the worked examples in `{{examples}}/` (one directory per worked example) as the model for shape and tone.
 
 ```yaml
 themes:
@@ -13,6 +13,8 @@ themes:
   size: S | M | L                  # S: under 25 edits in up to 3 files; M: up to ~100 edits or 10 files; L: larger
   depends_on: [D-1]
 ```
+
+Findings give `terms` as glossary headwords, so map each headword to its term id through `{{run_dir}}/rulebook.yaml` (`terms[].glossary_term` → `terms[].id`) before assigning themes.
 
 Every non-Form term with findings must belong to exactly one theme; Form findings go to a built-in theme. Read the actual rows for each theme before writing `alignment_work` — state the Ready/Pending split with numbers, and say when many rows are the same edit. Write for a reader who has never opened the rulebook.
 

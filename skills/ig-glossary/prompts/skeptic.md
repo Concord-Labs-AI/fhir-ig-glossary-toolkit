@@ -22,7 +22,7 @@ Write `{{run_dir}}/data/verify/{{packet}}.json`:
 ```json
 [{"key": "input/pagecontent/example.md@1234", "verdict": "confirm", "reason": "The organization here is the referring party; the strict reading applies."},
  {"key": "input/fsh/profiles/Example.fsh@88", "verdict": "revise", "replace": "an implementer", "reason": "Needs the article."},
- {"key": "input/pagecontent/example.md@402", "verdict": "reject", "reason": "Named workflow 'Direct Capacity Status Inquiry' is a proper label."}]
+ {"key": "input/pagecontent/example.md@402", "verdict": "reject", "reason": "Named workflow 'Standard Status Query' is a proper label."}]
 ```
 
 Then run `python3 {{scripts}}/verify.py --run {{run_dir}} --check {{packet}}` until it prints `{{packet}}: OK`. Reply with counts per verdict.
