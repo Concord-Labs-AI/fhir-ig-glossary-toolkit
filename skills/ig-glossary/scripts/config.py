@@ -26,7 +26,9 @@ def load(run_dir=None):
     raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     cfg = {}
     for section, defaults in DEFAULTS.items():
-        cfg[section] = {**copy.deepcopy(defaults), **(raw.get(section) or {})}
+        if raw.get(section) is not None and not isinstance(raw[section], dict):
+            raise ConfigError(f"{path}: {section} must be a mapping")
+        cfg[section] = {**copy.deepcopy(defaults), **{k: v for k, v in (raw.get(section) or {}).items() if v is not None}}
     missing = [k for k in REQUIRED_IG if cfg["ig"].get(k) in (None, "")]
     if missing:
         raise ConfigError(f"{path} is missing " + ", ".join(f"ig.{k}" for k in missing))
@@ -34,7 +36,11 @@ def load(run_dir=None):
     if not (snapshot / "sushi-config.yaml").exists():
         raise ConfigError(f"ig.snapshot {snapshot} has no sushi-config.yaml")
     if not (snapshot / cfg["ig"]["glossary_page"]).is_file():
-        raise ConfigError(f"ig.glossary_page {snapshot / cfg['ig']['glossary_page']} is not a file")
+        raise ConfigError(f"{path}: ig.glossary_page {snapshot / cfg['ig']['glossary_page']} is not a file")
+    if not isinstance(cfg["acronyms"]["table"], dict):
+        raise ConfigError(f"{path}: acronyms.table must be a mapping of acronym to {{long, term}}")
+    if not isinstance(cfg["summary"]["outside_workbook"], list):
+        raise ConfigError(f"{path}: summary.outside_workbook must be a list")
     for name, entry in cfg["acronyms"]["table"].items():
         if not (isinstance(entry, dict) and entry.get("long") and entry.get("term")):
             raise ConfigError(f"{path}: acronyms.table.{name} needs long and term")

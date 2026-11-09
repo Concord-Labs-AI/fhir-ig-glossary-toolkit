@@ -104,3 +104,32 @@ def test_rulebook_without_decisions_means_none(run):
     raw["decisions"] = None
     (run / "rulebook.yaml").write_text(yaml.safe_dump(raw))
     assert config.rulebook(config.load(run))["decisions"] == []
+
+
+def test_blank_acronym_table_and_outside_workbook_load_as_empty(run):
+    (run / "config.yaml").write_text(
+        (run / "config.yaml").read_text().replace("  table:\n    CBO: {long: community-based organization, term: T-SSO}\n    SDOH: {long: social determinants of health, term: T-SDOH}\n", "  table:\n")
+        + "  outside_workbook:\n")
+    cfg = config.load(run)
+    assert cfg["acronyms"]["table"] == {} and cfg["summary"]["outside_workbook"] == []
+
+
+def test_mistyped_table_or_outside_workbook_is_a_named_error(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    raw["acronyms"]["table"] = ["CBO"]
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match="acronyms.table must be a mapping"):
+        config.load(run)
+    raw["acronyms"]["table"] = {}
+    raw["summary"]["outside_workbook"] = "text"
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match="summary.outside_workbook must be a list"):
+        config.load(run)
+
+
+def test_section_given_as_a_list_is_a_named_error(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    raw["summary"] = ["a"]
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match="config.yaml: summary must be a mapping"):
+        config.load(run)
