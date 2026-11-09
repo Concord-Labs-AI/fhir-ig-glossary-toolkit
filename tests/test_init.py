@@ -1,3 +1,5 @@
+import subprocess
+
 import pytest
 import yaml
 
@@ -22,6 +24,12 @@ def test_artifact_prefix_is_the_common_leading_token(tmp_path):
     (fsh / "a.fsh").write_text("Profile: SDOHCCGoal\nInstance: SDOHCC-ReferralSource\nValueSet: SDOHCCCategory\n")
     (fsh / "b.fsh").write_text("Profile: USCorePatient\n")
     assert gi.artifact_prefixes(tmp_path) == ["SDOHCC"]
+    (fsh / "c.fsh").write_text("Instance: example-goal\nInstance: example-referral\nInstance: sample-task\n")
+    assert gi.artifact_prefixes(tmp_path) == ["SDOHCC"]
+    (fsh / "c.fsh").unlink()
+    (fsh / "a.fsh").write_text("Profile: USCorePatient\n")
+    (fsh / "b.fsh").unlink()
+    assert gi.artifact_prefixes(tmp_path) == ["US"]
     (fsh / "a.fsh").write_text("Profile: Alpha\nProfile: Beta\nProfile: Gamma\n")
     assert gi.artifact_prefixes(tmp_path) == []
 
@@ -41,3 +49,21 @@ def test_main_warns_about_a_short_artifact_prefix(run, capsys, monkeypatch):
     monkeypatch.setattr(gi, "artifact_prefixes", lambda ig_dir: ["SDOHCC"])
     gi.main([str(run / "snapshot"), "--run", str(run), "--force"])
     assert "is short" not in capsys.readouterr().out
+
+
+def test_glossary_page_is_left_blank_when_no_file_exists(run):
+    (run / "snapshot" / "input" / "pagecontent" / "glossary.md").unlink()
+    assert gi.infer(run / "snapshot")["ig"]["glossary_page"] == ""
+
+
+def test_glossary_page_falls_back_to_input_pages(run):
+    pages = run / "snapshot" / "input" / "pages"
+    pages.mkdir()
+    (run / "snapshot" / "input" / "pagecontent" / "glossary.md").rename(pages / "glossary.md")
+    assert gi.infer(run / "snapshot")["ig"]["glossary_page"] == "input/pages/glossary.md"
+
+
+def test_git_tag_is_none_outside_a_repository(tmp_path):
+    if subprocess.run(["git", "-C", str(tmp_path), "rev-parse"], capture_output=True).returncode == 0:
+        pytest.skip("tmp_path is inside a git repository on this machine")
+    assert gi.git_tag(tmp_path) is None

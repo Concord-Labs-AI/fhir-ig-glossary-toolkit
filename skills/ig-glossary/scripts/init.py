@@ -18,8 +18,9 @@ class InitError(Exception):
 
 def artifact_prefixes(ig_dir):
     """The leading token most FSH artifact names share (e.g. SDOHCC from SDOHCCGoal, SDOHCC-ReferralSource)."""
-    names = [m.group(1) for p in Path(ig_dir).glob("input/fsh/**/*.fsh")
-             for m in ENTITY.finditer(p.read_text(encoding="utf-8", errors="replace"))]
+    names = [n for n in (m.group(1) for p in Path(ig_dir).glob("input/fsh/**/*.fsh")
+                         for m in ENTITY.finditer(p.read_text(encoding="utf-8", errors="replace")))
+             if n[:1].isupper()]
     tokens = Counter(m.group(0) for n in names if (m := LEADING.match(n)) and len(m.group(0)) >= 2)
     if not names or not tokens:
         return []
@@ -56,11 +57,12 @@ def infer(ig_dir):
         raise InitError(f"{ig_dir} has no sushi-config.yaml — point init at the root of an IG checkout")
     sc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     canonical = str(sc.get("canonical", "")).rstrip("/")
-    glossary = next((f"input/pagecontent/{p}" for p in page_names(sc.get("pages")) if "glossary" in p.lower()), "")
+    glossary = next((f"{d}/{p}" for p in page_names(sc.get("pages")) if "glossary" in p.lower()
+                     for d in ("input/pagecontent", "input/pages") if (ig_dir / d / p).is_file()), "")
     return {
         "ig": {"name": str(sc.get("title") or sc.get("name") or ig_dir.name),
                "short": str(sc.get("id", "")).split(".")[-1] or ig_dir.name,
-               "snapshot": os.path.relpath(ig_dir, Path.cwd()) if ig_dir.is_absolute() else str(ig_dir),
+               "snapshot": str(ig_dir),
                "tag": git_tag(ig_dir) or str(sc.get("version", "")),
                "canonical": canonical,
                "artifact_prefixes": artifact_prefixes(ig_dir),
