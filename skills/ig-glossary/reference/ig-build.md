@@ -6,6 +6,8 @@ Proves that applying every suggested edit still builds, and that the publisher's
 
 ## 1. Baseline build (pristine snapshot copy)
 
+If Step 8 made the dry-run copy with `cp -R` because the checkout had local changes, make the baseline with `cp -R` as well, so both start from the same files.
+
 ```bash
 set -eu
 IG=<absolute path to the IG checkout>   # the snapshot in config.yaml
@@ -14,8 +16,10 @@ RUN=<absolute run directory>
 git -C $IG worktree add --detach $IG-baseline $TAG
 mkdir -p $IG-baseline/input-cache
 cp $IG/input-cache/publisher.jar $IG-baseline/input-cache/ 2>/dev/null || true   # or _updatePublisher.sh
-cd $IG-baseline && bash ./_genonce.sh > build.log 2>&1
-mkdir -p $RUN/data/qa && cp output/qa.json $RUN/data/qa/qa-baseline.json
+cd $IG-baseline
+bash ./_genonce.sh > build.log 2>&1
+mkdir -p $RUN/data/qa
+cp output/qa.json $RUN/data/qa/qa-baseline.json
 echo "broken_links=$(grep -oE 'broken links = [0-9]+' output/qa.html | grep -oE '[0-9]+' | head -1)" > $RUN/data/qa/qa-baseline.txt
 jq '{errs, warnings, hints}' $RUN/data/qa/qa-baseline.json
 ```
@@ -31,7 +35,8 @@ TAG=HEAD                                # the commit under review (the configure
 RUN=<absolute run directory>
 mkdir -p $IG-dryrun/input-cache
 cp $IG/input-cache/publisher.jar $IG-dryrun/input-cache/ 2>/dev/null || true
-cd $IG-dryrun && bash ./_genonce.sh > build.log 2>&1
+cd $IG-dryrun
+bash ./_genonce.sh > build.log 2>&1
 grep -m1 -E '[0-9]+ Errors' build.log
 for k in errs warnings hints; do
   printf "%-10s baseline %-5s dryrun %-5s\n" $k "$(jq ".$k // 0" $RUN/data/qa/qa-baseline.json)" "$(jq ".$k // 0" output/qa.json)"
@@ -51,13 +56,17 @@ IG=<absolute path to the IG checkout>   # the snapshot in config.yaml
 TAG=HEAD                                # the commit under review (the configured tag may not be a git ref)
 RUN=<absolute run directory>
 SCRIPTS=<skill directory>/scripts
-mkdir -p $RUN/dryrun-scan && cd $RUN/dryrun-scan
+mkdir -p $RUN/dryrun-scan
+cd $RUN/dryrun-scan
 sed "s#^  snapshot: .*#  snapshot: $IG-dryrun#" $RUN/config.yaml > config.yaml
 cp $RUN/rulebook.yaml .
 cp $RUN/figure_transcripts.yaml . 2>/dev/null || true
-python3 $SCRIPTS/extract.py && python3 $SCRIPTS/scan.py
-mkdir -p $RUN/data/dryrun && cp data/hits.jsonl $RUN/data/dryrun/hits.jsonl
-cd $RUN && python3 $SCRIPTS/apply.py --residuals
+python3 $SCRIPTS/extract.py
+python3 $SCRIPTS/scan.py
+mkdir -p $RUN/data/dryrun
+cp data/hits.jsonl $RUN/data/dryrun/hits.jsonl
+cd $RUN
+python3 $SCRIPTS/apply.py --residuals
 ```
 Any `UNEXPLAINED` line is a hit nobody dispositioned; look at it before sharing the workbook.
 

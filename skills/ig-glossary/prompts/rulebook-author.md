@@ -43,4 +43,4 @@ Rules whose outcome depends on a decision carry `decision: D-n`. If some artifac
 
 **Domain notes.** Add a top-level `domain_notes:` block (plain text, a few paragraphs) with the judgement rules a reader agent needs that the glossary alone doesn't give: which FHIR element names must be left alone, which actors may perform "system" actions, which ambiguous words usually name a FHIR role rather than a glossary concept.
 
-Set `version: draft-1 (<today>)`. Then run `python3 {{scripts}}/check_rulebook.py --run {{run_dir}}` and fix every problem until it prints `rulebook: OK`. Reply with the counts: terms, rules by type, decisions, and anything you could not resolve.
+Set `version: draft-1 (<today>)`. Then run `python3 {{scripts}}/check_rulebook.py --run {{run_dir}}` and fix every problem until it prints `rulebook: OK`. Ignore any `acronyms.table` lines; the orchestrator fixes config.yaml. Reply with the counts: terms, rules by type, decisions, and anything you could not resolve.

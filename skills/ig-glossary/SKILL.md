@@ -27,7 +27,7 @@ You orchestrate a pipeline of scripts and agents. The scripts are deterministic 
 
 Outputs: `config.yaml`.
 
-Run `python3 $SCRIPTS/init.py <ig>`. Show the user the printed config and ask them to confirm or correct: name, short, tag, canonical, published_base (where the guide is published — for HL7 guides the inferred `/en/` form is right; for other publishers check it), artifact_prefixes, glossary_page. If `glossary_page` is blank, init found no glossary page file under `input/pagecontent/` or `input/pages/`: ask the user for its path. Then read the glossary page yourself and propose the **acronym table**: every acronym the glossary defines, its spelled-out form, its term id (you will assign ids in Step 3 — use `T-<ACRONYM>`), and any multi-word names starting with the acronym that must not be spelled out (`not_standalone`; each name matches as spelled with an optional plural s, so list every capitalisation the guide uses, e.g. both `SDOH domain` and `SDOH Domain`). Write them into `config.yaml` under `acronyms:`; each table entry has the shape `ACR: {long: spelled-out form, term: T-ID}`. Show the result; proceed on yes.
+Skip init.py if config.yaml exists. Otherwise run `python3 $SCRIPTS/init.py <ig>`. Show the user the printed config and ask them to confirm or correct: name, short, tag, canonical, published_base (where the guide is published — for HL7 guides the inferred `/en/` form is right; for other publishers check it), artifact_prefixes, glossary_page. If `glossary_page` is blank, init found no glossary page file under `input/pagecontent/` or `input/pages/`: ask the user for its path. Then read the glossary page yourself and propose the **acronym table**: every acronym the glossary defines, its spelled-out form, its term id (you will assign ids in Step 3 — use `T-<ACRONYM>`), and any multi-word names starting with the acronym that must not be spelled out (`not_standalone`; each name matches as spelled with an optional plural s, so list every capitalisation the guide uses, e.g. both `SDOH domain` and `SDOH Domain`). Write them into `config.yaml` under `acronyms:`; each table entry has the shape `ACR: {long: spelled-out form, term: T-ID}`. Show the result; proceed on yes.
 
 ## Step 2 — Extract
 
@@ -39,7 +39,7 @@ Outputs: `data/segments.jsonl`, `data/coverage.json`, `data/figures.json`.
 
 Outputs: `rulebook.yaml`.
 
-Render `python3 $SCRIPTS/prompt.py rulebook-author` and dispatch **one agent** with it. When it returns, run `python3 $SCRIPTS/check_rulebook.py` yourself; if it lists problems, send them back to the same agent (SendMessage) until it prints `rulebook: OK`. Then set each `acronyms.table.<ACR>.term` in config.yaml to the rulebook id of the term it spells out, then re-run check_rulebook.py (it checks this). Run `python3 $SCRIPTS/scan.py` and show the user: the per-rule hit counts from `data/rulebook-review.md` (a rule with zero hits or thousands of hits is worth a question), the term count, each decision's title/question/recommendation, and the domain notes. The user approves, edits the file, or asks for changes (which you relay to the agent). Proceed on approval.
+Render `python3 $SCRIPTS/prompt.py rulebook-author` and dispatch **one agent** with it. When it returns, run `python3 $SCRIPTS/check_rulebook.py` yourself; if it lists problems, send them back to the same agent (SendMessage) until it prints `rulebook: OK`. Fix any `acronyms.table…` problems yourself in config.yaml (set the term to the rulebook id of the term it spells out); send only the other problems back to the agent. Then set each `acronyms.table.<ACR>.term` in config.yaml to the rulebook id of the term it spells out, then re-run check_rulebook.py (it checks this). Run `python3 $SCRIPTS/scan.py` and show the user: the per-rule hit counts from `data/rulebook-review.md` (a rule with zero hits or thousands of hits is worth a question), the term count, each decision's title/question/recommendation, and the domain notes. The user approves, edits the file, or asks for changes (which you relay to the agent). Proceed on approval.
 
 ## Step 4 — Scan and batch
 
@@ -69,7 +69,7 @@ Outputs: `data/findings.json`, `data/rejected.json`.
 
 Outputs: `data/dryrun/apply-report.json`.
 
-Use absolute paths. Remove any existing `<ig>-dryrun` first (`git -C <ig> worktree remove --force <ig>-dryrun`, or `rm -rf`), because re-applying onto an applied copy doubles edits. Create the copy with `git -C <ig> worktree add --detach <ig>-dryrun HEAD` (HEAD is the commit under review, and the configured tag may not be a git ref). If `git -C <ig> status --porcelain` shows modified source files, use `cp -R <ig> <ig>-dryrun` instead. Then run `python3 $SCRIPTS/apply.py --root <ig>-dryrun`. Expected: `drifted 0`. Any drift means a finding's text does not match the snapshot; report it to the user — it is a bug in the data, not something to patch. Optional IG build: `reference/ig-build.md`.
+Use absolute paths. Remove any existing `<ig>-dryrun` first (`git -C <ig> worktree remove --force <ig>-dryrun`; use `rm -rf <ig>-dryrun` only for a copy made with `cp -R`, because a worktree removed that way stays registered and the next `worktree add` fails), because re-applying onto an applied copy doubles edits. Create the copy with `git -C <ig> worktree add --detach <ig>-dryrun HEAD` (HEAD is the commit under review, and the configured tag may not be a git ref). If `git -C <ig> status --porcelain` shows modified source files, use `cp -R <ig> <ig>-dryrun` instead. Then run `python3 $SCRIPTS/apply.py --root <ig>-dryrun`. Expected: `drifted 0`. Any drift means a finding's text does not match the snapshot; report it to the user — it is a bug in the data, not something to patch.
 
 ## Step 9 — Themes  ✋ CHECKPOINT 3
 
@@ -91,7 +91,7 @@ Render `python3 $SCRIPTS/prompt.py qa-review --packet Q01` (and `Q02`, `Q03` for
 - a wrong or weak row → verdict (`reject` / `revise` / `retag`) in `data/verify/V<next>.json`, reason prefixed "QA: "; each QA verdict file is checked with `python3 $SCRIPTS/verify.py --check V<next> --partial` until it prints `V<next>: OK`; a `retag` verdict carries `"decision"` (an open D-id, or null to move the row to Ready) and `"recommended": "change" | "keep"`, which is required when decision is a D-id;
 - a missed finding → an entry in `data/agent/Q01.json` (reader output format, `"hits": []`), validated with `python3 $SCRIPTS/findings.py --batch Q01`;
 - a narrative problem → edit `themes.yaml` or `config.yaml` `summary:`.
-Then re-run Steps 7 and 10. Repeat once if the second review still finds substantive issues; otherwise stop.
+Then re-run Steps 7 and 10. Repeat once if the second review still finds substantive issues; otherwise stop. Optional: build the final dry-run copy and compare the publisher's QA (`reference/ig-build.md`).
 
 ## Step 12 — Hand over  ✋ CHECKPOINT 4
 
