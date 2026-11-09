@@ -29,7 +29,7 @@ def glossary_terms(segments):
     return out
 
 
-def problems(book, glossary_terms=None):
+def problems(book, glossary_terms=None, acronyms=None):
     probs = []
     for t in book.get("terms", []):
         if not t.get("id"):
@@ -69,6 +69,10 @@ def problems(book, glossary_terms=None):
     if glossary_terms:
         have = {t.get("glossary_term") for t in book.get("terms", [])}
         probs += [f"glossary term has no rulebook entry: {g}" for g in glossary_terms if g not in have]
+    if acronyms:
+        term_ids = {t.get("id") for t in book.get("terms", [])}
+        probs += [f"acronyms.table.{acr}.term {e['term']} is not a rulebook term id"
+                  for acr, e in acronyms.get("table", {}).items() if e["term"] not in term_ids]
     return probs
 
 
@@ -78,7 +82,7 @@ def main(argv=None):
     cfg = config.load(args.run)
     segs_path = cfg["data"] / "segments.jsonl"
     terms = glossary_terms(read_jsonl(segs_path)) if segs_path.exists() else None
-    probs = problems(config.rulebook(cfg), terms)
+    probs = problems(config.rulebook(cfg), terms, cfg["acronyms"])
     if probs:
         print("\n".join(f"- {p}" for p in probs))
         raise SystemExit(1)

@@ -13,6 +13,15 @@ def test_fixture_rulebook_and_themes_are_clean(cfg):
     assert ct.problems(themes, book) == []
 
 
+def test_acronym_term_ids_must_be_rulebook_term_ids(cfg):
+    book = config.rulebook(cfg)
+    assert cr.problems(book, acronyms=cfg["acronyms"]) == []
+    acr = copy.deepcopy(cfg["acronyms"])
+    name = next(iter(acr["table"]))
+    acr["table"][name]["term"] = "T-NOPE"
+    assert cr.problems(book, acronyms=acr) == [f"acronyms.table.{name}.term T-NOPE is not a rulebook term id"]
+
+
 def test_rulebook_problems_are_named(cfg):
     book = copy.deepcopy(config.rulebook(cfg))
     book["terms"][0]["rules"][0]["pattern"] = "("                     # bad regex
