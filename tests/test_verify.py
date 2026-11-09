@@ -83,3 +83,14 @@ def test_mistyped_files_value_is_an_error(run):
     seed(run, [REC])
     with pytest.raises(SystemExit, match="B3"):
         gv.main(["--run", str(run), "--packets", "--files", "B3"])
+
+
+def test_retag_verdicts_are_checked_for_what_merge_needs():
+    keys = {"k1": rec("k1"), "k2": rec("k2"), "k3": rec("k3"), "k4": rec("k4")}
+    errs = gv.validate_verdicts([
+        {"key": "k1", "verdict": "retag", "decision": "D-2", "recommended": "change", "reason": "r"},
+        {"key": "k2", "verdict": "retag", "decision": None, "reason": "r"},
+        {"key": "k3", "verdict": "retag", "reason": "r"},
+        {"key": "k4", "verdict": "retag", "decision": "D-2", "reason": "r"}], keys, partial=True)
+    assert errs == ["k3: retag needs decision (a D-id, or null for Ready)",
+                    "k4: retag to D-2 needs recommended change or keep"]

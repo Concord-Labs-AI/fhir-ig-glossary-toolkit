@@ -6,7 +6,7 @@ from pathlib import Path
 import config
 from findings import replace_problems
 
-VERDICTS = {"confirm", "reject", "revise"}
+VERDICTS = {"confirm", "reject", "revise", "retag"}
 
 
 def needs_verification(rec):
@@ -48,11 +48,16 @@ def validate_verdicts(verdicts, keys, partial=False):
             errors.append(f"duplicate verdict for {k}")
         seen.add(k)
         if v.get("verdict") not in VERDICTS:
-            errors.append(f"{k}: verdict must be confirm, reject or revise")
+            errors.append(f"{k}: verdict must be confirm, reject, revise or retag")
         if not v.get("reason"):
             errors.append(f"{k}: reason is required")
         if v.get("verdict") == "revise":
             errors += [f"{k}: {p}" for p in replace_problems(keys[k], keys[k]["find"], v.get("replace"))]
+        if v.get("verdict") == "retag":
+            if "decision" not in v:
+                errors.append(f"{k}: retag needs decision (a D-id, or null for Ready)")
+            elif v["decision"] and v.get("recommended") not in ("change", "keep"):
+                errors.append(f"{k}: retag to {v['decision']} needs recommended change or keep")
     if not partial:
         errors += [f"no verdict for {k}" for k in sorted(set(keys) - seen)]
     return errors
