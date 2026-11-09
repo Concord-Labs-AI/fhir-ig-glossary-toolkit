@@ -14,7 +14,7 @@ Do **not** edit either deliverable. Write `{{run_dir}}/data/qa/review-{{packet}}
 "Proposed fix" names the data that should change, and each kind needs these fields:
 - **reject:** `key` + reason.
 - **revise:** `key` + `replace` + reason.
-- **retag:** `key` + the target decision (a D-id, or "Ready") + `recommended` (change or keep) when it is a D-id + reason.
+- **retag:** `key` + the target decision (a D-id that is still open, or null to move the row to Ready) + `recommended` (change or keep) when it is a D-id + reason.
 - **new finding** the analysis missed: file, line, find, replace, terms, type (Missed use / Misuse / Form), confidence (High / Medium), issue.
 - **themes.yaml** wording change, or a **config.summary** note.
 

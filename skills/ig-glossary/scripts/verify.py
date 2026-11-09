@@ -37,7 +37,7 @@ def packet_md(vid, recs):
     return "\n".join(lines)
 
 
-def validate_verdicts(verdicts, keys, partial=False):
+def validate_verdicts(verdicts, keys, partial=False, open_decisions=None):
     errors, seen = [], set()
     for v in verdicts:
         k = v.get("key")
@@ -56,6 +56,9 @@ def validate_verdicts(verdicts, keys, partial=False):
         if v.get("verdict") == "retag":
             if "decision" not in v:
                 errors.append(f"{k}: retag needs decision (a D-id, or null for Ready)")
+            elif v["decision"] and open_decisions is not None and v["decision"] not in open_decisions:
+                errors.append(f"{k}: retag to {v['decision']} is not an open decision "
+                              "(use a D-id from the rulebook, or null for Ready)")
             elif v["decision"] and v.get("recommended") not in ("change", "keep"):
                 errors.append(f"{k}: retag to {v['decision']} needs recommended change or keep")
     if not partial:
@@ -104,9 +107,15 @@ def main(argv=None):
         by_key = {r["key"]: r for r in records if r["key"] in keys}
     elif args.partial:
         by_key = {r["key"]: r for r in records}
+        merged = data / "findings.json"  # QA verdicts may rule on script-generated rows too
+        if merged.exists():
+            for r in json.loads(merged.read_text(encoding="utf-8"))["rows"]:
+                by_key.setdefault(r["key"], r)
     else:
         raise SystemExit(f"no {args.check}.keys.json; pass --partial for a consistency-pass or QA verdict file")
-    errors = validate_verdicts(json.loads((vdir / f"{args.check}.json").read_text(encoding="utf-8")), by_key, args.partial)
+    open_decisions = {d["id"] for d in config.rulebook(cfg).get("decisions", []) if not d.get("team_decision")}
+    errors = validate_verdicts(json.loads((vdir / f"{args.check}.json").read_text(encoding="utf-8")), by_key,
+                               args.partial, open_decisions)
     print(f"{args.check}: OK" if not errors else "\n".join(errors))
     raise SystemExit(1 if errors else 0)
 

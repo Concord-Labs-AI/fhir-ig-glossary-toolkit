@@ -94,3 +94,39 @@ def test_retag_verdicts_are_checked_for_what_merge_needs():
         {"key": "k4", "verdict": "retag", "decision": "D-2", "reason": "r"}], keys, partial=True)
     assert errs == ["k3: retag needs decision (a D-id, or null for Ready)",
                     "k4: retag to D-2 needs recommended change or keep"]
+
+
+def test_retag_must_name_an_open_decision_or_null():
+    keys = {k: rec(k) for k in ("k1", "k2", "k3", "k4")}
+    errs = gv.validate_verdicts([
+        {"key": "k1", "verdict": "retag", "decision": "Ready", "recommended": "keep", "reason": "r"},
+        {"key": "k2", "verdict": "retag", "decision": "D-99", "recommended": "keep", "reason": "r"},
+        {"key": "k3", "verdict": "retag", "decision": "D-1", "recommended": "keep", "reason": "r"},
+        {"key": "k4", "verdict": "retag", "decision": None, "reason": "r"}], keys, partial=True,
+        open_decisions={"D-1"})
+    msg = "retag to {} is not an open decision (use a D-id from the rulebook, or null for Ready)"
+    assert errs == [f"k1: {msg.format('Ready')}", f"k2: {msg.format('D-99')}"]
+
+
+def test_partial_check_can_rule_on_script_generated_rows(run):
+    seed(run, [REC])
+    (run / "data" / "findings.json").write_text(json.dumps({"rows": [{"key": "acr@9", "find": "x", "kind": "page", "field": "paragraph"}]}))
+    v = run / "data" / "verify"; v.mkdir(parents=True)
+    (v / "V09.json").write_text(json.dumps([{"key": "acr@9", "verdict": "reject", "reason": "r"}]))
+    with pytest.raises(SystemExit) as e:
+        gv.main(["--run", str(run), "--check", "V09", "--partial"])
+    assert e.value.code == 0
+    (v / "V09.json").write_text(json.dumps([{"key": "nowhere@1", "verdict": "reject", "reason": "r"}]))
+    with pytest.raises(SystemExit) as e:
+        gv.main(["--run", str(run), "--check", "V09", "--partial"])
+    assert e.value.code == 1
+
+
+def test_main_rejects_a_retag_to_an_unknown_decision(run):
+    seed(run, [REC])
+    v = run / "data" / "verify"; v.mkdir(parents=True)
+    (v / "V09.json").write_text(json.dumps([{"key": "a.md@1", "verdict": "retag", "decision": "D-99",
+                                             "recommended": "keep", "reason": "r"}]))
+    with pytest.raises(SystemExit) as e:
+        gv.main(["--run", str(run), "--check", "V09", "--partial"])
+    assert e.value.code == 1
