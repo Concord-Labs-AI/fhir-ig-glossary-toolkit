@@ -26,6 +26,8 @@ For **every glossary term**, write an entry:
     skip_fields: [heading, page title, menu label, Title, caption, entity name, Id, concept display, diagram line, svg text, transcribed text, artifact group name, IG title]
 ```
 
+**Concept terms.** For a concept the glossary does not define but a decision needs counted or flagged (for example a core word the glossary lacks), write `glossary_term: null`, a `label` naming the concept, and a `note` saying which decision it serves. A definition and a canonical rule are optional for these.
+
 Rule types: `canonical`, `missed-use`, `misuse-signal` (a pattern that often marks a use against the definition), `form`. Favor **recall**: patterns flag candidates; agents judge each in context. Every pattern must compile as a Python regex.
 
 **Decisions register.** Wherever the glossary and the guide's actual usage pull apart (two words for one concept, a term the guide uses in a sense the definition excludes, a defined name the guide never uses), write a decision instead of guessing:

@@ -44,7 +44,9 @@ def problems(book, glossary_terms=None, acronyms=None):
     for t in book.get("terms", []):
         tid = t.get("id", "?")
         if not t.get("glossary_term"):
-            probs.append(f"{tid}: glossary_term required")
+            if not t.get("label"):
+                probs.append(f"{tid}: glossary_term or label required")
+            continue
         if not t.get("definition"):
             probs.append(f"{tid}: definition required")
         if not any(r.get("type") == "canonical" for r in t.get("rules", [])):

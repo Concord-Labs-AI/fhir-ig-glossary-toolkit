@@ -124,3 +124,18 @@ def test_themes_file_without_list_is_a_named_error(run, cfg):
     (run / "themes.yaml").write_text("version: 1\n")
     with pytest.raises(config.ConfigError, match="needs a top-level themes: list"):
         config.themes(cfg)
+
+
+def test_concept_term_needs_label_not_definition_or_canonical(cfg):
+    book = copy.deepcopy(config.rulebook(cfg))
+    book["terms"].append({"id": "N-REF", "glossary_term": None, "label": "Referral (undefined core concept)",
+                          "note": "Counted for D-1.",
+                          "rules": [{"id": "R-REF-MISSED", "type": "missed-use", "pattern": r"\breferral\b"}]})
+    assert cr.problems(book) == []
+
+
+def test_term_with_neither_glossary_term_nor_label_is_reported(cfg):
+    book = copy.deepcopy(config.rulebook(cfg))
+    book["terms"].append({"id": "N-BARE", "glossary_term": None,
+                          "rules": [{"id": "R-BARE", "type": "missed-use", "pattern": "x"}]})
+    assert cr.problems(book) == ["N-BARE: glossary_term or label required"]
