@@ -21,7 +21,7 @@ Write `{{run_dir}}/data/verify/{{packet}}.json`:
 
 ```json
 [{"key": "input/pagecontent/example.md@1234", "verdict": "confirm", "reason": "The organization here is the referring party; the strict reading applies."},
- {"key": "input/fsh/profiles/Example.fsh@88", "verdict": "revise", "replace": "a social service organization", "reason": "Needs the article."},
+ {"key": "input/fsh/profiles/Example.fsh@88", "verdict": "revise", "replace": "an implementer", "reason": "Needs the article."},
  {"key": "input/pagecontent/example.md@402", "verdict": "reject", "reason": "Named workflow 'Direct Capacity Status Inquiry' is a proper label."}]
 ```
 

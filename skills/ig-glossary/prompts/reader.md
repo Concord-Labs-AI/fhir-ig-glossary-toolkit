@@ -40,7 +40,7 @@ If a D-n entry has a `team_decision`, apply that option directly and leave `deci
 ## Writing the edit
 - **`line`:** the source line number as the Read tool shows it. Transcribed figures (`input/images/*.png|jpg`) have no lines: use `"line": null` and copy `find` from the label text shown in the packet.
 - **`find`:** copy **exactly** from the raw source line: same characters, case, punctuation, and markdown (`**`, backticks).
-  - As short as possible while still a correct drop-in. Include a neighboring word when the replacement changes it ("a CBO" → "a social service organization").
+  - As short as possible while still a correct drop-in. Include a neighboring word when the replacement changes it ("a vendor" → "an implementer").
   - It must start and end on visible text. Never start or end inside a link URL `](...)`, a tag `<...>`, or a Liquid tag `{% %}`.
   - If the same text appears more than once on the line, add `"nth_in_line": N` (1-based).
 - **`replace`:** the exact text that replaces the whole `find`. Keep the sentence grammatical (articles, plurals, a capital at sentence start). No newlines. In `.fsh` files you are inside a quoted string, so write a double quote as `\"`. In markdown table rows, don't add or remove `|`.
@@ -60,10 +60,10 @@ If a D-n entry has a `team_decision`, apply that option directly and leave `deci
      "replace": "glossary term", "terms": ["T-XX"], "type": "Missed use", "rule": "R-XX-OLD",
      "issue": "Glossary names this 'glossary term'; 'old wording' is the retired name.",
      "confidence": "High", "hits": ["H-1a2b3c4d"]},
-    {"file": "input/pagecontent/example.md", "line": 57, "find": "a CBO",
-     "replace": "a social service organization", "terms": ["T-SSO"], "type": "Missed use", "rule": "R-SSO-CBO",
+    {"file": "input/pagecontent/example.md", "line": 57, "find": "a vendor",
+     "replace": "an implementer", "terms": ["T-IMPL"], "type": "Missed use", "rule": "R-IMPL-VENDOR",
      "decision": "D-1", "recommended": "change",
-     "issue": "Generic use; the glossary's inclusive term is social service organization.",
+     "issue": "Generic use; the glossary's term for a party that builds to the guide is implementer.",
      "confidence": "High", "hits": ["H-5e6f7a8b"]}
   ],
   "dismissed": [{"hit": "H-0badc0de", "reason": "Names an external instrument (proper name)."}],
