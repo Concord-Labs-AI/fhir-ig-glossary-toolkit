@@ -125,3 +125,17 @@ def test_revise_may_change_only_the_issue_text():
     kept, _ = gm.apply_verdicts([rec("k1", 0, 1, issue="old")],
                                 [{"key": "k1", "verdict": "revise", "issue": "new", "reason": "clearer"}])
     assert (kept[0]["issue"], kept[0]["replace"], kept[0]["revision_note"]) == ("new", "y", "clearer")
+
+
+def test_finalize_without_themes_puts_non_form_rows_in_the_catch_all():
+    rows = gm.finalize([rec("k1", 5, 6), rec("k2", 50, 51, type="Form")], [], BOOK)
+    assert {r["theme_id"] for r in rows} == {gm.THEME_OTHER, gm.THEME_FORM}
+
+
+def test_merge_main_runs_before_themes_yaml_exists(run):
+    (run / "themes.yaml").unlink()
+    (run / "data").mkdir(exist_ok=True)
+    for name in ("segments.jsonl", "hits.jsonl"):
+        (run / "data" / name).write_text("")
+    gm.main(["--run", str(run)])
+    assert (run / "data" / "findings.json").exists()
