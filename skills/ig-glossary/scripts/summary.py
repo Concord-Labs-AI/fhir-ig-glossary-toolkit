@@ -14,10 +14,10 @@ SIZE_RULE = "S: a short session (under 25 edits in up to 3 files); M: up to abou
 def form_theme(legend_examples):
     examples = f" (for example {', '.join(repr(x) for x in legend_examples)})" if legend_examples else ""
     return {"id": THEME_FORM, "title": "Form & presentation",
-            "convention": "The glossary writes each term in sentence case with its hyphenation and acronym fixed"
-                          f"{examples}. This theme applies that form wherever the guide's running text uses a "
-                          "glossary term, and spells each acronym out at its first use on a page. Headings, titles "
-                          "and table headers keep the guide's Title Case.",
+            "convention": f"The glossary fixes each term's case, hyphenation and acronym{examples}. This theme "
+                          "applies that form wherever the guide's running text uses a glossary term, and spells each "
+                          "acronym out at its first use on a page. Headings, titles and table headers keep the "
+                          "guide's own capitalisation.",
             "alignment_work": "Mechanical, low-risk edits that can be accepted by rule. Rows that repeat the same "
                               "edit can be accepted or declined together.",
             "work_package": "WP-Form Mechanical consistency pass", "size": "", "depends_on": []}
@@ -25,6 +25,10 @@ def form_theme(legend_examples):
 
 def e(s):
     return html.escape(str(s))
+
+
+def count(n, word):
+    return f"{n} {word}" if n == 1 else f"{n} {word}s"
 
 
 def size_for(rows):
@@ -142,23 +146,29 @@ def build_html(doc, book, themes, counts, coverage, cfg):
     if manual:
         p.append(f"<p><i>The {len(manual)} Identifier rows are artifact names; they are counted among the pending rows"
                  f"{f' (decision {e(ident_decision)})' if ident_decision else ''} and are reported, not edited.</i></p>")
-    p.append("<h2>Decisions needed first</h2>")
-    gated = Counter(r["decision"] for r in rows if r["decision"])
-    zero = [d["id"] for d in decisions if not gated[d["id"]]]
-    zero_note = (f" {len(zero)} decisions ({e(', '.join(zero))}) gate no workbook rows: they change the glossary itself "
-                 "(a note, a definition, a new entry) or add links, and the work-package table lists them where a "
-                 "package depends on them." if zero else "")
-    p.append(f"<p>{len(decisions)} decisions settle the pending findings; deciding one settles all its rows at once."
-             f"{zero_note} The recommended option is in bold.</p>")
-    p.append(table(["ID", "Decision", "Rows", "Question", "Options"],
-                   [(d["id"], d.get("title", ""), gated[d["id"]], " ".join(str(d.get("question", "")).split()), options(d))
-                    for d in decisions], widths=["6%", "15%", "7%", "32%", "40%"]))
-    glossary_ask = (f"<li><b>Route the glossary edits to the glossary owner first.</b> {len(glossary_rows)} rows edit "
-                    "the glossary page itself; those need sign-off before anything else.</li>" if glossary_rows else "")
+    if decisions:
+        gated = Counter(r["decision"] for r in rows if r["decision"])
+        zero = [d["id"] for d in decisions if not gated[d["id"]]]
+        zero_note = (f" No workbook rows wait on {count(len(zero), 'decision')} ({e(', '.join(zero))}): a decision like "
+                     "that changes the glossary itself (a note, a definition, a new entry) or adds links, and the "
+                     "work-package table lists it where a package depends on it." if zero else "")
+        p += ["<h2>Decisions needed first</h2>",
+              f"<p>The team has {count(len(decisions), 'decision')} to take; taking a decision settles all of its "
+              f"pending rows at once.{zero_note} The recommended option is in bold.</p>",
+              table(["ID", "Decision", "Rows", "Question", "Options"],
+                    [(d["id"], d.get("title", ""), gated[d["id"]], " ".join(str(d.get("question", "")).split()), options(d))
+                     for d in decisions], widths=["6%", "15%", "7%", "32%", "40%"])]
+    decisions_ask = (f"<li><b>Take the {count(len(decisions), 'decision')} above.</b> A decision settles its pending "
+                     "rows in one go; the rows are regenerated under the chosen option, so nobody reviews them "
+                     "twice.</li>" if decisions else "")
+    glossary_ask = (f"<li><b>Route the glossary edits to the glossary owner first.</b> The workbook has "
+                    f"{count(len(glossary_rows), 'row')} on the glossary page itself, and the glossary owner's sign-off "
+                    "comes before anything else.</li>" if glossary_rows else "")
+    owners = ("who decides each decision and by when, and who reviews which themes" if decisions
+              else "who reviews which themes, and by when")
     p += ["<h2>What we need from you</h2>",
           "<ol>"
-          f"<li><b>Take the {len(decisions)} decisions above.</b> Each one settles its pending rows in one go; the rows "
-          "are regenerated under the chosen option, so nobody reviews them twice.</li>"
+          f"{decisions_ask}"
           "<li><b>Review the Ready rows in the workbook.</b> Work page by page (the workbook is sorted that way), "
           "because a page's High and Medium rows sit in the same sentences. Mark each row Accept, Modify (with your "
           "replacement text), Reject or Defer. Repeated edits can be accepted together.</li>"
@@ -166,7 +176,7 @@ def build_html(doc, book, themes, counts, coverage, cfg):
           "</ol>"
           "<p><b>What happens next.</b> Accepted rows are applied to the source by script, the guide is rebuilt, "
           "and any row whose original text has since changed is reported back for a person to look at rather than "
-          "guessed. <i>[Owners and dates: who decides each decision and by when, and who reviews which themes.]</i></p>",
+          f"guessed. <i>[Owners and dates: {owners}.]</i></p>",
           "<h2>Themes</h2>"]
     for t in all_themes:
         rs = by_theme[t["id"]]

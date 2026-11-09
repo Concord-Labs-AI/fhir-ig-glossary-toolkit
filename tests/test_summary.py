@@ -86,3 +86,29 @@ def test_identifier_paragraph_cites_the_rulebook_decision_or_none(sample_doc, sa
     book = {**sample_book, "identifier_decision": "D-10"}
     out = gsu.build_html(sample_doc, book, THEMES, sample_counts, COVERAGE, cfg)
     assert "because renaming breaks implementers (decision D-10):" in out
+
+
+def test_form_theme_lists_legend_examples_only_when_configured(sample_doc, sample_book, sample_counts, cfg):
+    cfg["summary"]["legend_examples"] = ["Foo-bar"]
+    assert "Foo-bar" in gsu.build_html(sample_doc, sample_book, THEMES, sample_counts, COVERAGE, cfg)
+    cfg["summary"]["legend_examples"] = []
+    assert "(for example" not in gsu.build_html(sample_doc, sample_book, THEMES, sample_counts, COVERAGE, cfg)
+
+
+def test_configured_intro_is_escaped(sample_doc, sample_book, sample_counts, cfg):
+    cfg["summary"]["intro"] = "<b>x</b>"
+    out = gsu.build_html(sample_doc, sample_book, THEMES, sample_counts, COVERAGE, cfg)
+    assert "&lt;b&gt;x&lt;/b&gt;" in out and "<b>x</b>" not in out
+
+
+def test_no_decisions_means_no_decisions_section(sample_doc, sample_book, sample_counts, cfg):
+    out = gsu.build_html(sample_doc, {**sample_book, "decisions": []}, THEMES, sample_counts, COVERAGE, cfg)
+    assert "Decisions needed first" not in out and "0 decision" not in out
+    assert "Review the Ready rows" in out
+    assert "[Owners and dates: who reviews which themes, and by when.]" in out
+
+
+def test_one_decision_reads_in_the_singular(sample_doc, sample_book, sample_counts, cfg):
+    book = {**sample_book, "decisions": sample_book["decisions"][:1]}  # the D-10 row's decision is no longer in the book
+    out = gsu.build_html(sample_doc, book, THEMES, sample_counts, COVERAGE, cfg)
+    assert "1 decision" in out and "1 decisions" not in out
