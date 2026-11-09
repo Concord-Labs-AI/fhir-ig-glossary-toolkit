@@ -75,5 +75,6 @@ def test_not_standalone_phrases_are_built_from_config():
     assert rx.search("an SDOH referral") and rx.search("SDOH matter")
     assert not rx.search("the SDOH domain list") and not rx.search("SDOH domains") and not rx.search("SDOH Clinical Care")
     assert not rx.search("SDOH-related")
+    assert rx.search("SDOH clinical care") and rx.search("the SDOH Domain list")
     rx2 = acronym_regex("SDOH", [])
     assert rx2.search("the SDOH domain list")

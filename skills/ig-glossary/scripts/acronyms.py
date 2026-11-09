@@ -13,10 +13,10 @@ SENTENCE_START = re.compile(r"(?:^|[.!?]\s+|^\s*(?:[-*+]|\d+\.)\s+)$")
 
 
 def acronym_regex(acr, not_standalone):
-    """The acronym as a standalone word: not hyphenated, quoted or possessive, and not the start of a listed name."""
+    """The acronym as a standalone word: not hyphenated, quoted or possessive, and not the start of a listed name (names match as spelled, with an optional plural s)."""
     suffixes = [p[len(acr):].strip() for p in not_standalone if p.upper().startswith(acr.upper() + " ")]
     names = "|".join(re.escape(s) for s in suffixes)
-    tail = rf"|\s+(?i:{names})s?\b" if names else ""
+    tail = rf"|\s+(?:{names})s?\b" if names else ""
     return re.compile(rf"{NOT_QUOTED}\b{acr}s?\b(?![-‐‑”\"']|’{tail})")
 
 
