@@ -65,3 +65,42 @@ def test_missing_themes_file_is_a_named_error(run):
     (run / "themes.yaml").unlink()
     with pytest.raises(config.ConfigError, match="themes.yaml"):
         config.themes(config.load(run))
+
+
+def test_missing_glossary_page_is_a_named_error(run):
+    (run / "snapshot" / "input" / "pagecontent" / "glossary.md").unlink()
+    with pytest.raises(config.ConfigError, match="ig.glossary_page"):
+        config.load(run)
+
+
+def test_acronym_entry_needs_long_and_term(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    raw["acronyms"]["table"]["CBO"] = {"long": "community-based organization"}
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match="acronyms.table.CBO needs long and term"):
+        config.load(run)
+    raw["acronyms"]["table"]["CBO"] = "community-based organization"
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match="acronyms.table.CBO needs long and term"):
+        config.load(run)
+
+
+def test_outside_workbook_entry_needs_where_and_what(run):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    raw["summary"]["outside_workbook"] = [{"where": "Home page"}]
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    with pytest.raises(config.ConfigError, match=r"summary.outside_workbook\[0\] needs where and what"):
+        config.load(run)
+    raw["summary"]["outside_workbook"] = [{"where": "Home page", "what": "Not scanned"}]
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    assert config.load(run)["summary"]["outside_workbook"][0]["what"] == "Not scanned"
+
+
+def test_rulebook_without_decisions_means_none(run):
+    raw = yaml.safe_load((run / "rulebook.yaml").read_text())
+    raw.pop("decisions", None)
+    (run / "rulebook.yaml").write_text(yaml.safe_dump(raw))
+    assert config.rulebook(config.load(run))["decisions"] == []
+    raw["decisions"] = None
+    (run / "rulebook.yaml").write_text(yaml.safe_dump(raw))
+    assert config.rulebook(config.load(run))["decisions"] == []

@@ -33,6 +33,14 @@ def load(run_dir=None):
     snapshot = (run_dir / cfg["ig"]["snapshot"]).resolve()
     if not (snapshot / "sushi-config.yaml").exists():
         raise ConfigError(f"ig.snapshot {snapshot} has no sushi-config.yaml")
+    if not (snapshot / cfg["ig"]["glossary_page"]).is_file():
+        raise ConfigError(f"ig.glossary_page {snapshot / cfg['ig']['glossary_page']} is not a file")
+    for name, entry in cfg["acronyms"]["table"].items():
+        if not (isinstance(entry, dict) and entry.get("long") and entry.get("term")):
+            raise ConfigError(f"{path}: acronyms.table.{name} needs long and term")
+    for i, entry in enumerate(cfg["summary"]["outside_workbook"]):
+        if not (isinstance(entry, dict) and entry.get("where") and entry.get("what")):
+            raise ConfigError(f"{path}: summary.outside_workbook[{i}] needs where and what")
     cfg["ig"]["published_base"] = cfg["ig"]["published_base"].rstrip("/") + "/"
     cfg["ig"]["canonical"] = cfg["ig"]["canonical"].rstrip("/")
     cfg["ig"]["tag"] = str(cfg["ig"]["tag"])
@@ -48,7 +56,9 @@ def _yaml(cfg, name):
 
 
 def rulebook(cfg):
-    return _yaml(cfg, "rulebook.yaml")
+    rules = _yaml(cfg, "rulebook.yaml")
+    rules["decisions"] = rules.get("decisions") or []
+    return rules
 
 
 def themes(cfg):

@@ -95,6 +95,10 @@ def main(argv=None):
     except InitError as err:
         raise SystemExit(str(err))
     print(yaml.safe_dump(cfg, sort_keys=False, allow_unicode=True))
+    for prefix in cfg["ig"]["artifact_prefixes"]:
+        if len(prefix) < 4:
+            print(f"Artifact prefix '{prefix}' is short: check it matches only this guide's own artifact names "
+                  f"(a prefix like 'US' would also match US Core's).")
     blanks = [k for k, v in cfg["ig"].items() if v in ("", [])]
     if blanks:
         print(f"Could not infer: {', '.join(blanks)} — fill these in config.yaml before continuing.")

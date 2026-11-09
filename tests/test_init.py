@@ -33,3 +33,11 @@ def test_write_refuses_without_sushi_config_and_without_force(run, tmp_path):
         gi.write(run, run / "snapshot", force=False)
     gi.write(run, run / "snapshot", force=True)
     assert yaml.safe_load((run / "config.yaml").read_text())["ig"]["snapshot"] == "snapshot"
+
+
+def test_main_warns_about_a_short_artifact_prefix(run, capsys, monkeypatch):
+    gi.main([str(run / "snapshot"), "--run", str(run), "--force"])
+    assert "Artifact prefix 'XYZ' is short" in capsys.readouterr().out
+    monkeypatch.setattr(gi, "artifact_prefixes", lambda ig_dir: ["SDOHCC"])
+    gi.main([str(run / "snapshot"), "--run", str(run), "--force"])
+    assert "is short" not in capsys.readouterr().out
