@@ -1,4 +1,4 @@
-"""Build the thematic summary as HTML (uploaded to Drive, which converts it to a Google Doc)."""
+"""Build the thematic summary report as HTML."""
 import argparse
 import html
 import json
@@ -152,7 +152,7 @@ def build_html(doc, book, themes, counts, coverage, cfg):
              f"{zero_note} The recommended option is in bold.</p>")
     p.append(table(["ID", "Decision", "Rows", "Question", "Options"],
                    [(d["id"], d.get("title", ""), gated[d["id"]], " ".join(str(d.get("question", "")).split()), options(d))
-                    for d in book["decisions"]], widths=["6%", "15%", "7%", "32%", "40%"]))
+                    for d in decisions], widths=["6%", "15%", "7%", "32%", "40%"]))
     glossary_ask = (f"<li><b>Route the glossary edits to the glossary owner first.</b> {len(glossary_rows)} rows edit "
                     "the glossary page itself; those need sign-off before anything else.</li>" if glossary_rows else "")
     p += ["<h2>What we need from you</h2>",
