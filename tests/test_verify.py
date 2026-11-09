@@ -122,6 +122,21 @@ def test_partial_check_can_rule_on_script_generated_rows(run):
     assert e.value.code == 1
 
 
+def test_partial_check_accepts_a_revise_on_a_script_row_without_kind(run):
+    seed(run, [REC])
+    (run / "data" / "findings.json").write_text(json.dumps({"rows": [
+        {"key": "acr@9", "file": "input/pagecontent/x.md", "find": "x", "field": "paragraph"}]}))
+    v = run / "data" / "verify"; v.mkdir(parents=True)
+    (v / "V09.json").write_text(json.dumps([{"key": "acr@9", "verdict": "revise", "replace": "y", "reason": "QA: r"}]))
+    with pytest.raises(SystemExit) as e:
+        gv.main(["--run", str(run), "--check", "V09", "--partial"])
+    assert e.value.code == 0
+    (v / "V09.json").write_text(json.dumps([{"key": "acr@9", "verdict": "revise", "replace": "x", "reason": "QA: r"}]))
+    with pytest.raises(SystemExit) as e:
+        gv.main(["--run", str(run), "--check", "V09", "--partial"])
+    assert e.value.code == 1
+
+
 def test_main_rejects_a_retag_to_an_unknown_decision(run):
     seed(run, [REC])
     v = run / "data" / "verify"; v.mkdir(parents=True)

@@ -110,7 +110,7 @@ def main(argv=None):
         merged = data / "findings.json"  # QA verdicts may rule on script-generated rows too
         if merged.exists():
             for r in json.loads(merged.read_text(encoding="utf-8"))["rows"]:
-                by_key.setdefault(r["key"], r)
+                by_key.setdefault(r["key"], {**r, "kind": r.get("kind") or ("fsh" if r["file"].endswith(".fsh") else "page")})
     else:
         raise SystemExit(f"no {args.check}.keys.json; pass --partial for a consistency-pass or QA verdict file")
     open_decisions = {d["id"] for d in config.rulebook(cfg).get("decisions", []) if not d.get("team_decision")}
