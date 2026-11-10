@@ -8,5 +8,6 @@
   },
   "homepage": "https://github.com/Concord-Labs-AI/fhir-ig-glossary-toolkit",
   "repository": "https://github.com/Concord-Labs-AI/fhir-ig-glossary-toolkit",
+  "license": "Apache-2.0",
   "keywords": ["fhir", "implementation-guide", "glossary", "terminology", "hl7"]
 }

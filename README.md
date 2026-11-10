@@ -110,6 +110,10 @@ experiments/model-dependency/     protocol, scores, results
 tests/                            python3 -m pytest -q
 ```
 
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE). Copyright 2026 Clay Street Group, LLC.
+
 ---
 
 Method and tooling by Corey Smith, Concord Labs AI (corey@claystreetgroup.com). Use it however you like.
