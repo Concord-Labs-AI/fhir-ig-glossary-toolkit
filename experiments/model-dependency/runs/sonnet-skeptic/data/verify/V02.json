@@ -1,0 +1,4 @@
+[{"key":"input/fsh/instances/SDOHCC-ReferralSource.fsh@629","verdict":"reject","reason":"'SDOH needs' is not a glossary term; glossary equates social risk with HRSN/health-related social needs (D-4 pending), and swapping 'needs' for 'risks' changes the meaning (services address needs). No rule covers it."},
+{"key":"input/fsh/instances/SDOHCC-ReferralSource.fsh@1033","verdict":"confirm","reason":"Link text only; target page name unchanged per D-10. 'a referral target' reads correctly."},
+{"key":"input/fsh/instances/SDOHCC-ReferralSource.fsh@93902","verdict":"confirm","reason":"Link text for the role; 'referral target systems' reads correctly and keeps the link intact."},
+{"key":"input/fsh/instances/SDOHCC-ReferralSource.fsh@94173","verdict":"confirm","reason":"Link text; \"a 'light' referral target\" reads correctly."}]

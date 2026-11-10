@@ -1,0 +1,2543 @@
+{
+ "batch": "B03",
+ "findings": [
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 1,
+   "find": "Community Based Organization (CBO)",
+   "replace": "social service organization",
+   "terms": [
+    "T-CBO",
+    "T-SSO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Unhyphenated, Title Case 'Community Based Organization'; as a generic application owner the glossary's inclusive term is 'social service organization' (if CBO is kept, write 'community-based organization (CBO)').",
+   "confidence": "Medium",
+   "hits": [
+    "H-222b6682",
+    "H-aebf48f5",
+    "H-a7024cd3"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 7,
+   "find": "consumer or CBO",
+   "replace": "patient or social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'. 'consumer' is also covered by the glossary's 'patient' (D-2).",
+   "confidence": "Medium",
+   "hits": [
+    "H-222571f5",
+    "H-39a376a9"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 10,
+   "find": "CBOs",
+   "replace": "social service organizations",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-4d258f7d"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 11,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-c2a80e78"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 15,
+   "find": "Patient/Client",
+   "replace": "Patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-CLIENT",
+   "nth_in_line": 1,
+   "decision": "D-2",
+   "recommended": "change",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'. ('client' here means the person; D-2 reserves it for software).",
+   "confidence": "Medium",
+   "hits": [
+    "H-d9ce28a7"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 15,
+   "find": "Patient/Client",
+   "replace": "Patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-CLIENT",
+   "nth_in_line": 2,
+   "decision": "D-2",
+   "recommended": "change",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'. ('client' here means the person; D-2 reserves it for software).",
+   "confidence": "Medium",
+   "hits": [
+    "H-f4a3c5e3"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 18,
+   "find": "Patient/Client",
+   "replace": "Patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-CLIENT",
+   "decision": "D-2",
+   "recommended": "change",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'. ('client' here means the person; D-2 reserves it for software).",
+   "confidence": "Medium",
+   "hits": [
+    "H-03e2b848"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 20,
+   "find": "patient/client",
+   "replace": "patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-CLIENT",
+   "decision": "D-2",
+   "recommended": "change",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'. ('client' here means the person; D-2 reserves it for software).",
+   "confidence": "Medium",
+   "hits": [
+    "H-154bff7f"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 27,
+   "find": "CBO Applications",
+   "replace": "Social Service Organization Applications",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Heading uses 'CBO' for the generic referral target; glossary term is 'social service organization' (changing the heading changes its anchor).",
+   "confidence": "Medium",
+   "hits": [
+    "H-7a284f81"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 28,
+   "find": "CBO Applications",
+   "replace": "social service organization applications",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-ad3a9016"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 28,
+   "find": "CBO application",
+   "replace": "social service organization application",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-63eb3932"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 28,
+   "find": "Coordination Platform",
+   "replace": "coordination platform",
+   "terms": [
+    "T-CP"
+   ],
+   "type": "Form",
+   "rule": "R-CP-CASE",
+   "issue": "Glossary terms are sentence case mid-sentence.",
+   "confidence": "High",
+   "hits": [
+    "H-b27dcfc6"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 30,
+   "find": "CBO applications",
+   "replace": "social service organization applications",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-5214b44e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 31,
+   "find": "provides CBO",
+   "replace": "provides the social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-fff9bee9"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 32,
+   "find": "CBO enters",
+   "replace": "Social service organization enters",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-75404cb5"
+   ]
+  },
+  {
+   "file": "input/pagecontent/connecting_applications_with_api_data_sources.md",
+   "line": 35,
+   "find": "CBO authenticates",
+   "replace": "social service organization authenticates",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-b7ac824c"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 5,
+   "find": "healthcare providers",
+   "replace": "health care organizations",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ORGEX",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "'Provider' is a person in the glossary; here it names the organization sharing information, and 'healthcare' should be two words.",
+   "confidence": "Medium",
+   "hits": [
+    "H-4067e379",
+    "H-40509ef7"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 5,
+   "find": "community-based organizations (CBOs)",
+   "replace": "social service organizations",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-32d7b5f0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 5,
+   "find": "person",
+   "replace": "patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-PERSON",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-1c662b89"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 7,
+   "find": "a person",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-PERSON",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-96fb0ab3"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 9,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-ec3933e8"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 16,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-5bbbd75e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 20,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-a9b58343"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 21,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-89040314"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 30,
+   "find": "Healthcare Provider",
+   "replace": "Health care organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ORGEX",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "'Provider' is a person in the glossary; the referral source actor here is an organization, and 'healthcare' should be two words.",
+   "confidence": "Medium",
+   "hits": [
+    "H-08711093",
+    "H-dc1f14d5"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 31,
+   "find": "CBO",
+   "replace": "Social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-7d2a197b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 36,
+   "find": "healthcare entity",
+   "replace": "health care entity",
+   "terms": [
+    "T-HCO"
+   ],
+   "type": "Form",
+   "rule": "R-HCO-SPELL",
+   "issue": "Glossary spells 'health care' as two words.",
+   "confidence": "High",
+   "hits": [
+    "H-6a29678b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 36,
+   "find": "health-related social need (HRSN)",
+   "replace": "social risk",
+   "terms": [
+    "T-RISK"
+   ],
+   "type": "Missed use",
+   "rule": "R-RISK-HRSNLONG",
+   "decision": "D-4",
+   "recommended": "change",
+   "issue": "Glossary term is 'social risk' (equivalent to health-related social needs, HRSN).",
+   "confidence": "Medium",
+   "hits": [
+    "H-60a2cbf2",
+    "H-4d17b82c"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 37,
+   "find": "Community-Based Organization (CBO)",
+   "replace": "Social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Role description names the generic referral target as a CBO; glossary term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-4f1623d8"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 38,
+   "find": "individual",
+   "replace": "patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-5b50b01c"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 39,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-f5f7c70b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 39,
+   "find": "Social Care Network",
+   "replace": "social care network",
+   "terms": [
+    "T-SCN"
+   ],
+   "type": "Form",
+   "rule": "R-SCN-CASE",
+   "decision": "D-1",
+   "recommended": "change",
+   "issue": "Glossary terms are sentence case mid-sentence.",
+   "confidence": "High",
+   "hits": [
+    "H-8b7e63f5"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 41,
+   "find": "An individual",
+   "replace": "A patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-9d1fe239"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 50,
+   "find": "a CBO",
+   "replace": "a social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-0ddb1c78"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 52,
+   "find": "CBOs may",
+   "replace": "social service organizations may",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-a08955c6"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 54,
+   "find": "an HRSN",
+   "replace": "a social risk",
+   "terms": [
+    "T-RISK"
+   ],
+   "type": "Missed use",
+   "rule": "R-RISK-HRSN",
+   "decision": "D-4",
+   "recommended": "change",
+   "issue": "Glossary term is 'social risk' (equivalent to HRSN).",
+   "confidence": "Medium",
+   "hits": [
+    "H-cbc9b39f"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 55,
+   "find": "CBO receives",
+   "replace": "social service organization receives",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-15e333ff"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 55,
+   "find": "the individual",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-a8ab1244"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 56,
+   "find": "CBO determines",
+   "replace": "social service organization determines",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-f246eb91"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 56,
+   "find": "the person",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-PERSON",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-3353b850"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 56,
+   "find": "CBO creates",
+   "replace": "social service organization creates",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-f2662640"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 56,
+   "find": "CBO updates",
+   "replace": "social service organization updates",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-4c642d33"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 67,
+   "find": "a Community-Based Organization (CBO)",
+   "replace": "a social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Title Case mid-sentence and generic referral-target use; glossary term is 'social service organization' (if CBO is kept, write 'community-based organization (CBO)').",
+   "confidence": "Medium",
+   "hits": [
+    "H-0ea3cf81",
+    "H-fceb7d0f"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 67,
+   "find": "An individual",
+   "replace": "A patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-d94a6a95"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 67,
+   "find": "CBO assesses",
+   "replace": "social service organization assesses",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-41d29127"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 67,
+   "find": "individual's needs",
+   "replace": "patient's needs",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-08a8955a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 67,
+   "find": "CBO documents",
+   "replace": "social service organization documents",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-32e10d3b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 68,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-7c3be9ee"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 69,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-2e34c6e0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 69,
+   "find": "the referrer",
+   "replace": "the referral source",
+   "terms": [
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "issue": "'Referrer' is a paraphrase for the glossary's 'referral source'.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 71,
+   "find": "social care organizations",
+   "replace": "social service organizations",
+   "terms": [
+    "T-SSO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CAREORG",
+   "decision": "D-1",
+   "recommended": "change",
+   "issue": "Glossary term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-6662bd33"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 71,
+   "find": "healthcare organizations",
+   "replace": "health care organizations",
+   "terms": [
+    "T-HCO"
+   ],
+   "type": "Form",
+   "rule": "R-HCO-SPELL",
+   "issue": "Glossary spells 'health care' as two words.",
+   "confidence": "High",
+   "hits": [
+    "H-f7c37b87"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 71,
+   "find": "the individual",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-d3f8e46a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 80,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-a313bcc4"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 83,
+   "find": "the individual",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-af4942ec"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 89,
+   "find": "the individual",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-3fbbde2a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/enrollment.md",
+   "line": 93,
+   "find": "CBO updates",
+   "replace": "social service organization updates",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-26da2e92"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 3,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-624b4d9f"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 3,
+   "find": "a health-related social need",
+   "replace": "a social risk",
+   "terms": [
+    "T-RISK"
+   ],
+   "type": "Missed use",
+   "rule": "R-RISK-HRSNLONG",
+   "decision": "D-4",
+   "recommended": "change",
+   "issue": "Glossary term is 'social risk' (equivalent to health-related social needs).",
+   "confidence": "Medium",
+   "hits": [
+    "H-f015953f"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 3,
+   "find": "a Community-Based Organization (CBO)",
+   "replace": "a social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Title Case mid-sentence and generic referral-target use; glossary term is 'social service organization' (if CBO is kept, write 'community-based organization (CBO)').",
+   "confidence": "Medium",
+   "hits": [
+    "H-18b22ec5",
+    "H-e0fccf2a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 5,
+   "find": "Individual/Patient",
+   "replace": "Patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-19aefd6a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 5,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-3a48d9fb"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 5,
+   "find": "individual’s benefit",
+   "replace": "patient’s benefit",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-b2eca26d"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 5,
+   "find": "clinical healthcare provider",
+   "replace": "clinical health care organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ORGEX",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "'Provider' is a person in the glossary; here it names the organization that would have been the referral source, and 'healthcare' should be two words.",
+   "confidence": "Medium",
+   "hits": [
+    "H-89586027",
+    "H-1d93118a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 14,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-fee914b3"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 14,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-314f48a5"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 14,
+   "find": "an Individual/Patient",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-bb02cac4"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 14,
+   "find": "of the person",
+   "replace": "of the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-PERSON",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-755a27b4"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 15,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-dd7cadc1"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 15,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-2a56602e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 19,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-7931de3b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 19,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-8572e3e0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 20,
+   "find": "an individual",
+   "replace": "a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-c14cd5c6"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 20,
+   "find": "CBOs",
+   "replace": "social service organizations",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-49dab56b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 21,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-1d077b4b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 28,
+   "find": "Individual/Patient",
+   "replace": "Patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-8ef67ec0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 28,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-48efc5ed"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 29,
+   "find": "CBO",
+   "replace": "Social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-3177a5ec"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 32,
+   "find": "Individual/Patient",
+   "replace": "Patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-ba75d24a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 32,
+   "find": "A person",
+   "replace": "A patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-PERSON",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-edd50c9e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 32,
+   "find": "of a person",
+   "replace": "of a patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-PERSON",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-486768de"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 32,
+   "find": "health-related social needs",
+   "replace": "social risks",
+   "terms": [
+    "T-RISK"
+   ],
+   "type": "Missed use",
+   "rule": "R-RISK-HRSNLONG",
+   "decision": "D-4",
+   "recommended": "change",
+   "issue": "Glossary term is 'social risk' (equivalent to health-related social needs).",
+   "confidence": "Medium",
+   "hits": [
+    "H-a371810e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 32,
+   "find": "The person",
+   "replace": "The patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-PERSON",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'person'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-08316a96"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 33,
+   "find": "Community Resource Platform",
+   "replace": "Community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-16200f8e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 33,
+   "find": "enables individuals",
+   "replace": "enables patients",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-aaad2c22"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 33,
+   "find": "screening assessments",
+   "replace": "assessments",
+   "terms": [
+    "T-SAI"
+   ],
+   "type": "Missed use",
+   "rule": "R-SCREEN-ACT",
+   "decision": "D-7",
+   "recommended": "change",
+   "issue": "The guide's own prose has moved from 'screening' to 'assessment'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-8c822a7d"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 34,
+   "find": "Community-Based Organization (CBO)",
+   "replace": "Social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Role description names the generic referral target as a CBO; glossary term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-9d7081f0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 34,
+   "find": "CBO functions",
+   "replace": "social service organization functions",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-fc89f2d0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 39,
+   "find": "Direct Referral",
+   "replace": "direct referral",
+   "terms": [
+    "T-DIRECT"
+   ],
+   "type": "Form",
+   "rule": "R-DIRECT-CASE",
+   "issue": "Glossary terms are sentence case mid-sentence (leave capitalised if this is a workflow name).",
+   "confidence": "Medium",
+   "hits": [
+    "H-a0c88ee6"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 43,
+   "find": "The individual",
+   "replace": "The patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-904fe875"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 43,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-f2df826a"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 44,
+   "find": "The individual",
+   "replace": "The patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-c0adb273"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 44,
+   "find": "screening results",
+   "replace": "assessment results",
+   "terms": [
+    "T-SAI"
+   ],
+   "type": "Missed use",
+   "rule": "R-SCREEN-ACT",
+   "decision": "D-7",
+   "recommended": "change",
+   "issue": "The guide's own prose has moved from 'screening' to 'assessment'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-89398a6e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 44,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-7cf0d2ca"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 48,
+   "find": "The individual",
+   "replace": "The patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-8c476c67"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 48,
+   "find": "screening questionnaire",
+   "replace": "standardized assessment instrument",
+   "terms": [
+    "T-SAI"
+   ],
+   "type": "Missed use",
+   "rule": "R-SAI-SCREENTOOL",
+   "issue": "Glossary term for a validated questionnaire is 'standardized assessment instrument'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-64329363"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 48,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-2e878dac"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 49,
+   "find": "screening results",
+   "replace": "assessment results",
+   "terms": [
+    "T-SAI"
+   ],
+   "type": "Missed use",
+   "rule": "R-SCREEN-ACT",
+   "decision": "D-7",
+   "recommended": "change",
+   "issue": "The guide's own prose has moved from 'screening' to 'assessment'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-a7669a5d"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 49,
+   "find": "CBOs",
+   "replace": "social service organizations",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-5737180b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 50,
+   "find": "The individual",
+   "replace": "The patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-7441ec7d"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 50,
+   "find": "a CBO",
+   "replace": "a social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-f474dff2"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 51,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-6cc5f420"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 51,
+   "find": "Referral Source",
+   "replace": "referral source",
+   "terms": [
+    "T-RS"
+   ],
+   "type": "Form",
+   "rule": "R-RS-CASE",
+   "issue": "Glossary terms are sentence case mid-sentence.",
+   "confidence": "High",
+   "hits": [
+    "H-ba49472f"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 51,
+   "find": "Referral Target's",
+   "replace": "referral target's",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Form",
+   "rule": null,
+   "issue": "Glossary terms are sentence case mid-sentence.",
+   "confidence": "High",
+   "hits": []
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 51,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-b2beda41"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 52,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-af2002af"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 52,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-1ae253e6"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 53,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-d5d7cb95"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 53,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-79feede6"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 54,
+   "find": "CBO works",
+   "replace": "social service organization works",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-fe9ac555"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 55,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-e8cb76e2"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 55,
+   "find": "the individual",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-a297c8e4"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 61,
+   "find": "Direct Referral",
+   "replace": "direct referral",
+   "terms": [
+    "T-DIRECT"
+   ],
+   "type": "Form",
+   "rule": "R-DIRECT-CASE",
+   "issue": "Glossary terms are sentence case mid-sentence (leave capitalised if this is a workflow name).",
+   "confidence": "Medium",
+   "hits": [
+    "H-9b41fcab"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 65,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-6af6fcf1"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 65,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-1964dcfc"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 70,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-35dffdf2"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 71,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'. Normative statement: the actor is the same entity, only the name changes.",
+   "confidence": "Medium",
+   "hits": [
+    "H-412fb294"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 72,
+   "find": "the individual",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-6da218f6"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 73,
+   "find": "the screening",
+   "replace": "the assessment",
+   "terms": [
+    "T-SAI"
+   ],
+   "type": "Missed use",
+   "rule": "R-SCREEN-ACT",
+   "decision": "D-7",
+   "recommended": "change",
+   "issue": "The guide's own prose has moved from 'screening' to 'assessment'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-683731db"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 77,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-5f33d6fb"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 78,
+   "find": "the individual",
+   "replace": "the patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-9d9debe0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 84,
+   "find": "completed screening",
+   "replace": "completed assessment",
+   "terms": [
+    "T-SAI"
+   ],
+   "type": "Missed use",
+   "rule": "R-SCREEN-ACT",
+   "decision": "D-7",
+   "recommended": "change",
+   "issue": "The guide's own prose has moved from 'screening' to 'assessment'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-b5596d66"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 88,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-34fa7018"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 88,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-4c1eab18"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 90,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "nth_in_line": 1,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-d152fdd5"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 90,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "nth_in_line": 2,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-b5a7a97b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 91,
+   "find": "CBO updates",
+   "replace": "social service organization updates",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-4f64c4b0"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 92,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'. Normative statement (SHALL): the actor is the same entity, only the name changes.",
+   "confidence": "Medium",
+   "hits": [
+    "H-2a8ca160"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 93,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "nth_in_line": 1,
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-4485e330"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 93,
+   "find": "Community Resource Platform",
+   "replace": "community resource referral platform",
+   "terms": [
+    "T-CP",
+    "T-RS"
+   ],
+   "type": "Missed use",
+   "rule": "R-CP-CRP",
+   "nth_in_line": 2,
+   "issue": "The glossary's name for this platform (alias of coordination platform) is 'community resource referral platform'; 'Community Resource Platform' is a shortened, Title Case variant.",
+   "confidence": "Medium",
+   "hits": [
+    "H-7ec6039e"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 93,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-09a51ef7"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 95,
+   "find": "Direct Referral",
+   "replace": "direct referral",
+   "terms": [
+    "T-DIRECT"
+   ],
+   "type": "Form",
+   "rule": "R-DIRECT-CASE",
+   "issue": "Glossary terms are sentence case mid-sentence (leave capitalised if this is a workflow name).",
+   "confidence": "Medium",
+   "hits": [
+    "H-80cbfc18"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 95,
+   "find": "Individual/Patient",
+   "replace": "patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-1ba35a7b"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 95,
+   "find": "individual is initiating",
+   "replace": "patient is initiating",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "Glossary term for the person receiving care is 'patient'; this text says 'individual'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-0ec738ce"
+   ]
+  },
+  {
+   "file": "input/pagecontent/self_referral.md",
+   "line": 95,
+   "find": "CBO",
+   "replace": "social service organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "Generic referral-target use of 'CBO'; the glossary's inclusive term is 'social service organization'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-ba3fa743"
+   ]
+  }
+ ],
+ "dismissed": [
+  {
+   "hit": "H-d446ed6c",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-8ff250e9",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-84654dc5",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-af2b79a1",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-08530ab6",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-fe437075",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-05ed2ad0",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-5e479d46",
+   "reason": "Generic 'referral platform' here covers any referral-source or FHIR server platform (the page's own example is Epic), not only the glossary's coordination platform; replacing it would be wrong."
+  },
+  {
+   "hit": "H-12a01be7",
+   "reason": "'point person' is an idiom, not a reference to the patient."
+  },
+  {
+   "hit": "H-153e909b",
+   "reason": "ServiceRequest.requester may be the patient, a related person, or an entity; 'patient' would be wrong here."
+  }
+ ],
+ "glossary_feedback": [
+  {
+   "term": "T-CP",
+   "observation": "The guide uses 'referral platform' for the system a patient app or CBO app connects to, which includes referral-source EHRs (e.g., Epic) as well as coordination platforms. The glossary has no generic term for 'the referral source's or intermediary's FHIR-serving platform'.",
+   "evidence": [
+    "input/pagecontent/connecting_applications_with_api_data_sources.md:13",
+    "input/pagecontent/connecting_applications_with_api_data_sources.md:30"
+   ]
+  },
+  {
+   "term": "T-RS",
+   "observation": "Self-referral uses 'Community Resource Platform' as a named actor acting as the referral source system. The glossary only mentions 'community resource referral platform' as an alias of CP and inside the referral source definition; no entry says whether this platform is a CP or the referral source's system.",
+   "evidence": [
+    "input/pagecontent/self_referral.md:5",
+    "input/pagecontent/self_referral.md:33"
+   ]
+  },
+  {
+   "term": "T-PAT",
+   "observation": "'Patient/Client' is used for a person using an app, while 'client' also means software; the glossary's Patient definition already covers 'client' in the person sense. Self-referral also uses 'Individual/Patient' as a paired role name.",
+   "evidence": [
+    "input/pagecontent/connecting_applications_with_api_data_sources.md:15",
+    "input/pagecontent/self_referral.md:32"
+   ]
+  },
+  {
+   "term": "T-RT",
+   "observation": "System actions by the referral target and referral source (e.g., 'the CBO's system processes the received Task', 'the CBO updates the Task', 'the Community Resource Platform polls') have no glossary system-actor term; left unchanged per the domain note (see D-11).",
+   "evidence": [
+    "input/pagecontent/self_referral.md:52",
+    "input/pagecontent/self_referral.md:90"
+   ]
+  },
+  {
+   "term": "T-PROV",
+   "observation": "Enrollment defines 'Provider' as 'the healthcare entity or clinician', mixing organization and person, while the glossary defines Provider as a person and the roles table labels the organization as 'Healthcare Provider'.",
+   "evidence": [
+    "input/pagecontent/enrollment.md:30",
+    "input/pagecontent/enrollment.md:36"
+   ]
+  }
+ ]
+}

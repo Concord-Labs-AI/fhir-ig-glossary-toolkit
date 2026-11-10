@@ -1,0 +1,19 @@
+{
+ "status": "ok",
+ "proposed": 36,
+ "valid": 36,
+ "validity": 1.0,
+ "errors": 0,
+ "reference_kept": 34,
+ "recall": 1.0,
+ "matches_rejected": 2,
+ "unmatched": 0,
+ "precision_proxy": 0.9444444444444444,
+ "pending_violations": 0,
+ "validation_errors": [],
+ "meta": {
+  "model": "haiku",
+  "tokens": 158479,
+  "seconds": 146.7
+ }
+}

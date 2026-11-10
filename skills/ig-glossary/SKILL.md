@@ -13,7 +13,7 @@ You orchestrate a pipeline of scripts and agents. The scripts are deterministic 
 
 **When a script fails**, show the user its output and stop. Don't patch scripts or hand-edit data to get past it.
 
-**Agents.** Dispatch with the Agent tool (`subagent_type: general-purpose`), one per packet, all packets in one message. Pass the exact text printed by `prompt.py` as the prompt. Model per role: see "Which model" in the toolkit README; if the README has no table yet, use the strongest available model for every role. After each agent returns, write `data/agent/<Bnn>.meta.json` (reader), `data/verify/<Vnn>.meta.json` (skeptic or consistency) or `data/qa/<Qnn>.meta.json` (QA) with `{"model": "...", "tokens": N, "seconds": N}`: write the model you requested, and take tokens and seconds from the agent result, so the run's cost is recorded.
+**Agents.** Dispatch with the Agent tool (`subagent_type: general-purpose`), one per packet, all packets in one message. Pass the exact text printed by `prompt.py` as the prompt. Model per role: see "Which model" in the toolkit README (reader: Opus 5.5 or Fable 5.1; skeptic: the strongest available, Sonnet is workable; consistency, rulebook/themes authoring and QA review: the strongest available). After each agent returns, write `data/agent/<Bnn>.meta.json` (reader), `data/verify/<Vnn>.meta.json` (skeptic or consistency) or `data/qa/<Qnn>.meta.json` (QA) with `{"model": "...", "tokens": N, "seconds": N}`: write the model you requested, and take tokens and seconds from the agent result, so the run's cost is recorded.
 
 ## Step 0 — Preflight
 

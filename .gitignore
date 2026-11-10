@@ -8,3 +8,5 @@ experiments/model-dependency/runs/*/data/*
 !experiments/model-dependency/runs/*/data/agent/
 !experiments/model-dependency/runs/*/data/verify/
 !experiments/model-dependency/runs/*/data/scores/
+experiments/model-dependency/runs/*/*.yaml
+experiments/model-dependency/runs/sonnet-skeptic*/data/agent/

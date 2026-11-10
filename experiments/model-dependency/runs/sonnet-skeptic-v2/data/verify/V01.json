@@ -1,0 +1,333 @@
+[
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@467",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@870",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@902",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1063",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1113",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1273",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1467",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@2321",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@2548",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@3290",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@345",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@434",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@629",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@845",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@956",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1109",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1207",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1517",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1655",
+  "verdict": "revise",
+  "replace": "Health Care Organization: The organization that",
+  "reason": "Redundant/awkward 'whose provider'; parallel to the CBO entry 'The organization that receives referrals'."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@2212",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@2397",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@3739",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@3826",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@4542",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@4651",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@4926",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@5149",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@5456",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@5806",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@6274",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@6493",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@6978",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@57",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@96",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@362",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@653",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@690",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1423",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1477",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1668",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1803",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2062",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2157",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2249",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2326",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2462",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2519",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3070",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3202",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3327",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3393",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3418",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3502",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3571",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@4941",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@5063",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6090",
+  "verdict": "reject",
+  "reason": "'Community Resource Platform' is the page's established actor label (used ~15 times, incl. bold actor entry and diagrams); renaming only normative mentions splits the vocabulary. The glossary aka makes both acceptable."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6221",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6296",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6430",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6698",
+  "verdict": "reject",
+  "reason": "Same: established actor label on this page; a one-off rename inside a SHOULD statement leaves the page inconsistent."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6871",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@7336",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@7988",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@8650",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@8708",
+  "verdict": "confirm",
+  "reason": "Matches glossary on strict reading; replacement reads correctly in the sentence."
+ }
+]

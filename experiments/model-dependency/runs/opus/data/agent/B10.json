@@ -1,0 +1,708 @@
+{
+ "batch": "B10",
+ "findings": [
+  {
+   "file": "input/images-source/CapacityStatusQueryLight.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-b40ada6e"
+   ]
+  },
+  {
+   "file": "input/images-source/CapacityStatusSimplified.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-057c05e6"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedDirectReferral.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-37b1220c"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedDirectReferralLight.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-ecbef491"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPostReferralCapacityStatus.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-a9af3663"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPreReferralCapacityStatus.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-123fd8e0"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferral.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-f26f648c"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferralLight.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-d88acd10"
+   ]
+  },
+  {
+   "file": "input/images-source/EnrollmentWorkflow.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-d60c860f"
+   ]
+  },
+  {
+   "file": "input/images-source/ReferralForFurtherAssessmentWorkflow.plantuml",
+   "line": 5,
+   "find": "Provider",
+   "replace": "Health Care Organization",
+   "terms": [
+    "T-PROV",
+    "T-HCO"
+   ],
+   "type": "Misuse",
+   "rule": "R-PROV-ACTOR",
+   "decision": "D-8",
+   "recommended": "change",
+   "issue": "The glossary defines a provider as a person, but this diagram uses 'Provider' as the actor for the referral source organization; the glossary's term for that organization is health care organization.",
+   "confidence": "High",
+   "hits": [
+    "H-9d7e3d47"
+   ]
+  },
+  {
+   "file": "input/images-source/CapacityStatusQueryLight.plantuml",
+   "line": 6,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/CapacityStatusSimplified.plantuml",
+   "line": 6,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/DetailedDirectReferral.plantuml",
+   "line": 6,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/DetailedDirectReferralLight.plantuml",
+   "line": 6,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPostReferralCapacityStatus.plantuml",
+   "line": 7,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPreReferralCapacityStatus.plantuml",
+   "line": 7,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferral.plantuml",
+   "line": 7,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferralLight.plantuml",
+   "line": 7,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/EnrollmentWorkflow.plantuml",
+   "line": 7,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/ReferralForFurtherAssessmentWorkflow.plantuml",
+   "line": 7,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/SelfReferralWorkflow.plantuml",
+   "line": 6,
+   "find": "Community-Based Organization",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "The referral target actor is the generic receiving organization, which the glossary calls a social service organization; a CBO is only one kind. Changing it keeps this label consistent with the CBO edits in the diagram's message lines.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPostReferralCapacityStatus.plantuml",
+   "line": 21,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-85434b08"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPostReferralCapacityStatus.plantuml",
+   "line": 29,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-5fa83617"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPostReferralCapacityStatus.plantuml",
+   "line": 30,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-beedebeb"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectPreReferralCapacityStatus.plantuml",
+   "line": 30,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-e5c95a00"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferral.plantuml",
+   "line": 17,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-66273dec"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferral.plantuml",
+   "line": 19,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-90663c07"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferralLight.plantuml",
+   "line": 19,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-98c4a8c8"
+   ]
+  },
+  {
+   "file": "input/images-source/EnrollmentWorkflow.plantuml",
+   "line": 17,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-d8cb4b39"
+   ]
+  },
+  {
+   "file": "input/images-source/EnrollmentWorkflow.plantuml",
+   "line": 19,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-5c88a274"
+   ]
+  },
+  {
+   "file": "input/images-source/ReferralForFurtherAssessmentWorkflow.plantuml",
+   "line": 17,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-f65ffbda"
+   ]
+  },
+  {
+   "file": "input/images-source/ReferralForFurtherAssessmentWorkflow.plantuml",
+   "line": 19,
+   "find": "CBO",
+   "replace": "Social Service Organization",
+   "terms": [
+    "T-SSO",
+    "T-CBO"
+   ],
+   "type": "Missed use",
+   "rule": "R-SSO-CBO",
+   "decision": "D-6",
+   "recommended": "change",
+   "issue": "'CBO' here stands for whatever organization receives the referral, which the glossary calls a social service organization; a CBO is only one kind.",
+   "confidence": "Medium",
+   "hits": [
+    "H-09004d6d"
+   ]
+  },
+  {
+   "file": "input/images-source/ReferralForFurtherAssessmentWorkflow.plantuml",
+   "line": 6,
+   "find": "Care Coordinator",
+   "replace": "Coordination Platform",
+   "terms": [
+    "T-CC",
+    "T-CP",
+    "T-INT"
+   ],
+   "type": "Misuse",
+   "rule": "R-CC-ACTOR",
+   "issue": "The glossary defines a care coordinator as a person, but here it labels the intermediary's system, which creates and posts the CP Task; the glossary calls that system the coordination platform, as every other intermediary diagram does.",
+   "confidence": "High",
+   "hits": [
+    "H-7c037823"
+   ]
+  },
+  {
+   "file": "input/images-source/DetailedIndirectReferral.plantuml",
+   "line": 31,
+   "find": "CPTask",
+   "replace": "CP Task",
+   "terms": [
+    "T-CP"
+   ],
+   "type": "Form",
+   "rule": null,
+   "issue": "The coordination platform's acronym is run into 'Task'; every other line in this diagram writes 'CP Task'.",
+   "confidence": "High",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/SelfReferralWorkflow.plantuml",
+   "line": 5,
+   "find": "Actor:",
+   "replace": "Actor: Coordination Platform used by",
+   "terms": [
+    "T-RS",
+    "T-CP"
+   ],
+   "type": "Misuse",
+   "rule": null,
+   "issue": "The glossary makes the self-referral referral source the organization running the community resource referral platform (the coordination platform), not the person; this actor creates, posts and polls Tasks, so it is the platform the individual uses.",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/images-source/SelfReferralWorkflow.plantuml",
+   "line": 5,
+   "find": "Individual",
+   "nth_in_line": 1,
+   "replace": "Patient",
+   "terms": [
+    "T-PAT"
+   ],
+   "type": "Missed use",
+   "rule": "R-PAT-INDIV",
+   "decision": "D-2",
+   "recommended": "keep",
+   "issue": "The person referring themselves is the subject of care, which the glossary calls the patient.",
+   "confidence": "High",
+   "hits": [
+    "H-f4ce24eb"
+   ]
+  },
+  {
+   "file": "input/images/GravityProjectModel.png",
+   "line": null,
+   "find": "Standardized Instruments",
+   "replace": "Standardized Assessment Instruments",
+   "terms": [
+    "T-SAI"
+   ],
+   "type": "Missed use",
+   "rule": "R-SAI-TOOL",
+   "issue": "The glossary's term for these validated instruments is standardized assessment instrument.",
+   "confidence": "High",
+   "hits": [
+    "H-99df1edc"
+   ]
+  },
+  {
+   "file": "input/images/GravityProjectModel.png",
+   "line": null,
+   "find": "Screening",
+   "replace": "Assessment",
+   "terms": [
+    "N-SCREEN"
+   ],
+   "type": "Missed use",
+   "rule": "R-SCREEN-ACT",
+   "decision": "D-7",
+   "recommended": "change",
+   "issue": "'Screening' names the assessment activity; STU 3.0 moved to assessment wording and the glossary has no 'screening' entry. This is Gravity-authored artwork, not an external name.",
+   "confidence": "Medium",
+   "hits": [
+    "H-7003461f"
+   ]
+  }
+ ],
+ "dismissed": [
+  {
+   "hit": "H-09824a98",
+   "reason": "'Authorized Individual' is the patient's representative, not the subject of care, so 'patient' would change the meaning."
+  }
+ ],
+ "glossary_feedback": [
+  {
+   "term": "T-PAT",
+   "observation": "The glossary has no term for a person authorized to act on the patient's behalf. The self-referral diagram says 'Authorized Individual' and the self-referral page says 'authorized representative', so neither can be checked against a definition.",
+   "evidence": [
+    "input/images-source/SelfReferralWorkflow.plantuml:5",
+    "input/pagecontent/self_referral.md:14",
+    "input/pagecontent/self_referral.md:32"
+   ]
+  }
+ ]
+}

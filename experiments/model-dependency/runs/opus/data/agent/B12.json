@@ -1,0 +1,705 @@
+{
+ "batch": "B12",
+ "findings": [
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 8,
+   "find": "SDOH needs",
+   "replace": "social risks",
+   "terms": [
+    "T-RISK",
+    "T-NEED"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "issue": "'SDOH needs' is not a glossary term; identifying patients is about their social risks (the glossary reserves 'social need' for patient-prioritized social risks).",
+   "confidence": "Medium",
+   "hits": []
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 12,
+   "find": "recipients of requests for service",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-BARE",
+   "issue": "'Recipients of requests for service' describes the role the glossary calls 'referral target'.",
+   "confidence": "Medium",
+   "hits": [
+    "H-697aae02"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 12,
+   "find": "Referral Recipient",
+   "replace": "referral target",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Link text uses the ballot-era name 'Referral Recipient', in Title Case mid-sentence, for the role the glossary calls 'referral target'; only the visible link text changes, not the linked CapabilityStatement.",
+   "confidence": "High",
+   "hits": [
+    "H-2ea52ddf"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 12,
+   "find": "Coordination Platform",
+   "replace": "coordination platform",
+   "terms": [
+    "T-CP"
+   ],
+   "type": "Form",
+   "rule": null,
+   "issue": "Glossary term in Title Case mid-sentence; write it in sentence case as 'coordination platform'.",
+   "confidence": "High",
+   "hits": []
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 12,
+   "find": "Referral Sources",
+   "replace": "referral sources",
+   "terms": [
+    "T-RS"
+   ],
+   "type": "Form",
+   "rule": "R-RS-CASE",
+   "issue": "Glossary term in Title Case mid-sentence; write it in sentence case as 'referral sources'.",
+   "confidence": "High",
+   "hits": [
+    "H-5f3d6a01"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 888,
+   "find": "downstream coordination system",
+   "replace": "downstream coordination platform",
+   "terms": [
+    "T-CP"
+   ],
+   "type": "Missed use",
+   "rule": null,
+   "issue": "'Coordination system' paraphrases the glossary's 'coordination platform', the term used everywhere else in this CapabilityStatement.",
+   "confidence": "High",
+   "hits": []
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 968,
+   "find": "referral recipient",
+   "replace": "referral target",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "nth_in_line": 1,
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym (link text only; the linked CapabilityStatement is unchanged).",
+   "confidence": "High",
+   "hits": [
+    "H-fa7fa2ab"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 968,
+   "find": "where the recipient is",
+   "replace": "where the referral target is",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-BARE",
+   "issue": "Bare 'recipient' stands for the referral target named in the same sentence; the glossary term is 'referral target'.",
+   "confidence": "High",
+   "hits": [
+    "H-27964aa7"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 968,
+   "find": "'light' referral recipient",
+   "replace": "'light' referral target",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym (link text only; the linked CapabilityStatement is unchanged).",
+   "confidence": "High",
+   "hits": [
+    "H-e9dd14cf"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 981,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-97c26b2e"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 985,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-ff679575"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1017,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-afbaf0bf"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1021,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-db0e300c"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1084,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-1b356722"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1088,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-4ee39467"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1122,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-17c1291e"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1126,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-2a9af6c6"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1158,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-6b09881a"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1162,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-e9dabfe8"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1194,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-d2c69244"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1198,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-beff7c03"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1308,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-0363e72a"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1312,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-6db25bde"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1384,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-c3d00b43"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1388,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-58b5ae64"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1455,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-c250b47f"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1459,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-3ab168c5"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1483,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-9fb67c97"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1487,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-deda1e9c"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1511,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-13b3f707"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1515,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-82406930"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1539,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-f8e0bffe"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1543,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-d00bca17"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1581,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-dde20d3a"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1585,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-40ca611c"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1589,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-3bc1eebc"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1806,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-65c22548"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1810,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-df87199b"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1956,
+   "find": "referral recipients",
+   "replace": "referral targets",
+   "terms": [
+    "T-RT"
+   ],
+   "type": "Missed use",
+   "rule": "R-RT-RECIP",
+   "issue": "Glossary names this role 'referral target'; 'referral recipient' is the ballot-era synonym.",
+   "confidence": "High",
+   "hits": [
+    "H-9743f4b4"
+   ]
+  },
+  {
+   "file": "input/fsh/instances/SDOHCC-ReferralSource.fsh",
+   "line": 1278,
+   "find": "SDOH category (domain)",
+   "replace": "SDOH domain",
+   "terms": [
+    "T-DOMAIN"
+   ],
+   "type": "Missed use",
+   "rule": "R-DOMAIN-CAT",
+   "decision": "D-5",
+   "recommended": "change",
+   "issue": "Prose names the concept (conditions in the same domain), for which the glossary term is 'SDOH domain'; 'SDOH category' is the coded element's name.",
+   "confidence": "Medium",
+   "hits": [
+    "H-f3aa0111"
+   ]
+  }
+ ],
+ "dismissed": [
+  {
+   "hit": "H-fc834830",
+   "reason": "'Individual' means any person who can be the FHIR QuestionnaireResponse.author (practitioner, related person or patient), not the subject of care; 'patient' would narrow the search parameter's meaning."
+  },
+  {
+   "hit": "H-852b820c",
+   "reason": "'Individual' means any person who can be the FHIR QuestionnaireResponse.author (practitioner, related person or patient), not the subject of care; 'patient' would narrow the search parameter's meaning."
+  },
+  {
+   "hit": "H-32f9d6ad",
+   "reason": "'Individual' means any person who can be the FHIR Task.requester (practitioner, related person or patient), not the subject of care; 'patient' would narrow the search parameter's meaning. Paired with 'organization' to describe the reference's target types."
+  },
+  {
+   "hit": "H-dcbcf875",
+   "reason": "'Individual' means any person who can be the FHIR Task.requester (practitioner, related person or patient), not the subject of care; 'patient' would narrow the search parameter's meaning. Paired with 'organization' to describe the reference's target types."
+  }
+ ],
+ "glossary_feedback": [
+  {
+   "term": "T-RT",
+   "observation": "No system-actor term for either end of a referral (D-11): this CapabilityStatement describes 'systems acting as referral sources' and invents names for the target's system ('delivery' system, 'a fulfilling system', 'referral recipient systems', 'referral sources system'). Left as-is per the domain notes; one glossary note would cover all of them.",
+   "evidence": [
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:4",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:8",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:544",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:884",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:888",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:968",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:1960"
+   ]
+  },
+  {
+   "term": "T-RS",
+   "observation": "The glossary treats referral source and referral target as fixed roles, but this CapabilityStatement expects referral sources also to receive referrals ('may sometimes also be recipients of requests for service', 'For referral sources that receive referrals from upstream systems', repeated across resources). Supports D-12's note that roles are assigned per referral.",
+   "evidence": [
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:12",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:18",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:27",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:54",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:258",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:768"
+   ]
+  },
+  {
+   "term": "T-DIRECT",
+   "observation": "The server section plans for a \"'light' referral recipient that doesn't have local persistence or FHIR server capabilities\", but the Direct and Indirect referral definitions require every party to have a FHIR server API (D-12).",
+   "evidence": [
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:968"
+   ]
+  },
+  {
+   "term": "T-PAT",
+   "observation": "In search-parameter documentation, 'individual' names any person a FHIR reference can point to (author, requester), not the subject of care. A strict D-2 option A would misapply 'patient' here; the R-PAT-INDIV pattern could skip 'organization or individual' and 'by a particular individual'.",
+   "evidence": [
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:710",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:944",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:1771",
+    "input/fsh/instances/SDOHCC-ReferralSource.fsh:2017"
+   ]
+  }
+ ]
+}

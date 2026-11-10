@@ -1,0 +1,19 @@
+{
+ "status": "ok",
+ "proposed": 38,
+ "valid": 38,
+ "validity": 1.0,
+ "errors": 0,
+ "reference_kept": 34,
+ "recall": 1.0,
+ "matches_rejected": 2,
+ "unmatched": 2,
+ "precision_proxy": 0.8947368421052632,
+ "pending_violations": 0,
+ "validation_errors": [],
+ "meta": {
+  "model": "opus",
+  "tokens": 182977,
+  "seconds": 260.1
+ }
+}

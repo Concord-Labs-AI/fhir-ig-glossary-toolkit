@@ -1,0 +1,15 @@
+{
+ "compared": 66,
+ "agreement": 0.4090909090909091,
+ "agreement_explicit": 0.4090909090909091,
+ "confusion": {
+  "confirm\u2192confirm": 25,
+  "confirm\u2192reject": 36,
+  "revise\u2192revise": 1,
+  "reject\u2192reject": 1,
+  "confirm\u2192revise": 2,
+  "revise\u2192reject": 1
+ },
+ "revise_same_replace": 1,
+ "revise_different_replace": 0
+}

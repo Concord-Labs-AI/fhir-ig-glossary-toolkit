@@ -1,0 +1,335 @@
+[
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@467",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@870",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@902",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1063",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1113",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1273",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@1467",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@2321",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@2548",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/connecting_applications_with_api_data_sources.md@3290",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@345",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@434",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@629",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@845",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@956",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1109",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1207",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1517",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@1655",
+  "verdict": "revise",
+  "replace": "Health Care Organization: The organization whose provider",
+  "reason": "Label matches the actor-table cell; \"whose provider\" keeps the person-level action with the provider; avoids repeating the term."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@2212",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@2397",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@3739",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@3826",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@4542",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@4651",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@4926",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@5149",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@5456",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@5806",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@6274",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@6493",
+  "verdict": "reject",
+  "reason": "Would read \"Patient resource for the patient\"; individual is allowed here under D-2 B."
+ },
+ {
+  "key": "input/pagecontent/enrollment.md@6978",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@57",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@96",
+  "verdict": "revise",
+  "replace": "a social need",
+  "reason": "Self-identified, patient-prioritized need is the glossary term social need, not social risk."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@362",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@653",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@690",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1423",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1477",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1668",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@1803",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2062",
+  "verdict": "reject",
+  "reason": "Replaces the guide's own pairing of Individual/Patient as actor with the platform; contradicts the actor list and D-2 keep; raise as glossary feedback instead."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2157",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2249",
+  "verdict": "revise",
+  "replace": "social needs",
+  "reason": "Self-identified, patient-prioritized needs are social needs per the glossary; social risks would misstate it."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2326",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2462",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@2519",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3070",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3202",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3327",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3393",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3418",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3502",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@3571",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@4941",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@5063",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6090",
+  "verdict": "reject",
+  "reason": "Community Resource Platform is a page-defined actor label (bold, defined at line 33) used throughout; partial rename in a SHALL leaves inconsistency."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6221",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6296",
+  "verdict": "reject",
+  "reason": "Would read \"Patient resource for the patient\"; D-2 B allows individual."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6430",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6698",
+  "verdict": "reject",
+  "reason": "Community Resource Platform is a page-defined actor label used throughout; partial rename leaves inconsistency."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@6871",
+  "verdict": "reject",
+  "reason": "Would read \"Patient resource for the patient\"; D-2 B allows individual."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@7336",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@7988",
+  "verdict": "confirm",
+  "reason": "Term used against glossary; replacement reads correctly in context."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@8650",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ },
+ {
+  "key": "input/pagecontent/self_referral.md@8708",
+  "verdict": "reject",
+  "reason": "Self-referral/enrollment context: D-2 option B keeps person/individual wording here (recommended: keep)."
+ }
+]
