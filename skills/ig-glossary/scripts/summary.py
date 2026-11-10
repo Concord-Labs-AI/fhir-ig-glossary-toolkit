@@ -144,8 +144,9 @@ def build_html(doc, book, themes, counts, coverage, cfg):
                + [(f"Change class: {c}", n) for c, n in Counter(r["change_class"] for r in rows).most_common()]
                + [(f"Confidence: {c}", n) for c, n in Counter(r["confidence"] for r in rows).most_common()])]
     if ident_rows:
-        pending = f"counted among the pending rows (decision {e(ident_decision)}) and are " if ident_decision else ""
-        p.append(f"<p><i>The {len(ident_rows)} Identifier rows are artifact names; they are {pending}reported, "
+        is_, names = ("is", "an artifact name; it") if len(ident_rows) == 1 else ("are", "artifact names; they")
+        counted = f"counted among the pending rows (decision {e(ident_decision)}) and {is_} " if ident_decision else ""
+        p.append(f"<p><i>The {count(len(ident_rows), 'Identifier row')} {is_} {names} {is_} {counted}reported, "
                  "not edited.</i></p>")
     if decisions:
         gated = Counter(r["decision"] for r in rows if r["decision"])
