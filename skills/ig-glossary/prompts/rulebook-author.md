@@ -1,6 +1,6 @@
 # Glossary alignment — write the rulebook
 
-You are writing `{{run_dir}}/rulebook.yaml` for **{{ig_name}}** ({{tag}}). Read the glossary page `{{snapshot}}/{{glossary_page}}` in full, then skim the guide's main narrative pages under `{{snapshot}}/input/pagecontent/` to see how the terms are actually used. Use the example rulebooks in `{{examples}}/` (one directory per worked example) as the model for shape and tone; copy its structure, not its content.
+You are writing `{{run_dir}}/rulebook.yaml` for **{{ig_name}}** ({{tag}}). Read the glossary page `{{snapshot}}/{{glossary_page}}` in full, then skim the guide's main narrative pages under `{{snapshot}}/input/pagecontent/` or `{{snapshot}}/input/pages/` to see how the terms are actually used. Use the example rulebooks in `{{examples}}/` (one directory per worked example) as the model for shape and tone; copy its structure, not its content.
 
 For **every glossary term**, write an entry:
 

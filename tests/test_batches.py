@@ -19,6 +19,13 @@ def test_directories_never_share_a_packet_and_follow_a_fixed_order():
                                                    ["input/images-source/d.plantuml"]]
 
 
+def test_input_pages_and_intro_notes_get_packets_after_pagecontent_not_other():
+    s = {"misc/z.md": 10, "input/intro-notes/X-intro.md": 10, "input/pages/a.md": 10, "input/pagecontent/b.md": 10}
+    plan = gb.plan_batches(s, target_chars=1000, overrides=[])
+    assert [e["title"] for e in plan.values()] == ["input/pagecontent: b.md", "input/pages: a.md",
+                                                   "input/intro-notes: X-intro.md", "other: z.md"]
+
+
 def test_oversize_file_gets_a_packet_of_its_own():
     s = {"input/fsh/instances/small.fsh": 100, "input/fsh/instances/huge.fsh": 5000, "input/fsh/instances/tiny.fsh": 50}
     plan = gb.plan_batches(s, target_chars=1000, overrides=[])

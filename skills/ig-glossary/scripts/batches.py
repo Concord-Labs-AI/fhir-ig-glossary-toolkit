@@ -10,8 +10,8 @@ import config
 from common import LOCKED_CLASSES, read_jsonl
 
 # Directories are packed in this order and never share a packet; a file not under any of them goes last.
-GROUP_ORDER = ["input/pagecontent", "input/includes", "input/fsh/profiles", "input/fsh/extensions",
-               "input/fsh/valuesets", "input/fsh/codesystems", "input/fsh/instances", "input/fsh",
+GROUP_ORDER = ["input/pagecontent", "input/pages", "input/intro-notes", "input/includes", "input/fsh/profiles",
+               "input/fsh/extensions", "input/fsh/valuesets", "input/fsh/codesystems", "input/fsh/instances", "input/fsh",
                "input/resources", "input/images-source", "input/images", "input/data"]
 
 
