@@ -1,0 +1,109 @@
+# Text labels of raster figures referenced by published STU 3.0 pages, transcribed by eye
+# (reading order: top-to-bottom, left-to-right). Diagram = Gravity-authored artwork;
+# External = third-party graphic or screenshot of generated/US Core content.
+
+- image: input/images/GravityProjectModel.png
+  change_class: Diagram
+  text:
+    - "Proposed Activities for Gravity Project Model*"
+    - "ASSESSMENT OF SOCIAL CONDITIONS AND CONTEXT"
+    - "Comprehensive Assessment"
+    - "Social Condition Determination"
+    - "Identify Goals of Care"
+    - "Using Standardized Instruments and Observation Methods"
+    - "SOCIAL AND CLINICAL CARE COORDINATION"
+    - "Shared Care Planning"
+    - "Data Sharing for Service Delivery"
+    - "INTERVENTIONS AND SERVICE DELIVERY"
+    - "Referral to Social Care"
+    - "Service Provision"
+    - "Authorization and Payment for Services"
+    - "MEASURING AND REPORTING"
+    - "Change in Social Condition"
+    - "Data Aggregation"
+    - "Screening and Intervention Process"
+    - "Status of Interventions"
+    - "Patient Experience of Care"
+    - "Progress Toward Goals"
+    - "Social Risk Stratification"
+    - "Tracking Referrals to Completion"
+    - "*Activities that may be addressed through standards development. This diagram does not imply sequence, workflow, or any specific standard."
+
+- image: input/images/GravityProject.png
+  change_class: Diagram
+  text:
+    - "Workstreams: Terminology, Technical, Implementation"
+    - "Data Set Identification"
+    - "Coding Gap Analysis & Recommendations"
+    - "New Code Submissions"
+    - "Publication in NLM VSAC & ONC ISA"
+    - "Terminology (SDOH Domains)"
+    - "CODED VALUE SETS"
+    - "Technical"
+    - "Community & FHIR Coordination"
+    - "FHIR IG Development"
+    - "FHIR Implementation Guide (IG) Testing"
+    - "FHIR IG Ballot & Publication"
+    - "Implementation (Testing, Pilots, Adoption)"
+    - "1 National Library of Medicine Value Set Authority Center (NLM VSAC)"
+    - "2 Office of the National Coordinator for Health Information Technology Interoperability Standards Advisory (ONC ISA)"
+
+- image: input/images/VSACValueSets-ConditionExample.png
+  change_class: Diagram
+  text:
+    - "Gravity Value Set Development Process and Bindings for Condition.code for SDOHCC Condition"
+    - "Gravity-Authored VSAC Value Sets"
+    - "US Core Value Set"
+    - "Domain, profile, and code system-specific value set"
+    - "Domain and profile-specific value set (= Additional Bindings for SDOHCC Condition.code)"
+    - "Profile-specific value set (SDOH Grouping value set)"
+    - "(= Binding for SDOHCC Condition.code)"
+    - "Food Insecurity Diagnoses ICD10CM"
+    - "Food Insecurity Diagnoses SNOMED CT"
+    - "Food Insecurity Diagnoses"
+    - "Inadequate Housing Diagnoses ICD10CM"
+    - "Inadequate Housing Diagnoses SNOMED CT"
+    - "Inadequate Housing Diagnoses"
+    - "Additional Domain-specific Diagnoses ICD10CM"
+    - "Additional Domain-specific Diagnoses SNOMED CT"
+    - "Additional Domain-specific Diagnoses"
+    - "Social Determinants of Health Conditions"
+    - "US Core Condition Codes"
+
+- image: input/images/SDOHConditionExample.png
+  change_class: External
+  text:
+    - "Identification of the condition, problem or diagnosis"
+    - "Binding: US Core Condition Code (required): Valueset to describe the actual problem experienced by the patient"
+    - "Additional Bindings | Purpose | Usage"
+    - "Digital Access Diagnoses | Extensible Binding | Condition.category: digital-access"
+    - "Digital Literacy Diagnoses | Extensible Binding | Condition.category: digital-literacy"
+    - "Less than high school education Diagnoses | Extensible Binding | Condition.category: educational-attainment"
+    - "Elder Abuse Diagnoses | Extensible Binding | Condition.category: elder-abuse"
+    - "Unemployment Diagnoses | Extensible Binding | Condition.category: employment-status"
+    - "Financial Insecurity Diagnoses | Extensible Binding | Condition.category: financial-insecurity"
+    - "Food Insecurity Diagnoses | Extensible Binding | Condition.category: food-insecurity"
+
+- image: input/images/Whatgoesintoyourhealth.jpg
+  change_class: External
+  text:
+    - "Socioeconomic Factors 40%: Education, Job Status, Family/Social Support, Income, Community Safety"
+    - "Physical Environment 10%"
+    - "Health Behaviors 30%: Tobacco Use, Diet & Exercise, Alcohol Use, Sexual Activity"
+    - "Health Care 20%: Access to Care, Quality of Care"
+
+- image: input/images/CBO.png
+  change_class: Diagram
+  text: []
+
+- image: input/images/CoordinationPlatform.png
+  change_class: Diagram
+  text: []
+
+- image: input/images/Patient.png
+  change_class: Diagram
+  text: []
+
+- image: input/images/Provider.png
+  change_class: Diagram
+  text: []

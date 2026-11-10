@@ -1,0 +1,1188 @@
+# Term rulebook for the STU 3.1 glossary alignment analysis.
+# Rules flag CANDIDATES (favoring recall); agents judge each hit in context.
+# Types: canonical (correct use, counted) | missed-use (variant that should become the term)
+#        misuse-signal (likely use against the definition) | form (right term, wrong form).
+# Rules carrying a decision are held 'pending' until that D-n item is decided.
+
+version: draft-2 (2026-10-26)
+snapshot: IG tag 3.0.0
+identifier_decision: D-10
+domain_notes: |
+  System actions. Only two kinds of system action count as Misuse: one done by the intermediary (that belongs
+  to its coordination platform) and one done by a provider (that belongs to the referral source's system;
+  decision D-8). The glossary names no system actor for the referral source or referral target. So when they
+  "send", "query", "populate" or "return" something, leave the text alone. Don't rewrite it as "the referral
+  target's system". If it seems worth raising, add one glossary_feedback note for the pattern rather than a
+  finding per sentence.
+
+  "Requester", "performer", "owner". Bare, these usually name a FHIR role (Task.requester, Task.owner): leave
+  them. Change one to "referral source" or "referral target" only when it is clearly shorthand for a referral
+  requester or recipient named earlier in the same paragraph. Mark those Medium.
+
+  Linking terms to the glossary is decision D-3 and is not a finding.
+decisions:
+- id: D-1
+  title: Social care vs social services
+  question: The glossary names 'Social care program' and 'Social care network (SCN)' and uses 'social care service'
+    in the Capacity definition; an alternative is 'social services / social service providers'. What does 3.1
+    propagate?
+  options:
+  - 'A: Propagate the glossary as written (''social care'' wording stays)'
+  - 'B: Revise the glossary terms to ''social service(s)'' wording first, then propagate'
+  - 'C: Keep the two defined term names for 3.1; use ''social services'' wherever prose says ''social care'' generically'
+  recommendation: C — defined terms carry citations and can be renamed deliberately later; generic prose can move
+    now without touching them.
+- id: D-2
+  title: Patient vs person / individual / client
+  question: The glossary defines Patient broadly ('a consumer, or client, who is the subject of care … does not
+    necessarily imply a clinical context'). Strictly applied, every 'individual' (~156), 'person' (~62), 'consumer'
+    and person-sense 'client' becomes a missed use of 'patient' — but the self-referral and enrollment pages use
+    'person', and 'client' already means software in ~40 places.
+  options:
+  - 'A: Standardize on ''patient'' everywhere (strict glossary)'
+  - 'B: ''Patient'' for the FHIR Patient and clinical workflows; ''person''/''individual'' allowed in self-referral
+    and social-service contexts; ''client'' reserved for software — and revise the Patient definition to match'
+  - 'C: Leave person-reference wording as-is for 3.1'
+  recommendation: B — it matches how the guide already reads in self-referral/enrollment and removes the 'client'
+    double meaning; needs a one-line glossary edit.
+- id: D-3
+  title: Link first use of glossary terms
+  question: No page links glossary terms to the glossary. Should 3.1 link the first use of each glossary term on
+    each page?
+  options:
+  - 'A: Yes — first use per page'
+  - 'B: Only the referral-actor terms (source, target, intermediary, CP, direct/indirect referral)'
+  - 'C: No links'
+  recommendation: A — cheap, mechanical, and makes every later wording fix land with its definition one click away.
+- id: D-4
+  title: HRSN vs social risk
+  question: The glossary says Social risk is 'equivalent to health-related social needs, or HRSN'. The guide uses
+    'HRSN' ~62 times (mostly the assessment-instrument page) and 'health-related social need(s)' ~15 times.
+  options:
+  - 'A: Replace HRSN with ''social risk'' throughout'
+  - 'B: Use ''social risk'' in the guide''s own prose; keep ''HRSN'' only inside external proper names (e.g., the
+    AHC HRSN Screening Tool) and note the equivalence on first use'
+  - 'C: Keep HRSN; add it to the glossary as a synonym entry'
+  recommendation: B — honors the glossary while leaving CMS program/instrument names intact.
+- id: D-5
+  title: SDOH domain vs SDOH category
+  question: The glossary defines 'SDOH domain'; FHIR artifacts code the same idea as 'SDOH category' (Condition.category,
+    the SDOH Category value set and code displays — identifiers). Prose uses 'SDOH domain' ~64 times and 'SDOH category'
+    ~103.
+  options:
+  - 'A: ''SDOH domain'' for the concept in prose; ''SDOH category'' only when naming the coded element or value
+    set — and add that sentence to the glossary entry'
+  - 'B: Adopt ''SDOH category'' everywhere and revise the glossary term'
+  - 'C: Treat them as synonyms; no change'
+  recommendation: A — keeps the glossary term, explains the artifact naming, and avoids breaking identifiers.
+- id: D-6
+  title: CBO vs social service organization (how far to propagate)
+  question: STU 3.0 introduced 'social service organization' as the inclusive term and its index STU note deferred
+    broader adoption to future versions. 'CBO' still appears ~197 times, usually as the generic referral target.
+  options:
+  - 'A: Use ''social service organization'' wherever the generic referral target is meant; keep ''CBO'' only where
+    community-based specifically is meant or in named examples; update diagrams together'
+  - 'B: Keep CBO as the illustrative referral target for 3.1'
+  - 'C: Swap every CBO'
+  recommendation: A — completes the STU-note pivot, which is exactly the propagation 3.1 is for; B leaves the note's
+    promise unmet.
+- id: D-7
+  title: '''Screening'' as an activity word'
+  question: The glossary has no 'screening' entry; STU 3.0 moved to 'standardized assessment instrument'. 'Screening'
+    still appears ~119 times — some in artifact names (Observation Screening Response profile, LOINC panel names),
+    most in the guide's own prose.
+  options:
+  - 'A: Replace ''screening'' in the guide''s own prose with ''assessment'' / ''standardized assessment instrument'';
+    leave artifact and external names'
+  - 'B: Keep ''screening'' where it describes the clinical activity; only fix ''screening tool/instrument'''
+  - 'C: No change'
+  recommendation: A — consistent with the STU 3.0 terminology shift; names are reported, not changed.
+- id: D-8
+  title: 'Provider: person or organization?'
+  question: 'The glossary defines Provider as a person, but its own Referral source, Direct referral and Indirect
+    referral entries use ''health care provider'' as the example organization, and diagrams label the referral source
+    system ''Actor: Provider''.'
+  options:
+  - 'A: Keep Provider = person; change organization examples to ''health care organization'' (glossary + prose +
+    diagram actor labels)'
+  - 'B: Broaden the Provider definition to include organizations'
+  - 'C: Leave as-is'
+  recommendation: A — the glossary already defines Health care organization; this removes a self-contradiction.
+- id: D-9
+  title: 'Glossary gaps: heavily used concepts with no entry'
+  question: 'Several concepts are used throughout the guide but have no glossary entry (counts in the N- entries
+    below): referral, self-referral, intervention, health information exchange (HIE), EHR as an acronym, SDOH category,
+    HRSN, and ''assessment instrument'' (the guide also defines non-standardized instruments, so the unqualified
+    phrase is a broader concept than the glossary term).'
+  options:
+  - 'A: Add entries for referral, self-referral, and intervention; add see-also notes for SDOH category and HRSN'
+  - 'B: Add all listed'
+  - 'C: No new entries in 3.1'
+  recommendation: A — the referral concepts are core to the guide; the rest are better handled as notes on existing
+    entries.
+- id: D-10
+  title: Identifier-level misalignments
+  question: 'Some artifact names and ids embed retired or non-glossary wording: the SDOHCC Referral Recipient CapabilityStatements,
+    the SDOHCC Observation Screening Response profile, the SDOH Category code system. Renaming is a breaking change.
+    Changing only the titles is non-breaking, but a changed artifact title needs a matching pull request to
+    HL7/JIRA-Spec-Artifacts (the dry run''s only new QA warning).'
+  options:
+  - 'A: Do not rename in 3.1; align titles/descriptions where non-breaking and explain the legacy names once (e.g.,
+    in an STU note)'
+  - 'B: Rename now with redirects/versioning'
+  - 'C: Leave entirely'
+  recommendation: A — keeps 3.1 non-breaking while making the mismatch visible to implementers.
+# D-11..D-13 come from the reading agents' glossary feedback (Part 2); no finding is gated on them.
+- id: D-11
+  title: No system actor for the referral source and referral target
+  question: 'The glossary names a system actor only for the intermediary (its coordination platform). The referral
+    source and referral target are organizations, so pages, diagrams and all four CapabilityStatements give them system
+    actions (''the referral target populates ... and returns it'') or invent names (''service delivery system'',
+    ''a fulfilling system''). Raised independently by 8 of the 12 reading batches; no findings were written for it.'
+  options:
+  - 'A: Add a glossary note that in technical artifacts (CapabilityStatements, diagrams, conformance statements) the
+    role names stand for the system each organization operates'
+  - 'B: Define system-actor terms for both sides (e.g., referral source system, referral target system) and use them
+    wherever a system acts'
+  - 'C: Leave as-is'
+  recommendation: A — one sentence settles hundreds of sentences without rewriting normative text; B is cleaner but
+    touches most SHALL/SHOULD statements in the CapabilityStatements.
+- id: D-12
+  title: Referral definitions vs light targets and chained referrals
+  question: 'The Direct and Indirect referral entries require every party to have a FHIR server API, so the guide''s
+    Direct/Indirect Referral Light use cases (a referral target with only a FHIR client app) fit neither definition. The
+    guide also describes chained referrals (a referral target that onward-refers, coordination platforms chained to each
+    other), while the glossary treats referral source and target as fixed roles and the CP entry covers only routing
+    from health care to social service organizations.'
+  options:
+  - 'A: Loosen the Direct/Indirect referral definitions to cover light targets, and add a note that source/target roles
+    are assigned per referral'
+  - 'B: Add separate entries for the light variants and for chained referrals'
+  - 'C: Leave the definitions as written'
+  recommendation: A — the light use cases are first-class workflows in the guide; a definition that excludes them
+    misleads implementers.
+- id: D-13
+  title: What 'standardized' means for an assessment instrument
+  question: 'Tables 2 and 3 on the assessment instrument page treat ''standardized'' as ''LOINC-encoded'' (an instrument
+    not in LOINC is ''non-standardized''). The glossary defines a standardized assessment instrument by validity,
+    reliability and replicability, with no mention of LOINC, so a validated instrument not yet in LOINC is standardized
+    by the glossary but non-standardized by the tables. The unqualified ''assessment instrument'' the guide also needs has
+    no entry (see D-9).'
+  options:
+  - 'A: Keep the glossary definition; relabel the tables'' axis as LOINC-encoded vs not'
+  - 'B: Add LOINC encoding to the glossary definition'
+  - 'C: Leave as-is'
+  recommendation: A — the glossary follows the field's meaning of 'standardized'; LOINC encoding is a separate property.
+terms:
+- id: T-ACH
+  glossary_term: Accountable community for health
+  definition: A multisector, community-based partnership that brings together health care, public health, social
+    services, other local partners, and residents to address the unmet health and social needs of the individuals
+    and communities they serve
+  rules:
+  - id: R-ACH-CANON
+    type: canonical
+    pattern: \baccountable\s+communit(y|ies)\s+for\s+health\b|\bACHs?\b
+- id: T-BA
+  glossary_term: Business associate
+  definition: A person or entity that performs certain functions or activities that involve the use or disclosure
+    of protected health information on behalf of, or provides services to, a covered entity. A member of the covered
+    entity's workforce is not a business associate.
+  rules:
+  - id: R-BA-CANON
+    type: canonical
+    pattern: \bbusiness\s+associates?\b
+  - id: R-BA-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Business Associates?\b
+    suggest: business associate
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-CAP
+  glossary_term: Capacity
+  definition: A social service organization's (e.g., a CBO's) ability to accept and serve a new individual for a
+    social care service it offers. In this guide, capacity is a point-in-time judgment of whether the social service
+    organization can take on a new referral for that service. It is an assessment of general operational bandwidth,
+    separate from whether an individual ultimately meets specific eligibility criteria or has complex needs that
+    require a more detailed intake review.
+  rules:
+  - id: R-CAP-CANON
+    type: canonical
+    pattern: \bcapacity\b(?!\s+status)
+  - id: R-CAP-OTHER
+    type: misuse-signal
+    pattern: \bin\s+(the|their|a|an|its|this)\s+capacity\b|\bcapacity\s+as\b
+    note: '''capacity'' in a different sense (role) next to the defined term; may confuse.'
+  - id: R-CAP-AVAIL
+    type: missed-use
+    pattern: \bavailability\b
+    suggest: capacity
+    note: May mean the defined concept.
+- id: T-CAPS
+  glossary_term: Capacity status
+  definition: A standardized, coded indicator reflecting whether a social service organization (e.g., a CBO) currently
+    has the operational bandwidth to receive and review new referrals for a specific service. A status of "has capacity"
+    signals to referring sources that the program is open to new requests, but does not guarantee individual eligibility,
+    a perfect match for complex needs, or immediate enrollment. See the SDOHCC Capacity Status value set for the
+    allowed states.
+  rules:
+  - id: R-CAPS-CANON
+    type: canonical
+    pattern: \bcapacity\s+status(es)?\b
+  - id: R-CAPS-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Capacity Status(es)?\b
+    suggest: capacity status
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-CC
+  glossary_term: Care coordinator
+  definition: One who organizes an individual's care across multiple providers.
+  rules:
+  - id: R-CC-CANON
+    type: canonical
+    pattern: \bcare\s+coordinators?\b
+  - id: R-CC-ACTOR
+    type: misuse-signal
+    pattern: Actor:\s*Care\s+Coordinator
+    note: 'Glossary: a care coordinator is a person; diagrams use it as the intermediary''s system actor.'
+  - id: R-CC-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Care Coordinators?\b
+    suggest: care coordinator
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-CLOSED
+  glossary_term: Closed system
+  definition: A system in which the referral source, intermediary, and referral target all use the same system or
+    platform. In this environment, capacity status, if shared, is known without the need for a standards-based exchange.
+    Closed systems are out of scope for this guide.
+  rules:
+  - id: R-CLOSED-CANON
+    type: canonical
+    pattern: \bclosed\s+systems?\b
+  - id: R-CLOSED-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Closed Systems?\b
+    suggest: closed system
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-CBO
+  glossary_term: Community-based organization (CBO)
+  definition: A public or private nonprofit organization that is representative of a community or a significant
+    segment of a community and works to meet community needs. Ideally, Community-Based Organizations are driven
+    by community residents in all aspects, aligned with the principles of the National Community-Based Organization
+    Network.
+  acronym: CBO
+  rules:
+  - id: R-CBO-CANON
+    type: canonical
+    pattern: \b[Cc]ommunity-based [Oo]rgani[sz]ations?\b|\bCBOs?\b
+    case_sensitive: true
+  - id: R-CBO-HYPHEN
+    type: form
+    pattern: \bcommunity\s+based\b
+    suggest: community-based
+    note: Glossary spells the term hyphenated.
+  - id: R-CBO-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Community[\s-]Based Organi[sz]ations?\b
+    suggest: community-based organization
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-COMPA
+  glossary_term: Comprehensive assessment
+  definition: A robust assessment of social, physical, emotional, and ecosystem context to identify risks, needs,
+    strengths, and supports toward the aim of establishing priorities and goals.
+  rules:
+  - id: R-COMPA-CANON
+    type: canonical
+    pattern: \bcomprehensive\s+assessments?\b
+  - id: R-COMPA-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Comprehensive Assessments?\b
+    suggest: comprehensive assessment
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-CP
+  glossary_term: Coordination platform (CP) (aka community resource referral platform)
+  definition: A technology platform that enables health care organizations to identify, search, and electronically
+    refer patients to community-based social service organizations in order to address unmet social needs. Some
+    community resource referral platforms also enable self-referral.
+  acronym: CP
+  rules:
+  - id: R-CP-CANON
+    type: canonical
+    pattern: \b[Cc]oordination [Pp]latforms?\b|\bCPs?\b|\bcommunity resource referral platforms?\b
+    case_sensitive: true
+  - id: R-CP-CRP
+    type: missed-use
+    pattern: \bcommunity[\s-]+resource[\s-]+platforms?\b
+    suggest: coordination platform (CP)
+    note: 'Self-referral page''s name for the CP (glossary: aka community resource referral platform).'
+  - id: R-CP-REFPLAT
+    type: missed-use
+    pattern: (?<!resource\s)\breferral\s+platforms?\b
+    suggest: coordination platform (CP)
+    note: Generic 'referral platform' for the glossary's coordination platform.
+  - id: R-CP-ASORG
+    type: misuse-signal
+    pattern: \b(CPs?|coordination\s+platforms?)\b(?=[^.|]{0,40}\b(staff|decides?|contacts?|calls?|agrees?|employs?|works?\s+with)\b)
+    note: 'Glossary: the CP is a system actor; organizational actions belong to the intermediary.'
+  - id: R-CP-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Coordination Platforms?\b
+    suggest: coordination platform
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-CE
+  glossary_term: Covered entity
+  definition: Health plans, health care clearinghouses, and health care providers who electronically transmit any
+    health information in connection with transactions for which HHS has adopted standards.
+  rules:
+  - id: R-CE-CANON
+    type: canonical
+    pattern: \bcovered\s+entit(y|ies)\b
+  - id: R-CE-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Covered Entit(y|ies)\b
+    suggest: covered entity
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-DIRECT
+  glossary_term: Direct referral
+  definition: A referral between a referral source (e.g., health care provider) and a referral target (e.g., a social
+    service organization such as a CBO) where both entities have FHIR server APIs and an intermediary using a coordination
+    platform (CP) is not involved in the referral.
+  rules:
+  - id: R-DIRECT-CANON
+    type: canonical
+    pattern: \bdirect\s+referrals?\b
+  - id: R-DIRECT-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Direct Referrals?\b
+    suggest: direct referral
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-EHR
+  glossary_term: Electronic health record system
+  definition: A set of technical components — including rules and procedures, processing and storage devices, and
+    communication and support facilities — whose core function is to capture, store, retrieve, display, and exchange
+    health-related information across authorized users, settings, and systems.
+  acronym: EHR
+  rules:
+  - id: R-EHR-CANON
+    type: canonical
+    pattern: \belectronic\s+health\s+records?(\s+systems?)?\b|\bEHRs?\b
+  - id: R-EHR-EMR
+    type: missed-use
+    pattern: \bEMRs?\b|\belectronic\s+medical\s+records?\b
+    suggest: EHR / electronic health record system
+    note: Glossary term is electronic health record system.
+- id: T-HCO
+  glossary_term: Health care organization
+  definition: An organization that provides health care services to individuals, including hospitals, nursing care
+    facilities, home health agencies, and clinics. Health care organizations can be organized as governmental, not-for-profit,
+    or commercial entities. If the health care entity is financially accountable to a primary government, it could
+    be classified as a component unit of the government.
+  rules:
+  - id: R-HCO-CANON
+    type: canonical
+    pattern: \bhealth\s*care\s+organi[sz]ations?\b
+  - id: R-HCO-VAR
+    type: missed-use
+    pattern: \bhealth\s+systems?\b|\bprovider\s+organi[sz]ations?\b|\bclinical\s+organi[sz]ations?\b
+    suggest: health care organization
+  - id: R-HCO-SPELL
+    type: form
+    pattern: \bhealthcare\b(?!\s+[Ss]ervice)
+    suggest: health care
+    note: Glossary spells 'health care' as two words (excludes the HealthcareService resource).
+  - id: R-HCO-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Health[\s]?[Cc]are Organi[sz]ations?\b
+    suggest: health care organization
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-HYBRID
+  glossary_term: Hybrid system
+  definition: A system in which some trading partners use the same system, while others use different systems. An
+    agreed-upon exchange method (e.g., FHIR) is still necessary to communicate capacity status across the disparate
+    system boundaries. Hybrid systems are in scope.
+  rules:
+  - id: R-HYBRID-CANON
+    type: canonical
+    pattern: \bhybrid\s+systems?\b
+  - id: R-HYBRID-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Hybrid Systems?\b
+    suggest: hybrid system
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-INDIRECT
+  glossary_term: Indirect referral
+  definition: A referral between a referral source (e.g., health care provider) and a referral target (e.g., a social
+    service organization such as a CBO) that involves an intermediary using a coordination platform (CP) and all
+    entities have FHIR server APIs.
+  rules:
+  - id: R-INDIRECT-CANON
+    type: canonical
+    pattern: \bindirect\s+referrals?\b
+  - id: R-INDIRECT-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Indirect Referrals?\b
+    suggest: indirect referral
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-INT
+  glossary_term: Intermediary
+  definition: An organizational actor that sits between a referral source and a referral target to facilitate and
+    coordinate the referral (for example, a community care hub). It typically operates a coordination platform (CP)
+    — the system actor that relays data between the source's and target's system actors — though some intermediaries
+    instead coordinate referrals manually (e.g., by email or spreadsheet) rather than through a CP.
+  rules:
+  - id: R-INT-CANON
+    type: canonical
+    pattern: \bintermediar(y|ies)\b
+  - id: R-INT-SYSTEM
+    type: misuse-signal
+    pattern: \bintermediar(y|ies)\b(?=[^.|]{0,60}\b(POSTs?|GETs?|PUTs?|quer(y|ies|ying)|subscri\w*|poll\w*|servers?|endpoints?|APIs?|clones?|proxies|creates?\s+(a\s+)?(Task|ServiceRequest)))
+    note: 'Glossary: the intermediary is the organization; system actions (POST, query, subscribe, create Task)
+      belong to its coordination platform.'
+  - id: R-INT-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Intermediar(y|ies)\b
+    suggest: intermediary
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-OPEN
+  glossary_term: Open system
+  definition: A system in which the referral source, intermediary, and referral target each use disparate systems
+    that cannot natively interoperate. To share information like capacity status, an agreed-upon exchange method
+    (e.g., FHIR) is required. Open systems are in scope for this guide.
+  rules:
+  - id: R-OPEN-CANON
+    type: canonical
+    pattern: \bopen\s+systems?\b
+  - id: R-OPEN-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Open Systems?\b
+    suggest: open system
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-PAT
+  glossary_term: Patient
+  definition: A consumer, or client, who is the subject of care, including assessment, goal identification, referrals,
+    and service provision. Use of the term in this IG does not necessarily imply a clinical context.
+  rules:
+  - id: R-PAT-CANON
+    type: canonical
+    pattern: \bpatients?\b
+  - id: R-PAT-INDIV
+    type: missed-use
+    pattern: \bindividuals?\b(?!\s+(components?|levels?|elements?|values?|questions?|answers?|items?|fields?|observations?|resources?|codes?|records?|entries|entry|responses?|data|panels?))
+    suggest: patient
+    decision: D-2
+    note: Person reference other than the glossary term.
+  - id: R-PAT-PERSON
+    type: missed-use
+    pattern: (?<!Related\s)\bpersons?\b(?!al)
+    suggest: patient
+    decision: D-2
+  - id: R-PAT-CONSUMER
+    type: missed-use
+    pattern: \bconsumers?\b
+    suggest: patient
+    decision: D-2
+  - id: R-PAT-SUBJ
+    type: missed-use
+    pattern: \bsubjects?\s+of\s+care\b
+    suggest: patient
+    decision: D-2
+  - id: R-PAT-CLIENT
+    type: missed-use
+    pattern: \bclients?\b(?!\s*(systems?|applications?|apps?|side|servers?|software|credentials?|ids?)\b)
+    suggest: patient (person sense) — or keep for software
+    decision: D-2
+    note: '''client'' is used for both the person and REST clients.'
+- id: T-PF
+  glossary_term: Protective factors
+  definition: Characteristics or strengths of individuals, families, communities or societies that act to mitigate
+    risks and promote positive well-being and healthy development
+  rules:
+  - id: R-PF-CANON
+    type: canonical
+    pattern: \bprotective\s+factors?\b
+  - id: R-PF-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Protective Factors?\b
+    suggest: protective factor
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-PROV
+  glossary_term: Provider
+  definition: A person such as a licensed provider or qualified professional who interacts with the patient to assess
+    social risks, set goals, and determine/recommend referrals.
+  rules:
+  - id: R-PROV-CANON
+    type: canonical
+    pattern: \bproviders?\b
+  - id: R-PROV-SYSTEM
+    type: misuse-signal
+    pattern: \bproviders?\b(?=[^.|]{0,60}\b(POSTs?|GETs?|PUTs?|quer(y|ies|ying)|subscri\w*|poll\w*|servers?|endpoints?|APIs?|clones?|proxies|creates?\s+(a\s+)?(Task|ServiceRequest)))
+    decision: D-8
+    note: 'Glossary: a provider is a person; system actions belong to the referral source''s system.'
+  - id: R-PROV-ACTOR
+    type: misuse-signal
+    pattern: Actor:\s*Provider
+    decision: D-8
+    note: Diagram labels a system actor 'Provider' (a person per the glossary).
+  - id: R-PROV-ORGEX
+    type: misuse-signal
+    pattern: \bhealth\s*care\s+providers?\b
+    decision: D-8
+    note: '''Health care provider'' used as the example referral source organization.'
+- id: T-PHO
+  glossary_term: Public health organization
+  definition: An organization that works to create the conditions in which people can live healthy lives, including
+    activities to prevent disease and injury and promote health for the population at large. They include governmental
+    public health agencies working at local, state, and federal levels, as well as nongovernmental organizations
+    that contribute to the performance of core public health functions. A defining feature of public health systems
+    is their focus on actions designed to protect and improve health at a population level rather than purely at
+    an individual level through the delivery of personal health services.
+  rules:
+  - id: R-PHO-CANON
+    type: canonical
+    pattern: \bpublic\s+health\s+organi[sz]ations?\b
+  - id: R-PHO-VAR
+    type: missed-use
+    pattern: \bpublic\s+health\s+(agenc(y|ies)|departments?)\b
+    suggest: public health organization
+- id: T-RS
+  glossary_term: Referral source
+  definition: An organizational actor that initiates a referral to address an individual's social risk or protective
+    factor (for example, a health care provider; or, in self-referral, the organization operating the community
+    resource referral platform the individual uses to refer themselves). It operates the system actor that sends
+    the referral and receives its status and results back.
+  rules:
+  - id: R-RS-CANON
+    type: canonical
+    pattern: \breferral\s+sources?\b
+  - id: R-RS-REFERRING
+    type: missed-use
+    pattern: \breferring\s+(organi[sz]ations?|providers?|entit(y|ies)|part(y|ies)|systems?|clinicians?)\b
+    suggest: referral source
+  - id: R-RS-REQUESTER
+    type: missed-use
+    pattern: \breferral\s+requesters?\b
+    suggest: referral source
+  - id: R-RS-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Referral Sources?\b
+    suggest: referral source
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-RT
+  glossary_term: Referral target
+  definition: An organizational actor that receives a referral requesting a service or assessment (for example,
+    a social service organization such as a CBO). It operates the system actor that receives the referral and returns
+    its status and results.
+  rules:
+  - id: R-RT-CANON
+    type: canonical
+    pattern: \breferral\s+targets?\b
+  - id: R-RT-RECIP
+    type: missed-use
+    pattern: \breferral[\s-]+recipients?\b
+    suggest: referral target
+    note: Ballot-era synonym; glossary names this role 'referral target'.
+  - id: R-RT-BARE
+    type: missed-use
+    pattern: (?<!referral[\s-])\brecipients?\b
+    suggest: referral target
+    note: Bare 'recipient' standing for the referral target.
+  - id: R-RT-RECEIVING
+    type: missed-use
+    pattern: \breceiving\s+(organi[sz]ations?|entit(y|ies)|part(y|ies))\b
+    suggest: referral target
+  - id: R-RT-SVCPROV
+    type: missed-use
+    pattern: (?<!social\s)\bservice\s+providers?\b
+    suggest: referral target
+  - id: R-RT-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Referral Targets?\b
+    suggest: referral target
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-DOMAIN
+  glossary_term: SDOH domain
+  definition: A high-level classification under which the value sets for specific social risks and protective factors
+    are categorized, including but not limited to standardized assessment instruments, diagnoses, goals, and interventions.
+    Examples include food insecurity, protective factors, and community access to green space.
+  rules:
+  - id: R-DOMAIN-CANON
+    type: canonical
+    pattern: \bSDOH\s+domains?\b
+  - id: R-DOMAIN-CAT
+    type: missed-use
+    pattern: \bSDOH\s+categor(y|ies)\b
+    suggest: SDOH domain
+    decision: D-5
+    note: Same concept as the glossary's SDOH domain; coded element is named 'category'.
+  - id: R-DOMAIN-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)SDOH Domains?\b
+    suggest: SDOH domain
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-SCN
+  glossary_term: Social care network (SCN)
+  definition: An outgrowth of the accountable health communities model, social care networks are coalitions of social
+    service, public health, and health care providers and other organizations that are connected through standards-supported
+    data exchange to enable sustainable partnerships and efficient, measurable outcomes related to SDOH.
+  acronym: SCN
+  decision: D-1
+  rules:
+  - id: R-SCN-CANON
+    type: canonical
+    pattern: \bsocial\s+care\s+networks?\b|\bSCNs?\b
+  - id: R-SCN-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Social Care Networks?\b
+    suggest: social care network
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-SCP
+  glossary_term: Social care program
+  definition: 'A structured series of actions and strategies designed to address fundamental human needs and improve
+    the well-being of individuals, families, and/or communities. Note: the term and definition for this concept
+    are under evaluation and may change in future versions to align with concepts elsewhere in the IG'
+  decision: D-1
+  rules:
+  - id: R-SCP-CANON
+    type: canonical
+    pattern: \bsocial\s+care\s+programs?\b
+  - id: R-SCP-SVC
+    type: missed-use
+    pattern: \bsocial\s+services?\s+programs?\b
+    suggest: social care program
+    note: Retired wording (tracked for the FHIR-54902 FSH change).
+  - id: R-SCP-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Social Care Programs?\b
+    suggest: social care program
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-SDOH
+  glossary_term: Social determinants of health (SDOH)
+  definition: The conditions in which people are born, grow, live, work and age, and people's access to power, money
+    and resources (Equivalent to social drivers of health)
+  acronym: SDOH
+  rules:
+  - id: R-SDOH-CANON
+    type: canonical
+    pattern: \bSDOH\b|\bsocial\s+determinants?\s+of\s+health\b
+  - id: R-SDOH-DRIVERS
+    type: missed-use
+    pattern: \bsocial\s+drivers?\s+of\s+health\b
+    suggest: social determinants of health
+    note: Glossary lists it as equivalent; the defined term is social determinants of health.
+  - id: R-SDOH-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Social Determinants? [Oo]f Health\b
+    suggest: social determinants of health
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-NEED
+  glossary_term: Social need
+  definition: Patient-prioritized social risks
+  rules:
+  - id: R-NEED-CANON
+    type: canonical
+    pattern: \bsocial\s+needs?\b
+  - id: R-NEED-ASRISK
+    type: misuse-signal
+    pattern: \b(assess|screen|identif|detect|document)\w*[^.|]{0,40}(?<!related\s)\bsocial\s+needs?\b|(?<!related\s)\bsocial\s+needs?\b[^.|]{0,40}\b(assess|screen|identif|detect)\w*
+    note: 'Glossary: a social need is a patient-prioritized social risk; identification/assessment language usually
+      means social risk.'
+  - id: R-NEED-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)(?<!Related\s)Social Needs?\b
+    suggest: social need
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-RISK
+  glossary_term: Social risk
+  definition: Adverse social conditions associated with poor health. (Equivalent to health-related social needs,
+    or HRSN)
+  rules:
+  - id: R-RISK-CANON
+    type: canonical
+    pattern: \bsocial\s+risks?\b
+  - id: R-RISK-HRSN
+    type: missed-use
+    pattern: (?<!AHC\s)\bHRSNs?\b
+    case_sensitive: true
+    suggest: social risk
+    decision: D-4
+    note: 'Glossary: social risk is equivalent to HRSN.'
+  - id: R-RISK-HRSNLONG
+    type: missed-use
+    pattern: (?<!Communities\s)\bhealth[\s-]related\s+social\s+needs?\b
+    suggest: social risk
+    decision: D-4
+  - id: R-RISK-PAIR
+    type: misuse-signal
+    pattern: \bsocial\s+risks?\s+and\s+needs?\b|\brisks?\s+and\s+needs?\b
+    note: Pairing risk and need may be deliberate (both concepts) or a conflation.
+  - id: R-RISK-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Social Risks?\b
+    suggest: social risk
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-SSO
+  glossary_term: Social service organization
+  definition: An organization within the social service sector that works to address fundamental human needs in
+    the community and promote social well-being through provision of services. Social service organizations include
+    both regulatory-administered and governed organizations and community-governed organizations.
+  rules:
+  - id: R-SSO-CANON
+    type: canonical
+    pattern: \bsocial\s+service\s+organi[sz]ations?\b
+  - id: R-SSO-CBO
+    type: missed-use
+    pattern: \bCBOs?\b
+    case_sensitive: true
+    suggest: social service organization
+    decision: D-6
+    note: Generic referral-target use of CBO.
+  - id: R-SSO-SVCSORG
+    type: form
+    pattern: \bsocial\s+services\s+organi[sz]ations?\b
+    suggest: social service organization
+  - id: R-SSO-CAREORG
+    type: missed-use
+    pattern: \bsocial\s+care\s+(organi[sz]ations?|providers?)\b|\bsocial\s+service\s+providers?\b
+    suggest: social service organization
+    decision: D-1
+  - id: R-SSO-COMMORG
+    type: missed-use
+    pattern: \bcommunity\s+(organi[sz]ations?|partners?)\b
+    suggest: social service organization
+  - id: R-SSO-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)Social Service Organi[sz]ations?\b
+    suggest: social service organization
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: T-SAI
+  glossary_term: Standardized assessment instrument
+  definition: An evaluation or measurement instrument, often in a scale or questionnaire form, that is valid and
+    reliable, and replicable without changes or adaptations in its structure and content.
+  rules:
+  - id: R-SAI-CANON
+    type: canonical
+    pattern: \bstandardi[sz]ed\s+assessment\s+instruments?\b
+  - id: R-SAI-SCREENTOOL
+    type: missed-use
+    pattern: (?<!HRSN\s)(?<!Needs\s)\bscreening\s+(tools?|instruments?|questionnaires?)\b
+    suggest: standardized assessment instrument
+  - id: R-SAI-TOOL
+    type: missed-use
+    pattern: \bassessment\s+tools?\b|\bstandardi[sz]ed\s+(instruments?|tools?|screening)\b|\bsurvey\s+instruments?\b
+    suggest: standardized assessment instrument
+  - id: R-SAI-CASE
+    type: form
+    case_sensitive: true
+    pattern: (?<=[a-z,;)]\s)(Standardized )?Assessment Instruments?\b
+    suggest: standardized assessment instrument
+    skip_fields:
+    - heading
+    - page title
+    - menu label
+    - Title
+    - caption
+    - entity name
+    - Id
+    - concept display
+    - diagram line
+    - svg text
+    - transcribed text
+    - artifact group name
+    - IG title
+    note: Glossary terms are sentence case mid-sentence.
+- id: N-SCREEN
+  glossary_term: null
+  label: '''Screening'' as an activity'
+  note: No glossary entry; STU 3.0 moved to 'standardized assessment instrument'.
+  rules:
+  - id: R-SCREEN-ACT
+    type: missed-use
+    pattern: (?<!Observation\s)\bscreen(ing|ings|ed|s)?\b(?!\s+(tools?|instruments?|questionnaires?|Response))
+    suggest: assessment / assess
+    decision: D-7
+- id: N-REFERRAL
+  glossary_term: null
+  label: Referral (undefined core concept)
+  note: Counted for D-9.
+  rules:
+  - id: R-REFERRAL-CANON
+    type: canonical
+    pattern: \breferrals?\b
+  - id: R-SELFREF-CANON
+    type: canonical
+    pattern: \bself[\s-]?referrals?\b
+- id: N-INTERV
+  glossary_term: null
+  label: Intervention (undefined)
+  note: Counted for D-9.
+  rules:
+  - id: R-INTERV-CANON
+    type: canonical
+    pattern: \binterventions?\b
+- id: N-HIE
+  glossary_term: null
+  label: Health information exchange (undefined)
+  note: Counted for D-9.
+  rules:
+  - id: R-HIE-CANON
+    type: canonical
+    pattern: \bhealth\s+information\s+exchanges?\b|\bHIEs?\b

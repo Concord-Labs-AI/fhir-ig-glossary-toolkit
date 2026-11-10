@@ -1,0 +1,166 @@
+# Themes group findings for the summary. Form-type findings always go to "Form & presentation".
+themes:
+- id: TH-ACTORS
+  title: Referral actors and roles
+  terms:
+  - T-RS
+  - T-RT
+  - T-INT
+  - T-CP
+  - T-DIRECT
+  - T-INDIRECT
+  - T-CLOSED
+  - T-OPEN
+  - T-HYBRID
+  glossary_says: Referral source and referral target are organizational actors that each operate a system actor.
+    An intermediary is the organization between them and typically operates a coordination platform (CP), the system
+    actor that relays data. Direct and indirect referrals differ by whether an intermediary using a CP is involved.
+  alignment_work: 'Retire the role names used during balloting: ''referral recipient'', bare ''recipient'', ''referral
+    requester'' and paraphrases such as ''service delivery organization'' become referral target or referral source,
+    mostly in the four CapabilityStatements (the conformance artifacts that describe each system''s capabilities)
+    and on the referral workflow and self-referral pages. Also correct text copied between the source and target
+    CapabilityStatements, and places that treat the coordination platform (a system) as the intermediary (an organization).
+    Nearly all rows are ready now; the CapabilityStatements repeat the same documentation strings, so many rows
+    are the same edit and can be accepted together. Where the referral source or target ''sends'' or ''returns''
+    something, the text is left alone (see D-11).'
+  work_package: WP-1 Referral actor names (CapabilityStatements and workflow pages)
+  size: L
+  depends_on:
+  - D-10
+  - D-11
+- id: TH-ORGS
+  title: Organization types
+  terms:
+  - T-CBO
+  - T-SSO
+  - T-HCO
+  - T-PHO
+  - T-SCN
+  - T-SCP
+  - T-ACH
+  glossary_says: Social service organization is the glossary's general term for organizations that address fundamental
+    human needs; its examples treat a community-based organization (CBO) as one kind ('a social service organization
+    such as a CBO'). Health care organizations, public health organizations, social care networks, social care programs
+    and accountable communities for health each have their own entries.
+  alignment_work: Replace 'CBO' as the generic referral target with 'social service organization' on the workflow,
+    capacity, self-referral and enrollment pages and in the workflow diagrams (actor boxes and step text together),
+    keeping 'CBO' where community-based is specifically meant or in a named example. Almost every row waits on D-6.
+    Where a SHALL, SHOULD or MAY statement names a CBO, the row is kept only when the party bound by the statement
+    is unchanged (the referral target); four statements in the Task subscription section whose scope would widen
+    from CBOs to all social service organizations were held out, because that is a conformance change rather than
+    a wording change.
+  work_package: WP-2 Social service organization (D-6)
+  size: L
+  depends_on:
+  - D-6
+- id: TH-PERSON
+  title: The person receiving services
+  terms:
+  - T-PAT
+  glossary_says: 'Patient: a consumer, or client, who is the subject of care, including assessment, goal identification,
+    referrals and service provision, without necessarily implying a clinical context.'
+  alignment_work: 'Person references (''individual'', ''person'', ''consumer'', person-sense ''client'') become
+    ''patient''. Every row waits on D-2 and records whether the recommended option would still change it: under
+    option B, 84 of the rows are left as written (self-referral, enrollment and social-service contexts) and the
+    rest still change (clinical and HIPAA contexts, and places where the FHIR Patient is meant). The Patient glossary
+    entry gets its one-line revision first. A few profile descriptions echo FHIR core''s own definition text; those
+    rows say so.'
+  work_package: WP-3 Person references (D-2)
+  size: L
+  depends_on:
+  - D-2
+- id: TH-PEOPLE
+  title: Providers and care coordinators
+  terms:
+  - T-PROV
+  - T-CC
+  glossary_says: A provider is a person who interacts with the patient to assess social risks, set goals and determine
+    referrals; a care coordinator is one who organizes an individual's care across multiple providers.
+  alignment_work: 'Stop using ''provider'' (a person) for the referral-source organization. Two replacements are
+    used on purpose: ''health care organization'' where the text gives an example organization (including the glossary''s
+    own Referral source and Direct/Indirect referral entries and the ''Actor: Provider'' label in the workflow diagrams),
+    and ''referral source'' where the provider stands for the role or its system. Two further rows fix ''care coordinator''
+    where a system is meant. All but two rows wait on D-8.'
+  work_package: WP-4 Provider vs health care organization (D-8)
+  size: M
+  depends_on:
+  - D-8
+- id: TH-RISK
+  title: Social risk, social need, and SDOH
+  terms:
+  - T-RISK
+  - T-NEED
+  - T-SDOH
+  - T-PF
+  glossary_says: Social risks are adverse social conditions associated with poor health (equivalent to HRSN); social
+    needs are the social risks a patient prioritizes; SDOH are the underlying conditions in which people live; protective
+    factors are strengths that mitigate risk.
+  alignment_work: 'Use ''social risk'' for the guide''s own uses of ''HRSN'' and ''health-related social need'', most
+    of them on the assessment instrument page, while keeping HRSN inside external names such as the AHC HRSN Screening
+    Tool; the first use on each page keeps the equivalence in parentheses, as D-4 option B asks. A few rows that
+    are ready now map paraphrases onto the glossary terms: ''SDOH needs/risks'' and ''social care needs'' become
+    ''social risks'' or ''social needs'' (these do not depend on D-1, which is about the names of two defined terms),
+    and a protective-factors definition is restated in the glossary''s words.'
+  work_package: WP-5 Social risk wording (D-4)
+  size: M
+  depends_on:
+  - D-4
+- id: TH-ASSESS
+  title: Assessment language
+  terms:
+  - T-SAI
+  - T-COMPA
+  - N-SCREEN
+  glossary_says: A standardized assessment instrument is a valid, reliable and replicable evaluation or measurement
+    instrument; a comprehensive assessment looks across social, physical, emotional and ecosystem context.
+  alignment_work: 'Thirteen rows are ready now: the ''screening questionnaire/instrument'' phrases that STU 3.0''s
+    rename missed, and ''assessment tool'' / ''standardized instruments'' variants of the glossary term. The rows
+    that retire ''screening'' as an activity word in the guide''s prose and artifact descriptions wait on D-7. Profile
+    names (Observation Screening Response), LOINC and VSAC names and text inherited from US Core stay as they are.'
+  work_package: WP-6 Assessment language (D-7)
+  size: M
+  depends_on:
+  - D-7
+  - D-13
+- id: TH-DOMAIN
+  title: SDOH domain vs SDOH category
+  terms:
+  - T-DOMAIN
+  glossary_says: An SDOH domain is the high-level classification under which value sets for specific social risks
+    and protective factors are organized (for example, food insecurity).
+  alignment_work: Use 'SDOH domain' where text means the concept and keep 'SDOH category' where it names the coded
+    element, its codes or the value set. Under D-5 option A about a third of the rows still change (prose that names
+    the concept); the 30 rows inside the SDOH Category code definitions and value-set bindings ('This SDOH category
+    covers…') are recorded as 'keep', because there 'SDOH category' names the code itself. Code displays and the
+    value set name are untouched, and under option A the glossary entry gains a see-also sentence.
+  work_package: WP-7 SDOH domain wording (D-5)
+  size: M
+  depends_on:
+  - D-5
+  - D-9
+- id: TH-CAPACITY
+  title: Capacity
+  terms:
+  - T-CAP
+  - T-CAPS
+  glossary_says: Capacity is a social service organization's point-in-time ability to take a new referral for a
+    service; capacity status is the coded indicator of it.
+  alignment_work: Use 'capacity' and 'capacity status' instead of 'availability' paraphrases on the capacity page,
+    avoid the defined word where a clinician's own time is meant, and fix one value set description that misapplies
+    'capacity status'.
+  work_package: 'WP-8 Small fixes: capacity, privacy and record systems'
+  size: S
+  depends_on: []
+- id: TH-PRIVACY
+  title: Privacy roles and record systems
+  terms:
+  - T-BA
+  - T-CE
+  - T-EHR
+  glossary_says: Covered entity and business associate follow their HIPAA definitions; an electronic health record
+    system is the technical system that captures, stores and exchanges health information.
+  alignment_work: 'Two small fixes: ''EMR systems'' becomes ''EHR systems'', and the covered-entity list is reworded
+    to the HIPAA categories the glossary entry cites.'
+  work_package: 'WP-8 Small fixes: capacity, privacy and record systems'
+  size: S
+  depends_on: []

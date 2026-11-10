@@ -1,0 +1,44 @@
+ig:
+  name: HL7 SDOH Clinical Care IG
+  short: sdoh-clinicalcare
+  snapshot: ../fhir-sdoh-clinicalcare-3.0.0     # a checkout of github.com/HL7/fhir-sdoh-clinicalcare at tag 3.0.0
+  tag: "3.0.0"
+  canonical: http://hl7.org/fhir/us/sdoh-clinicalcare
+  artifact_prefixes: [SDOHCC]
+  published_base: https://hl7.org/fhir/us/sdoh-clinicalcare/en/
+  glossary_page: input/pagecontent/glossary.md
+acronyms:
+  table:
+    CBO: {long: community-based organization, term: T-CBO}
+    CP: {long: coordination platform, term: T-CP}
+    EHR: {long: electronic health record, term: T-EHR}
+    SCN: {long: social care network, term: T-SCN}
+    SDOH: {long: social determinants of health, term: T-SDOH}
+  not_standalone: [SDOH Clinical Care, SDOH Category, SDOH domain, SDOH Domain]
+batches:
+  target_chars: 250000
+  overrides:
+  - {id: B06, title: Profile intro pages, globs: ["input/pagecontent/*-intro.md", "input/pagecontent/ImplementationGuide-*.md"]}
+  - {id: B01, title: Referral workflow, globs: ["input/pagecontent/referral_workflow.md", "input/pagecontent/patient_coordination_workflow.md"]}
+  - {id: B02, title: "Capacity, task status, referral for further assessment", globs: ["input/pagecontent/capacity.md", "input/pagecontent/checking_task_status.md", "input/pagecontent/rffa.md"]}
+  - {id: B03, title: "Self-referral, enrollment, app connection", globs: ["input/pagecontent/self_referral.md", "input/pagecontent/enrollment.md", "input/pagecontent/connecting_applications_with_api_data_sources.md"]}
+  - {id: B04, title: Assessment instruments and value sets, globs: ["input/pagecontent/assessment_instrument_support.md", "input/pagecontent/gravity_terminology.md"]}
+  - {id: B05, title: "Background, glossary, and specification pages", globs: ["input/pagecontent/*.md", "input/includes/*.md"]}
+  - {id: B08, title: "CapabilityStatements: referral recipients and patient app", globs: ["input/fsh/instances/SDOHCC-ReferralRecipient*.fsh", "input/fsh/instances/SDOHCC-PatientApp.fsh"]}
+  - {id: B11, title: "CapabilityStatement: coordination platform", globs: ["input/fsh/instances/SDOHCC-CoordinationPlatform.fsh"]}
+  - {id: B12, title: "CapabilityStatement: referral source", globs: ["input/fsh/instances/SDOHCC-ReferralSource.fsh"]}
+  - {id: B09, title: Example instances, globs: ["input/fsh/instances/*"]}
+  - {id: B07, title: "Profiles, extensions, value sets, code system, invariants", globs: ["input/fsh/*", "input/resources/*"]}
+  - {id: B10, title: "Diagrams, figures, navigation", globs: ["input/images-source/*", "input/images/*", "sushi-config.yaml", "input/data/ig.yml"]}
+summary:
+  legend_examples: ["Community-based organization (CBO)", "Social determinants of health (SDOH)"]
+  names_kept_note: The SDOHCC Observation Screening Response profile keeps its name for the same reason (its description text is in the Assessment language theme).
+  locked_examples: LOINC and SNOMED displays, quoted instrument names and text inherited from US Core
+  build_note: Every suggested edit was then applied to a copy of the guide, which built with no new errors and one expected new warning (a changed artifact title must be registered in HL7's artifact list, which is part of the rename work).
+  outside_workbook:
+  - {where: "sushi-config.yaml, lines 87–88", what: "The guide's description wraps 'Social Determinants / of Health' over two lines, so its Title Case cannot be fixed as a single edit; change it by hand in the same pass."}
+  - {where: "index.md, the note box at lines 16–21", what: "Under D-6 option A the whole note needs a rewrite (it currently defers broader adoption of 'social service organization' to a future version); only its first sentence has a row."}
+  - {where: "Subtask examples (Task.owner)", what: "Both subreferral example Tasks say the Task passes to a community organization, but each Task.owner points at 'Better Health Clinic'. An example-data bug, not a glossary issue; worth its own ticket."}
+  - {where: "SDOHCC-ReferralRecipient CapabilityStatement, purpose text", what: "The \"'Light' Referral Recipients\" link points at the regular Referral Recipient CapabilityStatement instead of the Light one (pre-existing)."}
+  - {where: "self_referral.md, conformance box 'refer-7'", what: "The box's summary attribute says 'Community Resource Platform'; it is not reader-visible text, so it has no row, but it should follow the page's rename."}
+  - {where: "self_referral.md, 'closed, open, and hybrid systems'", what: "The bold cross-reference has no link; 'capacity.html#system-environments' would resolve it."}
