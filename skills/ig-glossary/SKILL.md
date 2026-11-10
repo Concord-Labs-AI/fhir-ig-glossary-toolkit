@@ -39,7 +39,7 @@ Outputs: `data/segments.jsonl`, `data/coverage.json`, `data/figures.json`.
 
 Outputs: `rulebook.yaml`.
 
-Render `python3 $SCRIPTS/prompt.py rulebook-author` and dispatch **one agent** with it. When it returns, run `python3 $SCRIPTS/check_rulebook.py` yourself; if it lists problems, send them back to the same agent (SendMessage) until it prints `rulebook: OK`. Fix any `acronyms.table…` problems yourself in config.yaml (set the term to the rulebook id of the term it spells out); send only the other problems back to the agent. Then set each `acronyms.table.<ACR>.term` in config.yaml to the rulebook id of the term it spells out, then re-run check_rulebook.py (it checks this). Run `python3 $SCRIPTS/scan.py` and show the user: the per-rule hit counts from `data/rulebook-review.md` (a rule with zero hits or thousands of hits is worth a question), the term count, each decision's title/question/recommendation, and the domain notes. The user approves, edits the file, or asks for changes (which you relay to the agent). Proceed on approval.
+If `rulebook.yaml` already exists (a resumed run, or a rulebook copied in), skip the agent, which would overwrite it: start from the `check_rulebook.py` run below, and make any fixes or changes yourself instead of relaying them. Otherwise render `python3 $SCRIPTS/prompt.py rulebook-author` and dispatch **one agent** with it. When it returns, run `python3 $SCRIPTS/check_rulebook.py` yourself; if it lists problems, send them back to the same agent (SendMessage) until it prints `rulebook: OK`. Fix any `acronyms.table…` problems yourself in config.yaml (set the term to the rulebook id of the term it spells out); send only the other problems back to the agent. Then set each `acronyms.table.<ACR>.term` in config.yaml to the rulebook id of the term it spells out, then re-run check_rulebook.py (it checks this). Run `python3 $SCRIPTS/scan.py` and show the user: the per-rule hit counts from `data/rulebook-review.md` (a rule with zero hits or thousands of hits is worth a question), the term count, each decision's title/question/recommendation, and the domain notes. The user approves, edits the file, or asks for changes (which you relay to the agent). Proceed on approval.
 
 ## Step 4 — Scan and batch
 
@@ -75,7 +75,7 @@ Use absolute paths. Remove any existing `<ig>-dryrun` first (`git -C <ig> worktr
 
 Outputs: `themes.yaml`.
 
-Render `python3 $SCRIPTS/prompt.py themes-author`, dispatch one agent, run `python3 $SCRIPTS/check_themes.py` until `themes: OK`. Show the user the theme titles, sizes and the `alignment_work` paragraphs. Proceed on approval.
+If `themes.yaml` already exists, skip the agent, which would overwrite it: run `python3 $SCRIPTS/check_themes.py`, fix any problems it lists yourself, and go on to the checkpoint. Otherwise render `python3 $SCRIPTS/prompt.py themes-author`, dispatch one agent, run `python3 $SCRIPTS/check_themes.py` until `themes: OK`. Show the user the theme titles, sizes and the `alignment_work` paragraphs. Proceed on approval.
 
 ## Step 10 — Outputs
 

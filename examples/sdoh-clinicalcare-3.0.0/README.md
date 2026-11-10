@@ -8,4 +8,4 @@ The reference run this toolkit was built from: 31 glossary terms, 844 findings, 
 - `figure_transcripts.yaml` — text read off raster figures by eye.
 - `*-findings.xlsx`, `*-summary.html` — the two outputs, built by this toolkit from the reference run's merged findings (added by the reproduction check).
 
-To reproduce: check out `github.com/HL7/fhir-sdoh-clinicalcare` at tag `3.0.0` next to this directory, copy these four YAML files into an empty run directory, adjust `ig.snapshot`, and run `/ig-glossary-toolkit:ig-glossary`.
+To reproduce: check out `github.com/HL7/fhir-sdoh-clinicalcare` at tag `3.0.0` next to this directory, copy these four YAML files into an empty run directory, adjust `ig.snapshot`, and run `/ig-glossary-toolkit:ig-glossary <path-to-the-checkout>`.
