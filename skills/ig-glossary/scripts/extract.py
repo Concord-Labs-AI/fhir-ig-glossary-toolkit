@@ -567,6 +567,12 @@ def main(argv=None):
     print(f"{len(result['segments'])} segments from {len(result['coverage']) - excluded} files "
           f"({excluded} excluded); by class {dict(Counter(s['change_class'] for s in result['segments']))}; "
           f"{len(result['figures'])} figures need a visual read")
+    reasons = Counter(c["reason"].split(" (referenced by")[0] for c in result["coverage"].values()
+                      if c["status"] == "excluded")
+    if reasons:
+        print("excluded, by reason:")
+        for reason, n in reasons.most_common():
+            print(f"  {n:>4}  {reason}")
 
 
 if __name__ == "__main__":

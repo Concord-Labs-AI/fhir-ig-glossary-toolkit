@@ -350,3 +350,22 @@ def test_glossary_and_historical_pages_come_from_config(snapshot):
         by_file.setdefault(s["file"], []).append(s)
     assert by_file["input/pagecontent/index.md"][0]["kind"] == "glossary"
     assert by_file["input/pagecontent/glossary.md"][0]["change_class"] == HISTORICAL
+
+
+def test_main_prints_one_line_per_exclusion_reason(run, capsys):
+    gx.main(["--run", str(run)])
+    assert "excluded, by reason" not in capsys.readouterr().out    # nothing excluded, nothing listed
+    snap = run / "snapshot"
+    for name in ("draft.md", "old.md"):
+        _write(snap, f"input/pagecontent/{name}", "Unpublished.\n")
+    _write(snap, "input/notes.bin", "??")
+    _write(snap, "input/images/A.png", "binary")
+    _write(snap, "input/images/B.png", "binary")
+    _write(snap, "input/pagecontent/changehistory.md", '{% include img.html img="A.png" %}\n')
+    _write(snap, "input/pagecontent/glossary.md", '{% include img.html img="B.png" %}\n| T | D |\n| --- | --- |\n')
+    gx.main(["--run", str(run)])
+    lines = capsys.readouterr().out.splitlines()
+    assert "excluded, by reason:" in lines
+    assert "     2  not published (absent from sushi-config pages; 404 when published)" in lines
+    assert "     2  raster image — needs visual read" in lines     # grouped, whichever pages refer to them
+    assert "     1  unrecognized file type — review" in lines
