@@ -33,7 +33,7 @@ Skip init.py if config.yaml exists. Otherwise run `python3 $SCRIPTS/init.py <ig>
 
 Outputs: `data/segments.jsonl`, `data/coverage.json`, `data/figures.json`.
 
-`python3 $SCRIPTS/extract.py`. Report the printed line, and show the user the excluded files grouped by reason (extract prints each reason with its count; `data/coverage.json` gives each file's reason). If any pages were excluded as not published, ask the user before continuing: those pages are left out of the analysis. If `figures.json` lists raster images, tell the user: those images' text is only analysed if transcribed into `figure_transcripts.yaml` (shape: see `$SKILL_DIR/../../examples/*/figure_transcripts.yaml`). Offer to transcribe them yourself by reading the images; if the user agrees, write the file and re-run extract.
+`python3 $SCRIPTS/extract.py`. Report the printed line, and show the user the excluded files grouped by reason (extract prints each reason with its count; `data/coverage.json` gives each file's reason). If any pages were excluded as not published, ask the user before continuing: those pages are left out of the analysis. If they should not be, stop: the fix belongs in the guide's `sushi-config.yaml` `pages:` block, not in this run. If `figures.json` lists raster images, tell the user: those images' text is only analysed if transcribed into `figure_transcripts.yaml` (shape: see `$SKILL_DIR/../../examples/*/figure_transcripts.yaml`). Offer to transcribe them yourself by reading the images; if the user agrees, write the file and re-run extract.
 
 ## Step 3 — Rulebook  ✋ CHECKPOINT 2
 
