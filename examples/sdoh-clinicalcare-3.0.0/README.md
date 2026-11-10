@@ -1,6 +1,6 @@
 # Example: HL7 SDOH Clinical Care IG, tag 3.0.0
 
-The reference run this toolkit was built from: 31 glossary terms, 844 findings, 13 decisions.
+The reference run this toolkit was built from, the [Gravity Project](https://thegravityproject.net)'s glossary alignment of this guide: 31 glossary terms, 844 findings, 13 decisions.
 
 - `config.yaml` — the run's configuration, including the twelve hand-tuned packet overrides used in the reference run (an unconfigured run would partition automatically).
 - `rulebook.yaml` — the authored term rules and decisions register. The `rulebook-author` prompt points at this file as its exemplar.

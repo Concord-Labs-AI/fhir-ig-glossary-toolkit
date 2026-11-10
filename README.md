@@ -5,7 +5,7 @@ Checks every sentence of a FHIR Implementation Guide against the guide's own glo
 - **A findings workbook** (xlsx). Every place the guide departs from its glossary is written as an exact edit, which a reviewer can accept, modify, reject or defer.
 - **A summary report** (html). It goes theme by theme: what the glossary says, what the guide does, the work needed to align them, and which decisions the team must take first.
 
-It is a Claude Code plugin. The method comes from the glossary alignment of the HL7 SDOH Clinical Care IG 3.0.0 (31 terms, 844 findings). That run ships here as the worked example in `examples/`.
+It is a Claude Code plugin. The method comes from the [Gravity Project](https://thegravityproject.net)'s glossary alignment of the HL7 SDOH Clinical Care IG 3.0.0 (31 terms, 844 findings). That run ships here as the worked example in `examples/`.
 
 ## Quick start
 
