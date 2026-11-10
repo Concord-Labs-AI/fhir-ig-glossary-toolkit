@@ -75,7 +75,7 @@ Use absolute paths. Remove any existing `<ig>-dryrun` first (`git -C <ig> worktr
 
 Outputs: `themes.yaml`.
 
-If `themes.yaml` already exists, skip the agent, which would overwrite it: run `python3 $SCRIPTS/check_themes.py`, fix any problems it lists yourself, and go on to the checkpoint. Otherwise render `python3 $SCRIPTS/prompt.py themes-author`, dispatch one agent, run `python3 $SCRIPTS/check_themes.py` until `themes: OK`. Show the user the theme titles, sizes and the `alignment_work` paragraphs. Proceed on approval.
+If `themes.yaml` already exists, skip the agent, which would overwrite it: run `python3 $SCRIPTS/check_themes.py`, fix any problems it lists yourself, and go on to the checkpoint. Otherwise render `python3 $SCRIPTS/prompt.py themes-author`, dispatch one agent, run `python3 $SCRIPTS/check_themes.py` until `themes: OK`. Either way, show the user the theme titles, sizes and the `alignment_work` paragraphs. Proceed on approval.
 
 ## Step 10 — Outputs
 
