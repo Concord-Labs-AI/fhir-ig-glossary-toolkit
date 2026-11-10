@@ -14,6 +14,9 @@ For each finding:
 
 Be strict. A wrong accepted row edits the published guide.
 
+## Pending decisions
+A finding that shows `Decision: D-n (recommended: keep|change)` is held for the team to decide; it is not applied until they do. Its replacement applies the glossary as written. Judge it on that strict reading: reject it only for the reasons above, not because its recommendation is `keep`.
+
 ## Domain notes (from the rulebook author)
 {{domain_notes}}
 

@@ -91,3 +91,9 @@ def test_skill_and_reference_docs_only_call_scripts_and_flags_that_exist():
     docs = [skill / "SKILL.md", *sorted((skill / "reference").glob("*.md"))]
     assert len(docs) == 4
     _check_script_calls(docs, re.compile(r"\$SCRIPTS/(\w+\.py)([^`\n]*)"))
+
+
+def test_skeptic_judges_pending_rows_on_the_strict_reading(cfg):
+    text = gp.render("skeptic", cfg, packet="V01")
+    assert "## Pending decisions" in text
+    assert "not because its recommendation is `keep`" in text
