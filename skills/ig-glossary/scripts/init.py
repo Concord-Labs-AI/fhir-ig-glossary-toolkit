@@ -8,7 +8,7 @@ from pathlib import Path
 
 import yaml
 
-from extract import is_published, published_pages
+from extract import PAGE_DIRS, is_published, published_pages
 
 ENTITY = re.compile(r"^(?:Profile|Extension|Logical|Resource|Instance|ValueSet|CodeSystem)\s*:\s*(\S+)", re.M)
 LEADING = re.compile(r"^[A-Z][A-Z0-9]*?(?=[A-Z][a-z]|[-_.]|$)")
@@ -47,7 +47,7 @@ def infer(ig_dir):
     sc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     canonical = str(sc.get("canonical", "")).rstrip("/")
     published = published_pages(sc)
-    glossary = next((f"input/{d}/{p.name}" for d in ("pagecontent", "pages")
+    glossary = next((f"input/{d}/{p.name}" for d in PAGE_DIRS
                      for p in sorted((ig_dir / "input" / d).glob("*.md"))
                      if "glossary" in p.name.lower() and is_published(p.name, published)), "")
     return {
