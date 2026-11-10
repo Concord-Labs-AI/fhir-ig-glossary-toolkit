@@ -394,6 +394,9 @@ IMG_REF = re.compile(r'img="([^"]+)"|!\[[^\]]*\]\(([^)\s]+)\)|<img[^>]*src="([^"
 
 
 def published_pages(config):
+    """Page names under sushi-config's pages:, or None when it has no pages: block (every page file is then published)."""
+    if not config.get("pages"):
+        return None
     names = set()
 
     def walk(d):
@@ -407,7 +410,7 @@ def published_pages(config):
 
 
 def is_published(name, published):
-    return name in published or name.endswith(("-intro.md", "-notes.md"))
+    return published is None or name in published or name.endswith(("-intro.md", "-notes.md"))
 
 
 def image_refs(pages):

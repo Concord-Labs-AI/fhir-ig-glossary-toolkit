@@ -8,6 +8,8 @@ from pathlib import Path
 
 import yaml
 
+from extract import is_published, published_pages
+
 ENTITY = re.compile(r"^(?:Profile|Extension|Logical|Resource|Instance|ValueSet|CodeSystem)\s*:\s*(\S+)", re.M)
 LEADING = re.compile(r"^[A-Z][A-Z0-9]*?(?=[A-Z][a-z]|[-_.]|$)")
 
@@ -37,19 +39,6 @@ def git_tag(ig_dir):
         return None
 
 
-def page_names(pages):
-    names = []
-
-    def walk(d):
-        for k, v in (d or {}).items():
-            if re.search(r"\.(md|xml|html)$", str(k)):
-                names.append(str(k))
-            if isinstance(v, dict):
-                walk(v)
-    walk(pages)
-    return names
-
-
 def infer(ig_dir):
     ig_dir = Path(ig_dir)
     path = ig_dir / "sushi-config.yaml"
@@ -57,8 +46,10 @@ def infer(ig_dir):
         raise InitError(f"{ig_dir} has no sushi-config.yaml — point init at the root of an IG checkout")
     sc = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     canonical = str(sc.get("canonical", "")).rstrip("/")
-    glossary = next((f"{d}/{p}" for p in page_names(sc.get("pages")) if "glossary" in p.lower()
-                     for d in ("input/pagecontent", "input/pages") if (ig_dir / d / p).is_file()), "")
+    published = published_pages(sc)
+    glossary = next((f"input/{d}/{p.name}" for d in ("pagecontent", "pages")
+                     for p in sorted((ig_dir / "input" / d).glob("*.md"))
+                     if "glossary" in p.name.lower() and is_published(p.name, published)), "")
     return {
         "ig": {"name": str(sc.get("title") or sc.get("name") or ig_dir.name),
                "short": str(sc.get("id", "")).split(".")[-1] or ig_dir.name,

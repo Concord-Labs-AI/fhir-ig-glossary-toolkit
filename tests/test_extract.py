@@ -263,6 +263,15 @@ def test_extract_accounts_for_every_file(snapshot):
     assert cov["input/pagecontent/StructureDefinition-X-intro.md"]["status"] == "extracted"
 
 
+def test_without_a_pages_block_every_page_file_is_published(snapshot):
+    sc = snapshot / "sushi-config.yaml"
+    sc.write_text("title: T\nmenu:\n  Home: index.html\n")
+    result = gx.extract(snapshot, IG)
+    assert result["coverage"]["input/pagecontent/savestuff.md"]["status"] == "extracted"
+    assert result["coverage"]["input/pagecontent/index.md"]["status"] == "extracted"
+    assert result["coverage"]["input/images/Map.svg"]["status"] == "extracted"  # referenced by a published page
+
+
 def test_extract_change_classes_kinds_and_urls(snapshot):
     by_file = {}
     for s in gx.extract(snapshot, IG)["segments"]:

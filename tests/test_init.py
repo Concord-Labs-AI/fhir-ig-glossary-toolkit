@@ -1,3 +1,4 @@
+import re
 import subprocess
 
 import pytest
@@ -61,6 +62,19 @@ def test_glossary_page_falls_back_to_input_pages(run):
     pages.mkdir()
     (run / "snapshot" / "input" / "pagecontent" / "glossary.md").rename(pages / "glossary.md")
     assert gi.infer(run / "snapshot")["ig"]["glossary_page"] == "input/pages/glossary.md"
+
+
+def test_glossary_page_is_found_without_a_pages_block(run):
+    sc = run / "snapshot" / "sushi-config.yaml"
+    sc.write_text(re.sub(r"pages:\n(?:  .*\n)+", "", sc.read_text()))
+    assert "pages:" not in sc.read_text()
+    assert gi.infer(run / "snapshot")["ig"]["glossary_page"] == "input/pagecontent/glossary.md"
+
+
+def test_glossary_page_absent_from_the_pages_block_is_not_inferred(run):
+    sc = run / "snapshot" / "sushi-config.yaml"
+    sc.write_text(sc.read_text().replace("  glossary.md:\n    title: Glossary\n", ""))
+    assert gi.infer(run / "snapshot")["ig"]["glossary_page"] == ""
 
 
 def test_git_tag_is_none_outside_a_repository(tmp_path):
