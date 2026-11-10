@@ -10,7 +10,7 @@ The method comes from the glossary alignment of the HL7 SDOH Clinical Care IG 3.
 ## What you need
 
 - **Claude Code.** The toolkit is a Claude Code plugin; the stages that need judgement run as Claude agents.
-- **Python 3** with `pyyaml` and `openpyxl` (`pip3 install pyyaml openpyxl`).
+- **Python 3** with `pyyaml` and `openpyxl` (`pip3 install pyyaml openpyxl`), and `pytest` only to run the tests.
 - **A checkout of the IG** at the tag you are reviewing. Running `sushi build` in it first is optional; it gives instance pages their published URLs.
 
 ## Run it
@@ -48,7 +48,7 @@ An interrupted run resumes where it stopped.
 - `_build/<ig>-<tag>-glossary-alignment-findings.xlsx` has these tabs:
   - **README:** how to review.
   - **Findings:** one row per edit, with the context as read, the exact source text, the suggested replacement, confidence, status (Ready, or Pending D-n), the published link, and reviewer columns with a dropdown.
-  - **Decisions**, **Decision × theme**, **Term coverage**, **Page × theme** and **Reviewer additions**.
+  - **Decisions**, **Decision x theme**, **Term coverage**, **Page x theme** and **Reviewer additions**.
 - `_build/<ig>-<tag>-glossary-alignment-summary.html` has the headline numbers, the decisions needed first, what the team needs to supply, one section per theme with examples, work packages, names kept as they are, and the method and its limits. It opens in a browser and converts cleanly to a Google Doc.
 
 See the example outputs in `examples/sdoh-clinicalcare-3.0.0/`.
