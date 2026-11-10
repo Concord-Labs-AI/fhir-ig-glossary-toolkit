@@ -4,7 +4,7 @@
 
 **Reference.** The SDOH 3.0.0 reference run's data (kept outside this repository): reader outputs B01–B12 (all Fable 5.1, no model override), skeptic verdicts V01–V06, consistency pass V07, QA verdicts V08, merged `findings.json` (kept) and `rejected.json`.
 
-**Base.** `runs/base/` is the toolkit's own extract/scan/batches on the same snapshot with the reference packet overrides; Task 14 confirmed it reproduces the reference counts and hit ids, so candidate agents read identical packets.
+**Base.** `runs/base/` is the toolkit's own extract/scan/batches on the same snapshot with the reference packet overrides; a reproduction check confirmed it reproduces the reference counts and hit ids, so candidate agents read identical packets.
 
 **Candidates.**
 
