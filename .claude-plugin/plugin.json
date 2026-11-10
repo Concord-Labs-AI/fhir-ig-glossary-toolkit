@@ -1,12 +1,12 @@
 {
-  "name": "ig-glossary-toolkit",
+  "name": "fhir-ig-glossary-toolkit",
   "version": "0.1.0",
   "description": "Glossary alignment for any FHIR Implementation Guide: finds every place the guide's wording departs from its glossary and produces a reviewable findings workbook and a summary report.",
   "author": {
     "name": "Corey Smith, Concord Labs AI",
     "email": "corey@claystreetgroup.com"
   },
-  "homepage": "https://github.com/Concord-Labs-AI/ig-glossary-toolkit",
-  "repository": "https://github.com/Concord-Labs-AI/ig-glossary-toolkit",
+  "homepage": "https://github.com/Concord-Labs-AI/fhir-ig-glossary-toolkit",
+  "repository": "https://github.com/Concord-Labs-AI/fhir-ig-glossary-toolkit",
   "keywords": ["fhir", "implementation-guide", "glossary", "terminology", "hl7"]
 }

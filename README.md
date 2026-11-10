@@ -1,4 +1,4 @@
-# IG glossary toolkit
+# FHIR IG glossary toolkit
 
 Checks every sentence of a FHIR Implementation Guide against the guide's own glossary. It gives the team two things:
 
@@ -16,13 +16,13 @@ The method comes from the glossary alignment of the HL7 SDOH Clinical Care IG 3.
 ## Run it
 
 ```bash
-git clone https://github.com/Concord-Labs-AI/ig-glossary-toolkit
+git clone https://github.com/Concord-Labs-AI/fhir-ig-glossary-toolkit
 mkdir my-ig-glossary-run && cd my-ig-glossary-run
-claude --plugin-dir ../ig-glossary-toolkit
+claude --plugin-dir ../fhir-ig-glossary-toolkit
 ```
 Keep the run folder outside the IG checkout; the toolkit writes its data there. Then, in Claude Code:
 ```
-/ig-glossary-toolkit:ig-glossary ../path-to-your-ig-checkout
+/fhir-ig-glossary-toolkit:ig-glossary ../path-to-your-ig-checkout
 ```
 
 Claude runs the pipeline and stops four times for you:

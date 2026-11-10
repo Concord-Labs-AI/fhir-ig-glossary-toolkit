@@ -1,6 +1,6 @@
 ---
 name: ig-glossary
-description: Use when asked to check a FHIR Implementation Guide's wording against its glossary, run a glossary alignment analysis, or when the user invokes /ig-glossary-toolkit:ig-glossary with a path to an IG checkout. Produces a findings workbook (xlsx) and a summary report (html).
+description: Use when asked to check a FHIR Implementation Guide's wording against its glossary, run a glossary alignment analysis, or when the user invokes /fhir-ig-glossary-toolkit:ig-glossary with a path to an IG checkout. Produces a findings workbook (xlsx) and a summary report (html).
 ---
 
 # Glossary alignment for a FHIR IG
@@ -18,7 +18,7 @@ You orchestrate a pipeline of scripts and agents. The scripts are deterministic 
 ## Step 0 — Preflight
 
 - `python3 -c "import yaml, openpyxl"`; if it fails, tell the user the exact command `pip3 install pyyaml openpyxl` and offer to run it. If `pip3 install` is refused with externally-managed-environment, use `python3 -m pip install --user --break-system-packages pyyaml openpyxl`, or a virtual environment.
-- The argument to `/ig-glossary-toolkit:ig-glossary` is the IG checkout. Confirm `<ig>/sushi-config.yaml` exists. If not, ask for the right path.
+- The argument to `/fhir-ig-glossary-toolkit:ig-glossary` is the IG checkout. Confirm `<ig>/sushi-config.yaml` exists. If not, ask for the right path.
 - `git -C <ig> status --porcelain`: if non-empty, warn that the snapshot should be a clean checkout at the tag under review (untracked build artifacts are fine; modified source files are not), and ask whether to continue.
 - If `<ig>/fsh-generated/resources/` is absent, mention that running `sushi build` in the checkout first gives instance pages their published URLs; optional.
 - Create the run directory (see Paths) and work from it.
