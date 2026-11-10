@@ -1,0 +1,10 @@
+FHIR IG glossary toolkit
+Copyright 2026 Clay Street Group, LLC
+
+Method and tooling by Corey Smith, Concord Labs AI (corey@claystreetgroup.com).
+
+The worked example in examples/sdoh-clinicalcare-3.0.0/ quotes the HL7 FHIR
+SDOH Clinical Care Implementation Guide 3.0.0, which HL7 publishes under
+CC0-1.0.
+
+HL7® and FHIR® are registered trademarks of Health Level Seven International.
