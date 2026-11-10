@@ -78,3 +78,15 @@ def test_not_standalone_phrases_are_built_from_config():
     assert rx.search("SDOH clinical care") and rx.search("the SDOH Domain list")
     rx2 = acronym_regex("SDOH", [])
     assert rx2.search("the SDOH domain list")
+
+
+def test_an_is_kept_before_a_capitalised_vowel_expansion(tmp_path):
+    acr = {"table": {"EHR": {"long": "Electronic Health Record", "term": "T-EHR"},
+                     "SDOH": {"long": "Social Determinants of Health", "term": "T-SDOH"}}, "not_standalone": []}
+    page = "Send it to an EHR. Then an SDOH referral.\n"
+    p = tmp_path / "input/pagecontent/f.md"
+    p.parent.mkdir(parents=True)
+    p.write_text(page)
+    segs = gx.extract_page("input/pagecontent/f.md", page)
+    out = {r["find"]: r["replace"] for r in acronym_findings(segs, gf.Corpus(tmp_path, segs), acr)}
+    assert out == {"EHR": "Electronic Health Record (EHR)", "an SDOH": "a Social Determinants of Health (SDOH)"}

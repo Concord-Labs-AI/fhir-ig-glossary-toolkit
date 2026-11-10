@@ -43,7 +43,7 @@ def acronym_findings(segments, corpus, acronyms):
                 start = s["start"] + a.start()
                 replace = f"{long}s ({find})" if find != acr else f"{long} ({acr})"
                 an = AN_BEFORE.search(s["visible"], 0, a.start())
-                if an and long[0] not in "aeiou":  # "an SDOH" -> "a social determinants of health (SDOH)"
+                if an and long[0].lower() not in "aeiou":  # "an SDOH" -> "a social determinants of health (SDOH)"
                     find, start = f"{an.group(1)} {find}", start - len(an.group(0))
                     replace = f"{an.group(1)[0]} {replace}"
                 elif SENTENCE_START.search(s["visible"], 0, a.start()):
