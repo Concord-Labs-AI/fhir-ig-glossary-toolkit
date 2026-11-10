@@ -380,9 +380,10 @@ def extract_ig_yml(rel, raw):
     return kept_segments(rel, raw, spans, "config", PROSE, "ig.yml")
 
 
-def extract_structuremap(rel, raw, base):
+def extract_resource(rel, raw, base):
+    root = re.search(r"<([A-Za-z]\w*)", re.sub(r"<!--.*?-->", "", raw, flags=re.S))
     m_id = re.search(r'<id value="([^"]+)"', raw)
-    url = f"{base}StructureMap-{m_id.group(1)}.html" if m_id else None
+    url = f"{base}{root.group(1)}-{m_id.group(1)}.html" if root and m_id else None
     spans = [(m.start(2), m.end(2), m.group(1), m.group(1))
              for m in re.finditer(r'<(description|title|documentation) value="([^"]*)"', raw)
              if m.group(2).strip()]
@@ -456,7 +457,7 @@ def classify_file(rel, published, refs, stems, includes, transcripts, glossary_n
     if top == "images-source" and name.endswith(".plantuml"):
         return "plantuml", None
     if top == "resources" and name.endswith(".xml"):
-        return "structuremap", None
+        return "resource", None
     if top == "includes":
         if name.endswith(".html"):
             return None, "layout template (no prose)"
@@ -542,7 +543,7 @@ def extract(snapshot, ig, id_types=None, transcripts=None):
             elif how == "ig-yml":
                 segs = extract_ig_yml(rel, raw)
             else:
-                segs = extract_structuremap(rel, raw, base)
+                segs = extract_resource(rel, raw, base)
         segments += segs
         coverage[rel] = {"status": "extracted", "segments": len(segs), "skipped_strings": skipped}
     return {"segments": segments, "coverage": coverage, "figures": figures}

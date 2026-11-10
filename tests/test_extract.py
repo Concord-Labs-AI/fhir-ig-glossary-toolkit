@@ -209,13 +209,21 @@ def test_sushi_config_keeps_titles_and_menu_labels():
     assert not any("hl7.fhir" in t or "confluence" in t for _, t in got)
 
 
-def test_ig_yml_and_structuremap_text():
+def test_ig_yml_and_resource_text():
     yml = "groups:\n    Profiles:\n        name: Profiles\n        description: For referral targets\n        resources:\n          - X\n"
     assert [s["text"] for s in gx.extract_ig_yml("input/data/ig.yml", yml)] == ["Profiles", "For referral targets"]
     xml = '<StructureMap><id value="SDOHCC-SM"/><description value="Transforms answers"/><url value="http://x"/></StructureMap>'
-    segs = gx.extract_structuremap("input/resources/sm.xml", xml, BASE)
+    segs = gx.extract_resource("input/resources/sm.xml", xml, BASE)
     assert [s["text"] for s in segs] == ["Transforms answers"]
     assert segs[0]["url"].endswith("/en/StructureMap-SDOHCC-SM.html")
+
+
+def test_resource_link_takes_its_type_from_the_root_element():
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<!-- <StructureMap> in a comment -->\n'
+           '<Library xmlns="http://hl7.org/fhir"><id value="lib-1"/><description value="Shared logic"/></Library>')
+    assert gx.extract_resource("input/resources/lib.xml", xml, BASE)[0]["url"] == BASE + "Library-lib-1.html"
+    no_id = '<Library xmlns="http://hl7.org/fhir"><description value="Shared logic"/></Library>'
+    assert gx.extract_resource("input/resources/lib.xml", no_id, BASE)[0]["url"] is None
 
 
 def _write(root, rel, text):
