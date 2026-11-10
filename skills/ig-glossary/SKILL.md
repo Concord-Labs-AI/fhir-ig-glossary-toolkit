@@ -7,7 +7,7 @@ description: Use when asked to check a FHIR Implementation Guide's wording again
 
 You orchestrate a pipeline of scripts and agents. The scripts are deterministic and tested; your job is to run them in order, dispatch the agents with the rendered prompts, and stop at the four checkpoints where a human decides. Never edit the IG snapshot, never hand-edit the outputs — fixes go into the data (verdicts, Q-packets, config, rulebook, themes) and the outputs are regenerated.
 
-**Paths.** `SKILL_DIR` is this skill's base directory (announced when the skill loads). `SCRIPTS=$SKILL_DIR/scripts`. The **run directory** is the current working directory; every script takes `--run <dir>` if you need to be explicit. Create a run directory outside the IG checkout (for example `<ig>-glossary` next to it) and work from there. Never run inside the checkout: config.yaml and data/ would be written into it. The **snapshot** is the IG checkout `config.yaml` points at.
+**Paths.** `SKILL_DIR` is this skill's base directory (announced when the skill loads). `SCRIPTS=$SKILL_DIR/scripts`. The **run directory** is the current working directory, the folder Claude Code was started in; every script takes `--run <dir>` if you need to be explicit. The usual layout keeps the IG checkout inside it (`<run>/<checkout>/`), so the agents need no access outside the folder. Never run inside the checkout: config.yaml and data/ would be written into it. If the working directory is the checkout or inside it, stop and ask the user to start Claude Code from the folder that contains the checkout. The **snapshot** is the IG checkout `config.yaml` points at.
 
 **Resume.** Scripted steps are cheap and deterministic: re-run them each time. The exceptions are `verify.py --packets`, which runs once (skip it if `data/verify/V01.keys.json` exists), and the Step 8 copy. Agent work is skipped per packet once its output validates. Step 5 dispatches only packets without `data/agent/validated/Bnn.json`, and Step 6 only V packets without `data/verify/Vnn.json`. After each checkpoint approval, append its name (`config`, `rulebook`, `themes`, `hand-over`) to `checkpoints.txt` in the run directory. On resume, re-ask any checkpoint that isn't recorded, even if its file exists.
 
@@ -17,11 +17,11 @@ You orchestrate a pipeline of scripts and agents. The scripts are deterministic 
 
 ## Step 0 — Preflight
 
-- `python3 -c "import yaml, openpyxl"`; if it fails, tell the user the exact command `pip3 install pyyaml openpyxl` and offer to run it. If `pip3 install` is refused with externally-managed-environment, use `python3 -m pip install --user --break-system-packages pyyaml openpyxl`, or a virtual environment.
-- The argument to `/fhir-ig-glossary-toolkit:ig-glossary` is the IG checkout. Confirm `<ig>/sushi-config.yaml` exists. If not, ask for the right path.
+- `python3 -c "import yaml, openpyxl"`; if it fails, tell the user the exact command `python3 -m pip install pyyaml openpyxl` and offer to run it. If it is refused with externally-managed-environment, use `python3 -m pip install --user --break-system-packages pyyaml openpyxl`, or a virtual environment.
+- The argument to `/fhir-ig-glossary-toolkit:ig-glossary` is the IG checkout. If it is a repository URL instead, clone it into the run directory with `git clone --depth 1 --branch <tag> <url>` (ask for the tag under review if none was given) and use the clone. Confirm `<ig>/sushi-config.yaml` exists. If not, ask for the right path.
 - `git -C <ig> status --porcelain`: if non-empty, warn that the snapshot should be a clean checkout at the tag under review (untracked build artifacts are fine; modified source files are not), and ask whether to continue.
 - If `<ig>/fsh-generated/resources/` is absent, mention that running `sushi build` in the checkout first gives instance pages their published URLs; optional.
-- Create the run directory (see Paths) and work from it.
+- Check the working directory is not the checkout or inside it (see Paths).
 
 ## Step 1 — Config  ✋ CHECKPOINT 1
 

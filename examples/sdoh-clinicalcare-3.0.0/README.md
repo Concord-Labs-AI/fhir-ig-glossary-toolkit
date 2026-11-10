@@ -8,4 +8,11 @@ The reference run this toolkit was built from: 31 glossary terms, 844 findings, 
 - `figure_transcripts.yaml` — text read off raster figures by eye.
 - `*-findings.xlsx`, `*-summary.html` — the two outputs, built by this toolkit from the reference run's merged findings (added by the reproduction check).
 
-To reproduce: check out `github.com/HL7/fhir-sdoh-clinicalcare` at tag `3.0.0` next to this directory, copy these four YAML files into an empty run directory, adjust `ig.snapshot`, and run `/fhir-ig-glossary-toolkit:ig-glossary <path-to-the-checkout>`.
+To reproduce, copy these four YAML files into an empty folder, clone the guide into it, and start Claude Code there:
+
+```bash
+git clone --depth 1 --branch 3.0.0 https://github.com/HL7/fhir-sdoh-clinicalcare
+claude
+```
+
+Then type `/fhir-ig-glossary-toolkit:ig-glossary fhir-sdoh-clinicalcare`. Because the rulebook and themes are already there, the run skips the agents that would write them.

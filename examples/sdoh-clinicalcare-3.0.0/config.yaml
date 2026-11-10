@@ -1,7 +1,7 @@
 ig:
   name: HL7 SDOH Clinical Care IG
   short: sdoh-clinicalcare
-  snapshot: ../fhir-sdoh-clinicalcare-3.0.0     # a checkout of github.com/HL7/fhir-sdoh-clinicalcare at tag 3.0.0
+  snapshot: fhir-sdoh-clinicalcare     # a checkout of github.com/HL7/fhir-sdoh-clinicalcare at tag 3.0.0, inside the run folder
   tag: "3.0.0"
   canonical: http://hl7.org/fhir/us/sdoh-clinicalcare
   artifact_prefixes: [SDOHCC]

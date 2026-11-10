@@ -1,0 +1,15 @@
+{
+  "name": "fhir-ig-glossary-toolkit",
+  "description": "The FHIR IG glossary toolkit as a Claude Code plugin.",
+  "owner": {
+    "name": "Concord Labs AI",
+    "email": "corey@claystreetgroup.com"
+  },
+  "plugins": [
+    {
+      "name": "fhir-ig-glossary-toolkit",
+      "source": "./",
+      "description": "Glossary alignment for any FHIR Implementation Guide: a findings workbook and a summary report."
+    }
+  ]
+}
