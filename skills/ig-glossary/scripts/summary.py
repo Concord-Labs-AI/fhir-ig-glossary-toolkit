@@ -89,7 +89,7 @@ def build_html(doc, book, themes, counts, coverage, cfg):
     rows = doc["rows"]
     ready = [r for r in rows if r["status"] == "Ready"]
     pending = [r for r in rows if r["status"].startswith("Pending")]
-    manual = [r for r in rows if r["apply_method"] == "Manual"]
+    ident_rows = [r for r in rows if r["change_class"] == "Identifier"]
     rec_change = [r for r in pending if r["recommended"] == "change"]
     glossary_rows = [r for r in rows if r["apply_method"] == "Glossary entry edit"]
     decisions = book.get("decisions", [])
@@ -143,9 +143,10 @@ def build_html(doc, book, themes, counts, coverage, cfg):
                + [(f"Type: {t}", n) for t, n in Counter(r["type"] for r in rows).most_common()]
                + [(f"Change class: {c}", n) for c, n in Counter(r["change_class"] for r in rows).most_common()]
                + [(f"Confidence: {c}", n) for c, n in Counter(r["confidence"] for r in rows).most_common()])]
-    if manual:
-        p.append(f"<p><i>The {len(manual)} Identifier rows are artifact names; they are counted among the pending rows"
-                 f"{f' (decision {e(ident_decision)})' if ident_decision else ''} and are reported, not edited.</i></p>")
+    if ident_rows:
+        pending = f"counted among the pending rows (decision {e(ident_decision)}) and are " if ident_decision else ""
+        p.append(f"<p><i>The {len(ident_rows)} Identifier rows are artifact names; they are {pending}reported, "
+                 "not edited.</i></p>")
     if decisions:
         gated = Counter(r["decision"] for r in rows if r["decision"])
         zero = [d["id"] for d in decisions if not gated[d["id"]]]

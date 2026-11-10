@@ -112,3 +112,18 @@ def test_one_decision_reads_in_the_singular(sample_doc, sample_book, sample_coun
     book = {**sample_book, "decisions": sample_book["decisions"][:1]}  # the D-10 row's decision is no longer in the book
     out = gsu.build_html(sample_doc, book, THEMES, sample_counts, COVERAGE, cfg)
     assert "1 decision" in out and "1 decisions" not in out
+
+
+def test_identifier_note_counts_identifier_rows_and_says_pending_only_with_a_decision(sample_doc, sample_book,
+                                                                                     sample_counts, cfg):
+    svg = {**sample_doc["rows"][0], "id": "GA-0005", "key": "k5", "change_class": "Diagram", "apply_method": "Manual"}
+    doc = {**sample_doc, "rows": sample_doc["rows"] + [svg]}       # Manual, but not an artifact name
+    out = gsu.build_html(doc, {**sample_book, "identifier_decision": "D-10"}, THEMES, sample_counts, COVERAGE, cfg)
+    assert ("The 1 Identifier rows are artifact names; they are counted among the pending rows (decision D-10) "
+            "and are reported, not edited.") in out
+    out = gsu.build_html(doc, sample_book, THEMES, sample_counts, COVERAGE, cfg)
+    assert "The 1 Identifier rows are artifact names; they are reported, not edited." in out
+    assert "counted among the pending rows" not in out
+    doc = {**sample_doc, "rows": sample_doc["rows"][:3] + [svg]}    # no Identifier rows: no note
+    assert "Identifier rows are artifact names" not in gsu.build_html(doc, sample_book, THEMES, sample_counts,
+                                                                      COVERAGE, cfg)
