@@ -262,7 +262,8 @@ def test_extract_accounts_for_every_file(snapshot):
     cov = gx.extract(snapshot, IG)["coverage"]
     all_files = {p.relative_to(snapshot).as_posix() for p in snapshot.rglob("*") if p.is_file()}
     assert set(cov) == all_files
-    assert "not published" in cov["input/pagecontent/savestuff.md"]["reason"]
+    assert cov["input/pagecontent/savestuff.md"]["reason"] == \
+        "not published (absent from sushi-config pages; 404 when published)"  # no publisher's host assumed
     assert cov["input/weird.bin"]["reason"].startswith("unrecognized")
     assert cov["input/fsh/index.txt"]["reason"].startswith("SUSHI-generated FSH index")
     assert cov["input/images/Unused.png"]["reason"].startswith("image not referenced")

@@ -447,7 +447,7 @@ def classify_file(rel, published, refs, stems, includes, transcripts, glossary_n
             return "historical", None
         if is_published(name, published):
             return "page", None
-        return None, "not published (absent from sushi-config pages; 404 on hl7.org)"
+        return None, "not published (absent from sushi-config pages; 404 when published)"
     if top == "intro-notes" and name.endswith(INTRO_NOTES):
         return "page", None
     if top == "fsh" and name.endswith(".fsh"):
