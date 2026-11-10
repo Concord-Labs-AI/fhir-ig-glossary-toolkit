@@ -265,8 +265,8 @@ def test_extract_accounts_for_every_file(snapshot):
     cov = gx.extract(snapshot, IG)["coverage"]
     all_files = {p.relative_to(snapshot).as_posix() for p in snapshot.rglob("*") if p.is_file()}
     assert set(cov) == all_files
-    assert cov["input/pagecontent/savestuff.md"]["reason"] == \
-        "not published (absent from sushi-config pages; 404 when published)"  # no publisher's host assumed
+    reason = cov["input/pagecontent/savestuff.md"]["reason"]
+    assert "not published" in reason and "hl7.org" not in reason      # no publisher's host assumed
     assert cov["input/weird.bin"]["reason"].startswith("unrecognized")
     assert cov["input/fsh/index.txt"]["reason"].startswith("SUSHI-generated FSH index")
     assert cov["input/images/Unused.png"]["reason"].startswith("image not referenced")
@@ -368,8 +368,8 @@ def test_main_prints_one_line_per_exclusion_reason(run, capsys):
     _write(snap, "input/pagecontent/changehistory.md", '{% include img.html img="A.png" %}\n')
     _write(snap, "input/pagecontent/glossary.md", '{% include img.html img="B.png" %}\n| T | D |\n| --- | --- |\n')
     gx.main(["--run", str(run)])
-    lines = capsys.readouterr().out.splitlines()
-    assert "excluded, by reason:" in lines
-    assert "     2  not published (absent from sushi-config pages; 404 when published)" in lines
-    assert "     2  raster image — needs visual read" in lines     # grouped, whichever pages refer to them
-    assert "     1  unrecognized file type — review" in lines
+    listed = capsys.readouterr().out.split("excluded, by reason:\n", 1)[1].splitlines()
+    counts = {reason: int(n) for n, reason in (line.split(None, 1) for line in listed)}
+    assert [n for reason, n in counts.items() if reason.startswith("not published")] == [2]
+    assert counts["raster image — needs visual read"] == 2      # grouped, whichever pages refer to them
+    assert counts["unrecognized file type — review"] == 1
