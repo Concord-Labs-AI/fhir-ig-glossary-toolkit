@@ -1,3 +1,7 @@
+import subprocess
+import sys
+from pathlib import Path
+
 import pytest
 import yaml
 
@@ -133,3 +137,15 @@ def test_section_given_as_a_list_is_a_named_error(run):
     (run / "config.yaml").write_text(yaml.safe_dump(raw))
     with pytest.raises(config.ConfigError, match="config.yaml: summary must be a mapping"):
         config.load(run)
+
+
+@pytest.mark.parametrize("script", ["extract.py", "merge.py"])
+def test_a_config_error_ends_a_script_with_one_line_not_a_traceback(run, script):
+    raw = yaml.safe_load((run / "config.yaml").read_text())
+    del raw["ig"]["canonical"]
+    (run / "config.yaml").write_text(yaml.safe_dump(raw))
+    path = Path(config.__file__).with_name(script)
+    res = subprocess.run([sys.executable, str(path), "--run", str(run)], capture_output=True, text=True)
+    assert res.returncode == 1
+    assert "Traceback" not in res.stderr
+    assert res.stderr.strip().splitlines() == [f"{run.resolve() / 'config.yaml'} is missing ig.canonical"]

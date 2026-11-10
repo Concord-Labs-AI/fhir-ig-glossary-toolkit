@@ -14,8 +14,8 @@ DEFAULTS = {
 }
 
 
-class ConfigError(Exception):
-    pass
+class ConfigError(SystemExit):
+    """Uncaught, it ends a script with its message and exit status 1 instead of a traceback."""
 
 
 def load(run_dir=None):
