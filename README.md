@@ -11,7 +11,7 @@ It is a Claude Code plugin. The method comes from the [Gravity Project](https://
 
 You need:
 - [Claude Code](https://code.claude.com/docs/en/quickstart) 2.1.275 or later, signed in;
-- Python 3.9 or later;
+- Python 3.8 or later. The Python you already have will almost certainly do, including the one built into macOS; the toolkit is tested on 3.8 through 3.14;
 - git.
 
 Make a folder for the run and start Claude Code in it:
