@@ -139,3 +139,11 @@ def test_term_with_neither_glossary_term_nor_label_is_reported(cfg):
     book["terms"].append({"id": "N-BARE", "glossary_term": None,
                           "rules": [{"id": "R-BARE", "type": "missed-use", "pattern": "x"}]})
     assert cr.problems(book) == ["N-BARE: glossary_term or label required"]
+
+
+def test_rulebook_without_version_or_terms_is_reported_not_a_crash(cfg):
+    book = copy.deepcopy(config.rulebook(cfg))
+    del book["version"]                                                  # merge stamps it on findings.json
+    assert cr.problems(book) == ["version required"]
+    assert cr.problems({"version": "x", "decisions": []}) == ["terms required"]
+    assert cr.problems({"version": "x", "terms": None, "decisions": []}) == ["terms required"]

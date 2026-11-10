@@ -30,18 +30,20 @@ def glossary_terms(segments):
 
 
 def problems(book, glossary_terms=None, acronyms=None):
+    terms = book.get("terms") or []
     probs = []
-    for t in book.get("terms", []):
+    for t in terms:
         if not t.get("id"):
             probs.append(f"term without id: {t.get('glossary_term', '?')}")
         for r in t.get("rules", []):
             probs += [f"{t.get('id', '?')}: rule {r.get('id', '?')} needs {k}" for k in ("id", "type", "pattern") if not r.get(k)]
-    if not probs:
+    if terms and not probs:
         try:
             scan.load_rules(book)
         except ValueError as err:
             probs.append(str(err))
-    for t in book.get("terms", []):
+    probs += [f"{k} required" for k in ("version", "terms") if not book.get(k)]
+    for t in terms:
         tid = t.get("id", "?")
         if not t.get("glossary_term"):
             if not t.get("label"):
@@ -69,10 +71,10 @@ def problems(book, glossary_terms=None, acronyms=None):
     if idd and idd not in ids:
         probs.append(f"identifier_decision {idd} is not a decision")
     if glossary_terms:
-        have = {t.get("glossary_term") for t in book.get("terms", [])}
+        have = {t.get("glossary_term") for t in terms}
         probs += [f"glossary term has no rulebook entry: {g}" for g in glossary_terms if g not in have]
     if acronyms:
-        term_ids = {t.get("id") for t in book.get("terms", [])}
+        term_ids = {t.get("id") for t in terms}
         probs += [f"acronyms.table.{acr}.term {e['term']} is not a rulebook term id"
                   for acr, e in acronyms.get("table", {}).items() if e["term"] not in term_ids]
     return probs
