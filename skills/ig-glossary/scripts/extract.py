@@ -391,6 +391,8 @@ def extract_structuremap(rel, raw, base):
 
 # ---- whole snapshot ------------------------------------------------------------
 IMG_REF = re.compile(r'img="([^"]+)"|!\[[^\]]*\]\(([^)\s]+)\)|<img[^>]*src="([^"]+)"')
+PAGE_DIRS = ("pagecontent", "pages")
+INTRO_NOTES = ("-intro.md", "-notes.md")  # published on their artifact's page, from a page folder or input/intro-notes
 
 
 def published_pages(config):
@@ -410,7 +412,7 @@ def published_pages(config):
 
 
 def is_published(name, published):
-    return published is None or name in published or name.endswith(("-intro.md", "-notes.md"))
+    return published is None or name in published or name.endswith(INTRO_NOTES)
 
 
 def image_refs(pages):
@@ -437,7 +439,7 @@ def classify_file(rel, published, refs, stems, includes, transcripts, glossary_n
         return "ig-yml", None
     if rel == "input/ignoreWarnings.txt":
         return None, "publisher QA configuration (not reader-visible)"
-    if top == "pagecontent" and name.endswith(".md"):
+    if top in PAGE_DIRS and name.endswith(".md"):
         if name == glossary_name:
             return "glossary", None
         if name in historical:
@@ -445,6 +447,8 @@ def classify_file(rel, published, refs, stems, includes, transcripts, glossary_n
         if is_published(name, published):
             return "page", None
         return None, "not published (absent from sushi-config pages; 404 on hl7.org)"
+    if top == "intro-notes" and name.endswith(INTRO_NOTES):
+        return "page", None
     if top == "fsh" and name.endswith(".fsh"):
         return "fsh", None
     if rel == "input/fsh/index.txt":
@@ -491,8 +495,9 @@ def extract(snapshot, ig, id_types=None, transcripts=None):
     id_types = id_types or {}
     transcripts = {t["image"]: t for t in (transcripts or [])}
     published = published_pages(yaml.safe_load((snapshot / "sushi-config.yaml").read_text(encoding="utf-8")))
-    pages = {p.name: p.read_text(encoding="utf-8")
-             for p in (snapshot / "input" / "pagecontent").glob("*.md") if is_published(p.name, published)}
+    page_files = [p for d in PAGE_DIRS for p in (snapshot / "input" / d).glob("*.md")]
+    page_files += [p for p in (snapshot / "input" / "intro-notes").glob("*.md") if p.name.endswith(INTRO_NOTES)]
+    pages = {p.name: p.read_text(encoding="utf-8") for p in page_files if is_published(p.name, published)}
     refs = image_refs(pages)
     stems = {p.stem for p in (snapshot / "input" / "images-source").glob("*.plantuml")}
     includes = {n: pg for pg, raw in sorted(pages.items())

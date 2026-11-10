@@ -272,6 +272,28 @@ def test_without_a_pages_block_every_page_file_is_published(snapshot):
     assert result["coverage"]["input/images/Map.svg"]["status"] == "extracted"  # referenced by a published page
 
 
+def test_input_pages_and_intro_notes_are_read_like_pagecontent(snapshot):
+    sc = snapshot / "sushi-config.yaml"
+    sc.write_text(sc.read_text().replace("menu:", "  guidance.md:\n    title: Guidance\nmenu:", 1))
+    (snapshot / "input/pages").mkdir()
+    (snapshot / "input/pagecontent/glossary.md").rename(snapshot / "input/pages/glossary.md")
+    _write(snapshot, "input/pages/guidance.md", 'Use the referral target.\n{% include img.html img="Unused.png" %}\n')
+    _write(snapshot, "input/pages/draft.md", "Unpublished draft.\n")
+    _write(snapshot, "input/intro-notes/StructureDefinition-X-notes.md", "Notes on the goal.\n")
+    _write(snapshot, "input/intro-notes/readme.md", "Not an intro or notes file.\n")
+    result = gx.extract(snapshot, {**IG, "glossary_page": "input/pages/glossary.md"})
+    cov = result["coverage"]
+    assert cov["input/pages/guidance.md"]["status"] == "extracted"
+    assert "not published" in cov["input/pages/draft.md"]["reason"]
+    assert cov["input/intro-notes/StructureDefinition-X-notes.md"]["status"] == "extracted"
+    assert cov["input/intro-notes/readme.md"]["reason"].startswith("unrecognized")
+    assert "needs visual read" in cov["input/images/Unused.png"]["reason"]  # referenced from input/pages
+    segs = {s["file"]: s for s in result["segments"]}
+    assert segs["input/pages/glossary.md"]["kind"] == "glossary"
+    assert segs["input/pages/guidance.md"]["url"] == BASE + "guidance.html"
+    assert segs["input/intro-notes/StructureDefinition-X-notes.md"]["url"] == BASE + "StructureDefinition-X.html"
+
+
 def test_extract_change_classes_kinds_and_urls(snapshot):
     by_file = {}
     for s in gx.extract(snapshot, IG)["segments"]:
