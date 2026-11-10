@@ -398,7 +398,7 @@ INTRO_NOTES = ("-intro.md", "-notes.md")  # published on their artifact's page, 
 
 
 def published_pages(config):
-    """Page names under sushi-config's pages:, or None when it has no pages: block (every page file is then published)."""
+    """Page names under sushi-config's pages:, or None when pages: is missing or empty (SUSHI then publishes every page file)."""
     if not config.get("pages"):
         return None
     names = set()
