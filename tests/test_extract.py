@@ -224,6 +224,9 @@ def test_resource_link_takes_its_type_from_the_root_element():
     assert gx.extract_resource("input/resources/lib.xml", xml, BASE)[0]["url"] == BASE + "Library-lib-1.html"
     no_id = '<Library xmlns="http://hl7.org/fhir"><description value="Shared logic"/></Library>'
     assert gx.extract_resource("input/resources/lib.xml", no_id, BASE)[0]["url"] is None
+    commented = ('<Library xmlns="http://hl7.org/fhir"><!-- <id value="wrong"/> --><id value="lib-1"/>'
+                 '<description value="Shared logic"/></Library>')
+    assert gx.extract_resource("input/resources/lib.xml", commented, BASE)[0]["url"] == BASE + "Library-lib-1.html"
 
 
 def _write(root, rel, text):

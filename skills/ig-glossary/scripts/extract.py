@@ -381,8 +381,9 @@ def extract_ig_yml(rel, raw):
 
 
 def extract_resource(rel, raw, base):
-    root = re.search(r"<([A-Za-z]\w*)", re.sub(r"<!--.*?-->", "", raw, flags=re.S))
-    m_id = re.search(r'<id value="([^"]+)"', raw)
+    code = re.sub(r"<!--.*?-->", "", raw, flags=re.S)
+    root = re.search(r"<([A-Za-z]\w*)", code)
+    m_id = re.search(r'<id value="([^"]+)"', code)
     url = f"{base}{root.group(1)}-{m_id.group(1)}.html" if root and m_id else None
     spans = [(m.start(2), m.end(2), m.group(1), m.group(1))
              for m in re.finditer(r'<(description|title|documentation) value="([^"]*)"', raw)
