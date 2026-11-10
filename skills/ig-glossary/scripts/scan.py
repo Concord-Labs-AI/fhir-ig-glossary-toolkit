@@ -75,9 +75,9 @@ def summarize(hits, rules):
 
 
 def write_review(book, counts, hits, path, tag, samples=3):
-    lines = ["# Rulebook review (Checkpoint 1)", "",
+    lines = ["# Rulebook review (Checkpoint 2)", "",
              f"Counts are pattern hits over the {tag} corpus; *editable* excludes locked classes",
-             "(Identifier, External, Historical). Agents judge each hit in context in Part 2.", "",
+             "(Identifier, External, Historical). Reading agents judge each hit in context in Step 5.", "",
              "## Decisions register", ""]
     for d in book.get("decisions", []):
         lines += [f"### {d['id']} — {d.get('title', '')}", "", d.get("question", ""), ""]

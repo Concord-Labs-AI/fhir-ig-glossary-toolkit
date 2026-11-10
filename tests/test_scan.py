@@ -65,3 +65,13 @@ def test_summarize_counts_editable_and_locked():
     hits = gs.scan([seg("a referral recipient"), seg("b referral recipient", cls=HISTORICAL, seg_id="q")], rules)
     s = gs.summarize(hits, rules)["R-RT-RECIP"]
     assert (s["total"], s["editable"], s["by_class"]) == (2, 1, {PROSE: 1, HISTORICAL: 1})
+
+
+def test_review_names_the_runbook_checkpoint_and_step(tmp_path):
+    rules = gs.load_rules(BOOK)
+    hits = gs.scan([seg("A referral recipient")], rules)
+    gs.write_review(BOOK, gs.summarize(hits, rules), hits, tmp_path / "review.md", "1.0.0")
+    text = (tmp_path / "review.md").read_text()
+    assert text.startswith("# Rulebook review (Checkpoint 2)\n")
+    assert "in Step 5" in text
+    assert "Checkpoint 1" not in text and "Part 2" not in text
